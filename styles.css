@@ -2,7 +2,8 @@
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: rgb(5, 20, 221);
+    /* background-color: rgb(5, 20, 221); */
+    background-color: rgb(4, 11, 122);
 }
 
 div {
@@ -221,7 +222,7 @@ div {
     justify-content: center;
     margin: 50px 20px 0 -20px;
     width: 1500px;
-    height: 500px;
+    height: 70%;
     overflow: hidden;
     position: relative;
 }
@@ -277,7 +278,7 @@ div {
     justify-content: center;
     margin: 50px 20px 20px 50px;
     width: 1500px;
-    height: 500px;
+    height: 70%;
     overflow: hidden;
     position: relative;
 }
@@ -336,7 +337,7 @@ div {
     justify-content: center;
     margin: 50px 20px 0 -20px;
     width: 1500px;
-    height: 500px;
+    height: 70%;
     overflow: hidden;
     position: relative;
 }
