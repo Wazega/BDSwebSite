@@ -14,93 +14,21 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-//Partie pour le timer
+function logWindowSizeAndScroll() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
 
-function calculateDaysRemaining(targetDate) {
-    const currentDate = new Date();
-    const eventDate = new Date(targetDate);
-    const timeDiff = eventDate - currentDate;
-    const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return daysRemaining;
+    console.log(`Largeur: ${width}px, Hauteur: ${height}px, ScrollX: ${scrollX}px, ScrollY: ${scrollY}px`);
 }
 
+// Call the function to log the window size and scroll position initially
+logWindowSizeAndScroll();
 
-// DATE A MODIFIER POUR LE WES
-const targetDate = '2024-12-31';
-
-
-function updateDaysTimer() {
-    const daysRemaining = calculateDaysRemaining(targetDate);
-    document.getElementById('days-timer').innerText = daysRemaining;
-}
-
-window.onload = updateDaysTimer;
-
-setInterval(updateDaysTimer, 24 * 60 * 60 * 1000);
-
-
-
-// Partie pour modifier le défilement des évènements
-
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.Actu-container');
-    const leftArrow = document.querySelector('.left-arrow');
-    const rightArrow = document.querySelector('.right-arrow');
-    let currentIndex = 0;
-    const items = [];
-
-    // Fonction pour charger les images depuis une autre page
-    function loadImages() {
-        fetch('actu.html') // Remplace par l'URL de ta page source
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const images = doc.querySelectorAll('.image-class'); // Remplace '.image-class' par la classe des images
-                images.forEach(img => {
-                    const newItem = document.createElement('div');
-                    newItem.classList.add('carousel-item');
-                    newItem.innerHTML = img.outerHTML;
-                    container.appendChild(newItem);
-                    items.push(newItem);
-                });
-                updateCarousel(); // Met à jour la position initiale
-            })
-            .catch(error => {
-                console.error('Erreur de chargement des images:', error);
-            });
-    }
-
-    // Fonction pour mettre à jour le défilement
-    function updateCarousel() {
-        container.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    // Événement pour le clic sur la flèche gauche
-    leftArrow.addEventListener('click', () => {
-        if (currentIndex === 0) {
-            currentIndex = items.length - 1; // Passe à la dernière image
-        } else {
-            currentIndex--;
-        }
-        updateCarousel();
-    });
-
-    // Événement pour le clic sur la flèche droite
-    rightArrow.addEventListener('click', () => {
-        if (currentIndex === items.length - 1) {
-            currentIndex = 0; // Reprend depuis la première image
-        } else {
-            currentIndex++;
-        }
-        updateCarousel();
-    });
-
-    loadImages(); // Charge les images au démarrage
-});
-
-
-
+// Add event listeners to log the window size and scroll position when the window is resized or scrolled
+window.addEventListener('resize', logWindowSizeAndScroll);
+window.addEventListener('scroll', logWindowSizeAndScroll);
 
 
 
@@ -108,23 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    let windowHeight = window.innerHeight;
     const skier = document.getElementById('skier');
     const mountainContainer = document.querySelector('.mountain-container');
     const overlayText = document.querySelector('.overlay-text');
 
-    // Réglage des points de défilement
-    const startScroll = 2900; // Modifier pour définir le point de départ du défilement
-    const endScroll = 3800; // Modifier pour définir le point de fin du défilement
-    const maxSkierHeight = mountainContainer.offsetHeight - 210; // Limite maximale pour le skieur (ajustée)
-
     // Fonction pour ajuster la position du skieur et la taille du texte en fonction du défilement
     function onScroll() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const startScroll = 2.70 * windowHeight; // Modifier pour définir le point de départ du défilement
+        const endScroll = 4.13 * windowHeight; // Modifier pour définir le point de fin du défilement
+        const maxSkierHeight = mountainContainer.offsetHeight - skier.offsetHeight; // Limite maximale pour le skieur
 
         // Ajuster la position du skieur
         if (scrollTop >= startScroll && scrollTop <= endScroll) {
             const scrollRange = endScroll - startScroll;
-            const skierPosition = (scrollTop - startScroll) / scrollRange * (maxSkierHeight - skier.offsetHeight);
+            const skierPosition = (scrollTop - startScroll) / scrollRange * maxSkierHeight;
             skier.style.top = `${Math.min(skierPosition, maxSkierHeight)}px`;
         } else if (scrollTop < startScroll) {
             skier.style.top = '0px';
@@ -133,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Ajuster la taille du texte
-        const textSizeStart = 2700; // Point de défilement où le texte commence à grandir
+        const textSizeStart = 2500; // Point de défilement où le texte commence à grandir
         const textSizeEnd = 3400; // Point de défilement où le texte atteint sa taille maximale
-        const maxTextSize = 19; // Taille maximale du texte en em (ajustée)
+        const maxTextSize = 19; // Taille maximale du texte en em
 
         if (scrollTop >= textSizeStart && scrollTop <= textSizeEnd) {
             const textScrollRange = textSizeEnd - textSizeStart;
@@ -147,12 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
             overlayText.style.fontSize = `${maxTextSize}em`;
         }
     }
-
-    // Écouter l'événement de défilement
-    window.addEventListener('scroll', onScroll);
-
-    // Appeler la fonction au chargement initial pour appliquer le style
-    onScroll();
 
     // Fonction pour mettre à jour le compteur
     function updateTimer() {
@@ -170,7 +91,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mettre à jour le compteur toutes les secondes
     setInterval(updateTimer, 1000);
     updateTimer();
+
+    // Écouter l'événement de défilement
+    window.addEventListener('scroll', onScroll);
+
+    // Écouter l'événement de redimensionnement
+    window.addEventListener('resize', function() {
+        windowHeight = window.innerHeight;
+        onScroll(); // Mettre à jour les positions et tailles après le redimensionnement
+    });
+
+    // Appeler la fonction au chargement initial pour appliquer le style
+    onScroll();
 });
+
 
 
 
