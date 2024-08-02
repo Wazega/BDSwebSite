@@ -408,13 +408,14 @@ body {
     flex-direction: column;
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* Style pour l'image mountain */
 .mountain {
     transform: translate(-1.8%, -10%);
-    height: auto;
+    height: 100%;
 }
 
 /* Style pour l'image skier */
