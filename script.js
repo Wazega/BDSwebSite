@@ -34,48 +34,34 @@ window.addEventListener('scroll', logWindowSizeAndScroll);
 
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
-    let windowHeight = window.innerHeight;
-    const skier = document.getElementById('skier');
-    const mountainContainer = document.querySelector('.mountain-container');
-    const overlayText = document.querySelector('.overlay-text');
+    const skierElement = document.querySelector('.skier');
+    const skierInitialPosition = skierElement.getBoundingClientRect().top + window.scrollY;
+    const windowHeight = window.innerHeight;
+    const startScrollPosition = skierInitialPosition - windowHeight * 0.3; // 30% du haut de la fenêtre
+    const endScrollPosition = startScrollPosition + windowHeight;
 
-    // Fonction pour ajuster la position du skieur et la taille du texte en fonction du défilement
     function onScroll() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const startScroll = 2.70 * windowHeight; // Modifier pour définir le point de départ du défilement
-        const endScroll = 4.13 * windowHeight; // Modifier pour définir le point de fin du défilement
-        const maxSkierHeight = mountainContainer.offsetHeight - skier.offsetHeight; // Limite maximale pour le skieur
 
-        // Ajuster la position du skieur
-        if (scrollTop >= startScroll && scrollTop <= endScroll) {
-            const scrollRange = endScroll - startScroll;
-            const skierPosition = (scrollTop - startScroll) / scrollRange * maxSkierHeight;
-            skier.style.top = `${Math.min(skierPosition, maxSkierHeight)}px`;
-        } else if (scrollTop < startScroll) {
-            skier.style.top = '0px';
-        } else if (scrollTop > endScroll) {
-            skier.style.top = `${maxSkierHeight}px`;
-        }
-
-        // Ajuster la taille du texte
-        const textSizeStart = 2500; // Point de défilement où le texte commence à grandir
-        const textSizeEnd = 3400; // Point de défilement où le texte atteint sa taille maximale
-        const maxTextSize = 19; // Taille maximale du texte en em
-
-        if (scrollTop >= textSizeStart && scrollTop <= textSizeEnd) {
-            const textScrollRange = textSizeEnd - textSizeStart;
-            const textSize = 2 + ((scrollTop - textSizeStart) / textScrollRange) * (maxTextSize - 2);
+        if (scrollTop >= startScrollPosition && scrollTop <= endScrollPosition) {
+            const progress = (scrollTop - startScrollPosition) / (endScrollPosition - startScrollPosition);
+            const skierMaxTop = document.querySelector('.mountain-container').offsetHeight - skierElement.offsetHeight;
+            const skierNewTop = Math.min(progress * skierMaxTop, skierMaxTop);
+            skierElement.style.top = `${skierNewTop}px`;
+            
+            // Ajuster la taille du texte
+            const overlayText = document.querySelector('.overlay-text');
+            const maxTextSize = 19; // Taille maximale du texte en vw
+            const textSize = 2 + progress * (maxTextSize - 2);
             overlayText.style.fontSize = `${textSize}vw`;
-        } else if (scrollTop < textSizeStart) {
-            overlayText.style.fontSize = '2vw';
-        } else if (scrollTop > textSizeEnd) {
-            overlayText.style.fontSize = `${maxTextSize}vw`;
+        } else if (scrollTop < startScrollPosition) {
+            skierElement.style.top = '0px';
+        } else if (scrollTop > endScrollPosition) {
+            skierElement.style.top = `${document.querySelector('.mountain-container').offsetHeight - skierElement.offsetHeight}px`;
         }
     }
 
-    // Fonction pour mettre à jour le compteur
     function updateTimer() {
         const endDate = new Date('2024-12-23T00:00:00');
         const now = new Date();
@@ -88,22 +74,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('countdown').textContent = `${hours}h ${minutes}m ${seconds}s`;
     }
 
-    // Mettre à jour le compteur toutes les secondes
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    // Écouter l'événement de défilement
     window.addEventListener('scroll', onScroll);
-
-    // Écouter l'événement de redimensionnement
     window.addEventListener('resize', function() {
         windowHeight = window.innerHeight;
-        onScroll(); // Mettre à jour les positions et tailles après le redimensionnement
+        onScroll();
     });
 
-    // Appeler la fonction au chargement initial pour appliquer le style
     onScroll();
 });
+
+
 
 
 
