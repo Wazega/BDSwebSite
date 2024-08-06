@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (scrollTop >= textSizeStart && scrollTop <= textSizeEnd) {
             const textScrollRange = textSizeEnd - textSizeStart;
             const textSize = 2 + ((scrollTop - textSizeStart) / textScrollRange) * (maxTextSize - 2);
-            overlayText.style.fontSize = `${textSize}em`;
+            overlayText.style.fontSize = `${textSize}vw`;
         } else if (scrollTop < textSizeStart) {
-            overlayText.style.fontSize = '2em';
+            overlayText.style.fontSize = '2vw';
         } else if (scrollTop > textSizeEnd) {
-            overlayText.style.fontSize = `${maxTextSize}em`;
+            overlayText.style.fontSize = `${maxTextSize}vw`;
         }
     }
 
