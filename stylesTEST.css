@@ -321,6 +321,34 @@ a{
     border-bottom: 1px solid gray;
 }
 
+@media (max-width: 1300px){
+    .container{
+        font-size: 1.60em;
+        line-height: 2.10rem;
+    }
+}
+
+@media (max-width: 1000px){
+    .container{
+        font-size: 1.3em;
+        line-height: 1.9rem;
+    }
+}
+
+@media (max-width: 700px){
+    .container{
+        font-size: 1.1em;
+        line-height: 1.6rem;
+    }
+}
+
+@media (max-width: 400px){
+    .container{
+        font-size: 0.9em;
+        line-height: 1.2rem;
+    }
+}
+
 .container p{
     max-width: 70%;
     margin-left: 15%;
