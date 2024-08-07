@@ -36,74 +36,25 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     color: rgb(224, 78, 10);
-    font-size: 8rem;
+    font-size: 8em;
     text-align: center;
     font-family: 'Poppins';
     font-weight: 700;
 }
 
-
-
-
-
-
-/* Styles pour la barre de navigation */
-.navbar {
-    position: fixed;
-    background: none;
-    top: 0;
-    left: -10vw; /* Décaler la navbar vers la gauche */
-    width: 120vw; /* Ajuster la largeur pour couvrir le décalage */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
-    padding-right: 1vw;
-    -webkit-text-stroke: 1px black; /* Contour noir de 1px */
-    z-index: 1000;
+@media (max-width: 800px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 5em;
+    }
 }
 
-.navbar.scrolled {
-    background: black; /* Fond noir quand la page est défilée */
-    transition: 0.7s ease-in-out;
+@media (max-width: 500px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 4.5em;
+    }
 }
-
-/* Styles pour les éléments de navigation */
-.nav-items {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    margin-top: -1%;
-    gap: 3%;
-    font-size: xx-large;
-    margin-right: 30%; /* Ajuster la marge droite pour compenser le décalage */
-    margin-left: -18%; /* Ajuster la marge gauche pour compenser le décalage */
-}
-
-.nav-items a {  
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-}
-
-.nav-items a:nth-child(1) {  
-    margin-right: 0%;
-}
-
-.nav-items a.active {
-    text-decoration: underline;
-    -webkit-text-stroke: 1px black;
-}
-
-.nav-items a:hover {
-    color: rgb(54, 124, 188);
-    transition: 0.2s ease-in-out;
-}
-
-
-
 
 
 
@@ -203,7 +154,7 @@ body {
     justify-content: center;
     margin: -1% 0;
     gap: 3vw; /* Espace entre les éléments relatif à la largeur de la fenêtre */
-    font-size: 2vw; /* Taille de la police relative à la largeur de la fenêtre */
+    font-size: 2em; /* Taille de la police relative à la largeur de la fenêtre */
 }
 
 .nav-items a {  
@@ -216,7 +167,7 @@ body {
 
 .nav-items a:nth-child(1) {  
     margin-right: 10%;
-    margin-left: -18%;
+    margin-left: -20%;
 }
 
 .nav-items a.active {
@@ -229,6 +180,86 @@ body {
     transition: 0.2s ease-in-out;
 }
 
+
+@media (max-width: 1600px){
+    .nav-items{
+        font-size: 1.7em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -16%;
+    }
+}
+
+@media (max-width: 1300px){
+    .nav-items{
+        font-size: 1.5em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 1060px){
+    .nav-items{
+        font-size: 1.2em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 900px){
+    .nav-items{
+        font-size: 1em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 4%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 700px){
+    .nav-items{
+        font-size: 0.9em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 5%;
+        margin-left: -17%;
+    }
+}
+
+@media (max-width: 600px){
+    .nav-items{
+        font-size: 0.8em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 3%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 500px){
+    .nav-items{
+        font-size: 0.7em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 3%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 400px){
+    .nav-items{
+        font-size: 0.55em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 2%;
+        margin-left: -10%;
+    }
+}
 
 
 
@@ -424,6 +455,7 @@ body {
 .mountain {
     transform: translate(-1.8%, -10%);
     height: 100%;
+    width: 120%;
     object-fit: cover;
 }
 
@@ -717,6 +749,12 @@ body {
 
 
 
+
+
+
+
+/* PARTIE CONTACT */
+
 .Contact {
     background-color: rgb(18, 18, 18);
     color: rgb(207, 207, 207);
@@ -730,6 +768,7 @@ body {
     font-family: 'Poppins';
     font-weight: bold;
     margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: left;
 }
 
 .contenerContact {
@@ -752,12 +791,14 @@ body {
     justify-content: flex-start;
     gap: 20px;
     flex-grow: 1;
+    margin-left: 15px; /* Espacement entre l'image et les adresses email */
 }
 
 .adressemail span {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-family: 'Poppins';
     font-weight: bold;
+    text-align: left; /* Aligner les adresses email à gauche */
 }
 
 .ReseauLien {
@@ -789,53 +830,52 @@ body {
     font-weight: bold;
 }
 
-/* Media query pour les écrans de moins de 600px */
+
+
 @media (max-width: 600px) {
     .contenerContact {
         flex-direction: column;
         align-items: flex-start;
     }
 
+    .ContactTitre {
+        font-size: 2rem; 
+    }
+
+    .adressemail span {
+        font-size: 1rem;
+    }
+
     .LogoEmail {
-        margin-bottom: 20px; /* Espacement sous l'image */
+        margin-bottom: 5px;
     }
 
     .adressemail {
         width: 100%;
-        margin-left: 0; /* Réinitialiser les marges pour l'alignement vertical */
+        margin-left: 0;
     }
 
     .ReseauLien {
-        margin-left: 0; /* Réinitialiser les marges pour l'alignement vertical */
-        width: 100%; /* Prendre toute la largeur disponible */
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .ReseauLien a span {
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .ReseauLien a img{
+        width: 50px;
+        height: 50px;
     }
 }
 
-/* .ReseauLien a {
-    text-decoration: none;
-    font-size: 1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
-}
-
-.ReseauLien a img {
-    width: 75px;
-    height: 75px;
-}
-
-.ReseauLien a span { 
-    font-size: 1.1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    position: relative;
-    transform: translateY(-3%);
-    margin-left: 10px;
-} */
 
 
+
+
+/* COPYRIGHT */
 
 .Copyright{
     background-color: rgb(18, 18, 18);
@@ -873,5 +913,12 @@ body {
     display: inline-block;
     font-weight: bold;
     animation: rainbow 5s infinite;
+}
+
+@media (max-width: 600px){
+    .Copyright{
+        padding-top: 10px;
+        font-size: 0.8rem;
+    }
 }
 

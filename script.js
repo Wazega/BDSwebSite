@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', onScroll);
     window.addEventListener('resize', function() {
-        windowHeight = window.innerHeight;
+        let windowHeight = window.innerHeight;
         onScroll();
     });
 
