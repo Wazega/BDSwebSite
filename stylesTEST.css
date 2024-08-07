@@ -351,6 +351,7 @@ body {
 
 
 .feature {
+    font-size: 1em;
     text-decoration: none;
     background-color: #1A2238;
     border-radius: 8px;
@@ -414,6 +415,13 @@ body {
     display: inline-block;
 }
 
+
+@media (max-width: 500px) {
+    .feature{
+        font-size: 0.8em;
+    }
+    
+}
 
 
 
@@ -659,7 +667,7 @@ body {
 
 
 
-.Actu {
+/* .Actu {
     display: flex;
     align-items: center;
     position: relative;
@@ -702,13 +710,13 @@ body {
 }
 
 .left-arrow {
-    left: 10px; /* Ajuste la position selon le besoin */
+    left: 10px;
 }
 
 .right-arrow {
     z-index: 1006;
-    right: 10px; /* Ajuste la position selon le besoin */
-}
+    right: 10px;
+} */
 
 
 
