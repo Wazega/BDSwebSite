@@ -8,7 +8,11 @@ body {
     /* background-color: rgb(4, 11, 122); */
 }
 
-
+a{
+    color:#0B1124;
+    text-decoration-color: none;
+    text-decoration: none;
+}
 
 
 .LogoContainer{
@@ -374,15 +378,6 @@ body {
     flex-wrap: wrap;
 }
 
-.feature a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.feature a:visited {
-    color: inherit;
-    text-decoration: none;
-}
 
 
 .feature {
@@ -441,7 +436,7 @@ body {
 
 .feature p {
     font-size: 0.9em;
-    line-height: 1.5em;
+    line-height: 1.5em; 
 }
 
 .dots {
@@ -498,13 +493,13 @@ body {
     flex-direction: column;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: au;
     overflow: hidden;
 }
 
 /* Style pour l'image mountain */
 .mountain {
-    transform: translate(-1.8%, -10%);
+    transform: translate(-1.8%, 0%);
     height: 100%;
     width: 120%;
     object-fit: cover;
@@ -541,14 +536,13 @@ body {
 #countdown {
     font-size: 2.5em; /* Taille du texte du compteur */
     margin-top: 20px; /* Espace au-dessus du compteur */
-    color: #FFD700; /* Couleur jaune pour le texte */
+    color: #000000; /* Couleur jaune pour le texte */
     position: absolute; /* Positionner le texte au-dessus de l'image */
     top: 60%; /* Centrer verticalement le texte */
     left: 50%; /* Centrer horizontalement le texte */
     transform: translate(-50%, 140%); /* Ajuster le texte pour le centrer exactement */
     font-family: 'Arial', sans-serif; /* Police de caractères */
-    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.7), /* Ombre noire pour effet 3D */
-                 6px 6px 0px rgba(0, 0, 0, 0.5); /* Ombre noire pour effet 3D */
+
     font-weight: bold; /* Gras */
     letter-spacing: 5px; /* Espacement entre les lettres */
     z-index: 10; /* Assurez-vous que le texte est au-dessus des autres éléments */

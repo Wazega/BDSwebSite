@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const skierInitialPosition = skierElement.getBoundingClientRect().top + window.scrollY;
     const windowHeight = window.innerHeight;
     const startScrollPosition = skierInitialPosition - windowHeight * 0.3; // 30% du haut de la fenêtre
-    const endScrollPosition = startScrollPosition + windowHeight;
+    const endScrollPosition = startScrollPosition + windowHeight/1.5;
 
     function onScroll() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
