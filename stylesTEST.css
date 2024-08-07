@@ -547,6 +547,24 @@ a{
     text-align: center;
 }
 
+@media (max-width: 1300px){
+    #countdown{
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 900px){
+    #countdown{
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 900px){
+    #countdown{
+        font-size: 1.1em;
+    }
+}
+
 
 /* Animation pour le texte overlay-text */
 @keyframes growAndShrink {
