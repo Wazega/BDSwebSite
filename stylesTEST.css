@@ -129,22 +129,12 @@ body {
     transition: 0.7s ease-in-out;
 }
 
-/* Styles pour le conteneur du logo */
-.LogoContainer {
-    z-index: 1005;
-    position: fixed;
-    top: 1%;
-    right: 1%;
-    width: 12vw;
-    height: auto;
-    overflow: hidden;
-}
-
-/* Styles pour le logo */
-.logo {
+/* Styles pour le conteneur de la navigation */
+.nav-container {
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    justify-content: space-between;
 }
 
 /* Styles pour les éléments de navigation */
@@ -179,6 +169,17 @@ body {
     color: rgb(54, 124, 188);
     transition: 0.2s ease-in-out;
 }
+
+/* Styles pour le bouton de menu */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 
 
 @media (max-width: 1600px){
@@ -231,37 +232,61 @@ body {
     }
 }
 
-@media (max-width: 600px){
-    .nav-items{
-        font-size: 0.8em;
+/* Styles pour les écrans de moins de 600px */
+@media (max-width: 600px) {
+    .nav-items {
+        display: none; /* Cacher les éléments de navigation par défaut */
+        flex-direction: column;
+        gap: 10px;
+        background-color: black;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 25%;
+        padding: 10px;
+        border-radius: 20px;
     }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
     .nav-items a:nth-child(1) {  
-        margin-right: 3%;
-        margin-left: -14%;
+        margin-left: 0%;
+
     }
+
 }
 
-@media (max-width: 500px){
-    .nav-items{
-        font-size: 0.7em;
-    }
-    .nav-items a:nth-child(1) {  
-        margin-right: 3%;
-        margin-left: -14%;
-    }
+
+
+
+
+
+/* Styles pour le conteneur du logo */
+.LogoContainer {
+    z-index: 1005;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    width: 12vw;
+    height: auto;
+    overflow: hidden;
 }
 
-@media (max-width: 400px){
-    .nav-items{
-        font-size: 0.55em;
-    }
-    .nav-items a:nth-child(1) {  
-        margin-right: 2%;
-        margin-left: -10%;
-    }
+/* Styles pour le logo */
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-
-
 
 
 
@@ -369,6 +394,7 @@ body {
 .feature-icon {
     height: 100px;
     margin-bottom: 20px;
+    width: 100%;
     background-position: top;
     background-size: contain;
     background-repeat: no-repeat;
@@ -416,12 +442,12 @@ body {
 }
 
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
     .feature{
         font-size: 0.8em;
     }
     
-}
+} */
 
 
 

@@ -89,6 +89,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navItems = document.getElementById('nav-items');
+
+    menuToggle.addEventListener('click', function() {
+        navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+    });
+});
+
+
+
+
+
+
+
 
 
 
