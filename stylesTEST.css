@@ -390,6 +390,13 @@ body {
 }
 
 
+@media (max-width: 400px){
+    .feature{
+        width: 70vw;
+    }
+}
+
+
 
 .feature-icon {
     height: 100px;
