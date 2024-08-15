@@ -1012,3 +1012,112 @@ a{
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+.team-container {
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.team-container h2 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.team-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.team-container h4 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.team-container img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Section Présidente */
+.president-section {
+    margin-bottom: 50px;
+}
+
+/* Section Bureau */
+.bureau-section {
+    margin-bottom: 50px;
+}
+
+.bureau-images {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.bureau-member {
+    margin: 20px;
+}
+
+/* Autres membres */
+.other-members {
+    margin-bottom: 50px;
+}
+
+.member-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.member {
+    margin: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.construction{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.construction span{
+    width: 100%;
+    font-size: 3em;
+    color: white;
+    margin-left: 25%;
+}
+
+
+.construction img{
+    margin-left: 30%;
+    width: 40%;
+    height: auto;
+}

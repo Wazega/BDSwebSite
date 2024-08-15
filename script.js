@@ -32,6 +32,24 @@ window.addEventListener('scroll', logWindowSizeAndScroll);
 
 
 
+function getDivHeight() {
+    const div = document.getElementById('mountain');
+
+    // Utilisez offsetHeight pour obtenir la hauteur du div en pixels
+    const height = div.offsetHeight;
+
+    // Afficher la hauteur dans la console
+    console.log('Hauteur du Div:', height, 'px');
+
+    return height;
+}
+
+
+window.onload = getDivHeight;
+
+// Réécoutez les changements de taille de la fenêtre pour mettre à jour la hauteur
+window.onresize = getDivHeight;
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -40,9 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const windowHeight = window.innerHeight;
     const startScrollPosition = skierInitialPosition - windowHeight * 0.3; // 30% du haut de la fenêtre
     const endScrollPosition = startScrollPosition + windowHeight/1.5;
+    
 
     function onScroll() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        console.log("Debut du pingouin", startScrollPosition);
 
         if (scrollTop >= startScrollPosition && scrollTop <= endScrollPosition) {
             const progress = (scrollTop - startScrollPosition) / (endScrollPosition - startScrollPosition);
@@ -97,11 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
     });
 });
-
-
-
-
-
 
 
 
