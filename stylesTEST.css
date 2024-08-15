@@ -499,6 +499,111 @@ a{
 
 
 
+.infographie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #FFFFFF;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.infographie-container {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.infographie-item {
+    text-align: center;
+    width: 30%;
+}
+
+.infographie-header {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #32E0C4;
+    font-weight: 700;
+}
+
+.infographie-subheader {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    color: #192231;
+    padding: 5px;
+    border-radius: 20px;
+    border: 2px solid #32E0C4;
+    font-weight: 700;
+}
+
+.infographie-icon {
+    margin-bottom: 20px;
+}
+
+.icon-circle {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #32E0C4;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.icon-circle img {
+    width: 50%;
+    height: 50%;
+}
+
+.infographie-description {
+    font-size: 1.1em;
+}
+
+.wavy-border {
+    width: 100%;
+    height: 20px;
+    background: url('Image/vaguelette.png') repeat-x;
+    background-size: contain;
+}
+
+.wavy-border-top {
+    transform: rotate(180deg);
+    margin-bottom: -40px;
+}
+
+.wavy-border-bottom {
+    margin-top: -40px;
+    margin-bottom: 10%;
+}
+
+@media (max-width: 768px) {
+    .infographie-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .infographie-item {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 /* Container pour le wes */
 
@@ -607,125 +712,6 @@ a{
 .overlay-text.scroll-animation {
     animation: growAndShrink 1s ease-in-out;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.infographie {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    color: #FFFFFF;
-    width: 70%;
-    margin: 0 auto;
-}
-
-.infographie-container {
-    display: flex;
-    justify-content: space-around;
-    border-radius: 20px;
-    padding: 20px;
-    width: 100%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-}
-
-.infographie-item {
-    text-align: center;
-    width: 30%;
-}
-
-.infographie-header {
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #32E0C4;
-    font-weight: 700;
-}
-
-.infographie-subheader {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    background-color: #FFFFFF;
-    color: #192231;
-    padding: 5px;
-    border-radius: 20px;
-    border: 2px solid #32E0C4;
-    font-weight: 700;
-}
-
-.infographie-icon {
-    margin-bottom: 20px;
-}
-
-.icon-circle {
-    width: 100px;
-    height: 100px;
-    border: 5px solid #32E0C4;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-}
-
-.icon-circle img {
-    width: 50%;
-    height: 50%;
-}
-
-.infographie-description {
-    font-size: 1.1em;
-}
-
-.wavy-border {
-    width: 100%;
-    height: 20px;
-    background: url('Image/vaguelette.png') repeat-x;
-    background-size: contain;
-}
-
-.wavy-border-top {
-    transform: rotate(180deg);
-    margin-bottom: -40px;
-}
-
-.wavy-border-bottom {
-    margin-top: -40px;
-    margin-bottom: 10%;
-}
-
-@media (max-width: 768px) {
-    .infographie-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .infographie-item {
-        width: 80%;
-        margin-bottom: 20px;
-    }
-}
-
-
-
-
-
-
-
-
 
 
 

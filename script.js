@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const endDate = new Date('2024-12-23T00:00:00');
         const now = new Date();
         const timeRemaining = endDate - now;
-
-        const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+        const jours = Math.floor(timeRemaining / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((timeRemaining % (1000 * 60 * 60* 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').textContent = `${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('countdown').textContent = `${jours}jours ${hours}h ${minutes}m ${seconds}s`;
     }
 
     setInterval(updateTimer, 1000);
