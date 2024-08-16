@@ -1080,6 +1080,116 @@ a{
 }
 
 
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* UNISTRA */
+
+
+/* Styles généraux */
+.unistra {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.unistra h1, h2, h3 {
+    text-align: center;
+}
+
+.unistra a{
+    color: white;
+}
+
+.main-title {
+    font-size: 3vw;
+    margin-top: 5vh;
+}
+
+.sub-title{
+    font-size: 3em;
+}
+
+.response {
+    display: block;
+    width: 80%;
+    height: 150px;
+    margin: 20px auto;
+    font-size: 1.5vw;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Styles pour la section des sports */
+.sports-section {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10%;
+}
+
+.sports-list {
+    margin: 20px 0;
+    text-align: center;
+    margin-bottom: 15%;
+}
+
+.sports-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sports-list ul li {
+    font-size: 2vw;
+    margin: 15px 0;
+}
+
+.sport-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.sport-details img {
+    width: 40%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.sport-text {
+    width: 55%;
+    padding: 20px;
+    font-size: 1.5vw;
+}
+
+/* Styles pour la section Google Maps */
+.maps-section {
+    width: 80%;
+    margin: 50px auto;
+    margin-bottom: 10%;
+}
+
+.map-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.map-item img {
+    width: 40%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.map-text {
+    width: 55%;
+    padding: 20px;
+    font-size: 1.5vw;
+}
 
 
 
