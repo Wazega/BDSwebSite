@@ -8,8 +8,11 @@ body {
     /* background-color: rgb(4, 11, 122); */
 }
 
-
-
+a{
+    color:#0B1124;
+    text-decoration-color: none;
+    text-decoration: none;
+}
 
 
 .LogoContainer{
@@ -29,6 +32,8 @@ body {
     object-fit: cover;
 }
 
+
+
 .BDSTitre{
     position: absolute;
     top: 45%;
@@ -41,66 +46,26 @@ body {
     font-weight: 700;
 }
 
-
-
-/* Styles pour la barre de navigation */
-.navbar {
-    position: fixed;
-    background: none;
-    top: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
-    padding-right: 20px;
-
-    -webkit-text-stroke: 1px black; /* Contour noir de 1px */
-    z-index: 1000;
+@media (max-width: 800px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 5em;
+    }
 }
 
-.navbar.scrolled {
-    background: black; /* Fond noir quand la page est défilée */
-    transition: 0.7s ease-in-out;
+@media (max-width: 500px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 4.5em;
+    }
 }
 
-/* Styles pour les éléments de navigation */
-.nav-items {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    /* margin-left: -10%; */
-    margin-top: -1%;
-    gap: 3%;
-    font-size: xx-large;
-    margin-right: 20%;
-    margin-left: -8%;
-}
 
-.nav-items a {  
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-}
 
-.nav-items a:nth-child(1) {  
-    margin-right: 10%;
-}
 
-.nav-items a.active {
-    text-decoration: underline;
-    -webkit-text-stroke: 1px black;
-}
 
-.nav-items a:hover {
-    color: rgb(54, 124, 188);
-    transition: 0.2s ease-in-out;
-}
-
-/* Styles pour la vidéo de fond */
 .video-background {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -125,33 +90,34 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.Reseau{
+.Reseau {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligne les éléments à droite */
+    bottom: 3%;
+    right: 3%;
     z-index: 1;
-    left: 95%;
-    top: 83%;
+    gap: 2%; /* Espace entre les éléments */
 }
 
-.Facebook{
+.Facebook, .Insta {
     width: 75px;
     height: 75px;
 }
 
-.Insta{
-    width: 75px;
-    height: 75px;
-    transform: translate(0, 75px);
-}
 
 
 
 
 
 
+/* Styles pour la barre de navigation */
 .navbar {
     position: fixed;
     background: none;
     top: 0;
+    left: 0; /* Ajouté pour s'assurer que la navbar commence à gauche */
     width: 100%;
     display: flex;
     align-items: center;
@@ -159,13 +125,7 @@ body {
     padding: 1vh 2vw; /* Padding relatif à la taille de la fenêtre */
     -webkit-text-stroke: 1px black; /* Contour noir de 1px */
     z-index: 1000;
-}
-
-#nombds {
-    font-family: 'Poppins';
-    font-weight: 900;
-    color: rgb(5, 20, 221);
-    font-size: 2.5vw; /* Taille de la police relative à la largeur de la fenêtre */
+    box-sizing: border-box; /* Ajouté pour inclure padding et bordures dans la largeur */
 }
 
 .navbar.scrolled {
@@ -173,30 +133,22 @@ body {
     transition: 0.7s ease-in-out;
 }
 
-.LogoContainer {
-    z-index: 1005;
-    position: fixed;
-    top: -1%;
-    right: -1vw;
-    width: 15vw;
-    height: 15vw;
-    overflow: hidden;
-}
-
-/* Styles pour le logo */
-.logo {
+/* Styles pour le conteneur de la navigation */
+.nav-container {
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    justify-content: space-between;
 }
 
+/* Styles pour les éléments de navigation */
 .nav-items {
     display: flex;
     flex-grow: 1;
     justify-content: center;
     margin: -1% 0;
     gap: 3vw; /* Espace entre les éléments relatif à la largeur de la fenêtre */
-    font-size: 2vw; /* Taille de la police relative à la largeur de la fenêtre */
+    font-size: 2em; /* Taille de la police relative à la largeur de la fenêtre */
 }
 
 .nav-items a {  
@@ -209,6 +161,7 @@ body {
 
 .nav-items a:nth-child(1) {  
     margin-right: 10%;
+    margin-left: -20%;
 }
 
 .nav-items a.active {
@@ -221,6 +174,123 @@ body {
     transition: 0.2s ease-in-out;
 }
 
+/* Styles pour le bouton de menu */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 1600px){
+    .nav-items{
+        font-size: 1.7em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -16%;
+    }
+}
+
+@media (max-width: 1300px){
+    .nav-items{
+        font-size: 1.5em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 1060px){
+    .nav-items{
+        font-size: 1.2em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 900px){
+    .nav-items{
+        font-size: 1em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 4%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 700px){
+    .nav-items{
+        font-size: 0.9em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 5%;
+        margin-left: -17%;
+    }
+}
+
+/* Styles pour les écrans de moins de 600px */
+@media (max-width: 600px) {
+    .nav-items {
+        display: none; /* Cacher les éléments de navigation par défaut */
+        flex-direction: column;
+        gap: 10px;
+        background-color: black;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 25%;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-items a:nth-child(1) {  
+        margin-left: 0%;
+
+    }
+
+}
+
+
+
+
+
+
+/* Styles pour le conteneur du logo */
+.LogoContainer {
+    z-index: 1005;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    width: 12vw;
+    height: auto;
+    overflow: hidden;
+}
+
+/* Styles pour le logo */
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 
 
@@ -244,11 +314,39 @@ body {
     background-color: #0B1124;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.875rem;
+    font-size: 1.79rem;
     line-height: 2.25rem;
     color: rgb(207, 207, 207);
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
+}
+
+@media (max-width: 1300px){
+    .container{
+        font-size: 1.60em;
+        line-height: 2.10rem;
+    }
+}
+
+@media (max-width: 1000px){
+    .container{
+        font-size: 1.3em;
+        line-height: 1.9rem;
+    }
+}
+
+@media (max-width: 700px){
+    .container{
+        font-size: 1.1em;
+        line-height: 1.6rem;
+    }
+}
+
+@media (max-width: 400px){
+    .container{
+        font-size: 0.9em;
+        line-height: 1.2rem;
+    }
 }
 
 .container p{
@@ -267,8 +365,6 @@ body {
     color: white;
     font-weight: 700;
 }
-
-
 
 
 
@@ -311,7 +407,9 @@ body {
 }
 
 
+
 .feature {
+    font-size: 1em;
     text-decoration: none;
     background-color: #1A2238;
     border-radius: 8px;
@@ -325,17 +423,25 @@ body {
 }
 
 
+@media (max-width: 400px){
+    .feature{
+        width: 200px;
+    }
+}
+
+
 
 .feature-icon {
     height: 100px;
     margin-bottom: 20px;
+    width: 100%;
     background-position: top;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .plug-play {
-    background: url('Image/évènement.JPG');
+    background: url('Image/tmp.jpeg');
     background-position: top;
     background-position-y: 25%;
     background-size: cover;
@@ -343,11 +449,11 @@ body {
 }
 
 .customizable-themes {
-    background: url('customizable-themes-icon.png');
+    background: url('Image/tmp.jpeg');
 }
 
 .dark-mode {
-    background: url('dark-mode-icon.png');
+    background: url('Image/tmp.jpeg');
 }
 
 .feature h3 {
@@ -358,7 +464,7 @@ body {
 
 .feature p {
     font-size: 0.9em;
-    line-height: 1.5em;
+    line-height: 1.5em; 
 }
 
 .dots {
@@ -376,112 +482,12 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* Container pour le wes */
-
-
-/* Style pour la classe .wes */
-.wes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    height: auto; /* Hauteur de la page pour permettre le défilement */
-}
-
-/* Style pour la classe .mountain-container */
-.mountain-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* Style pour l'image mountain */
-.mountain {
-    transform: translate(-1.8%, -10%);
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Style pour l'image skier */
-.skier {
-    position: absolute;
-    width: 5vw; /* Taille de l'image du skieur en fonction de la largeur de l'écran */
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0); /* Ajustement initial du skieur */
-    transition: top 0.1s linear, left 0.1s linear, width 0.1s linear;
-}
-
-/* Style pour le texte overlay-text */
-.overlay-text {
-    position: absolute; /* Positionner le texte au-dessus de l'image */
-    top: 50%; /* Centrer verticalement le texte */
-    left: 50%; /* Centrer horizontalement le texte */
-    transform: translate(-50%, -50%); /* Ajuster le texte pour le centrer exactement */
-    font-size: 2vw; /* Taille initiale du texte */
-    color: #FFD700; /* Couleur jaune pour le texte */
-    font-family: 'Arial', sans-serif; /* Police de caractères */
-    font-weight: bold; /* Gras */
-    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.7), /* Ombre noire pour effet 3D */
-                 6px 6px 0px rgba(0, 0, 0, 0.5); /* Ombre noire pour effet 3D */
-    letter-spacing: 5px; /* Espacement entre les lettres */
-    z-index: 10; /* Assurez-vous que le texte est au-dessus des autres éléments */
-    text-align: center; /* Centrer le texte horizontalement */
-}
-
-/* Style pour le compteur countdown */
-#countdown {
-    font-size: 2.5em; /* Taille du texte du compteur */
-    margin-top: 20px; /* Espace au-dessus du compteur */
-    color: #FFD700; /* Couleur jaune pour le texte */
-    position: absolute; /* Positionner le texte au-dessus de l'image */
-    top: 60%; /* Centrer verticalement le texte */
-    left: 50%; /* Centrer horizontalement le texte */
-    transform: translate(-50%, 140%); /* Ajuster le texte pour le centrer exactement */
-    font-family: 'Arial', sans-serif; /* Police de caractères */
-    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.7), /* Ombre noire pour effet 3D */
-                 6px 6px 0px rgba(0, 0, 0, 0.5); /* Ombre noire pour effet 3D */
-    font-weight: bold; /* Gras */
-    letter-spacing: 5px; /* Espacement entre les lettres */
-    z-index: 10; /* Assurez-vous que le texte est au-dessus des autres éléments */
-    text-align: center; /* Centrer le texte horizontalement */
-}
-
-/* Animation pour le texte overlay-text */
-@keyframes growAndShrink {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
+/* @media (max-width: 500px) {
+    .feature{
+        font-size: 0.8em;
     }
-    50% {
-        transform: translate(-50%, -50%) scale(1.2);
-    }
-}
-
-.overlay-text.scroll-animation {
-    animation: growAndShrink 1s ease-in-out;
-}
-
-
-
-
-
+    
+} */
 
 
 
@@ -599,6 +605,113 @@ body {
 
 
 
+/* Container pour le wes */
+
+
+/* Style pour la classe .wes */
+.wes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: auto; /* Hauteur de la page pour permettre le défilement */
+}
+
+/* Style pour la classe .mountain-container */
+.mountain-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: au;
+    overflow: hidden;
+}
+
+/* Style pour l'image mountain */
+.mountain {
+    transform: translate(-1.8%, 0%);
+    height: 100%;
+    width: 120%;
+    object-fit: cover;
+}
+
+/* Style pour l'image skier */
+.skier {
+    position: absolute;
+    width: 5vw; /* Taille de l'image du skieur en fonction de la largeur de l'écran */
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0); /* Ajustement initial du skieur */
+    transition: top 0.1s linear, left 0.1s linear, width 0.1s linear;
+}
+
+/* Style pour le texte overlay-text */
+.overlay-text {
+    position: absolute; /* Positionner le texte au-dessus de l'image */
+    top: 50%; /* Centrer verticalement le texte */
+    left: 50%; /* Centrer horizontalement le texte */
+    transform: translate(-50%, -50%); /* Ajuster le texte pour le centrer exactement */
+    font-size: 2vw; /* Taille initiale du texte */
+    color: #FFD700; /* Couleur jaune pour le texte */
+    font-family: 'Arial', sans-serif; /* Police de caractères */
+    font-weight: bold; /* Gras */
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.7), /* Ombre noire pour effet 3D */
+                 6px 6px 0px rgba(0, 0, 0, 0.5); /* Ombre noire pour effet 3D */
+    letter-spacing: 5px; /* Espacement entre les lettres */
+    z-index: 10; /* Assurez-vous que le texte est au-dessus des autres éléments */
+    text-align: center; /* Centrer le texte horizontalement */
+}
+
+/* Style pour le compteur countdown */
+#countdown {
+    font-size: 2.5em;
+    margin-top: 5%;
+    color: #000000;
+    position: absolute;
+    top: 60%;
+    font-family: 'Arial', sans-serif;
+
+    font-weight: bold;
+    letter-spacing: 5px;
+    z-index: 10;
+    text-align: center;
+}
+
+@media (max-width: 1300px){
+    #countdown{
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 900px){
+    #countdown{
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 900px){
+    #countdown{
+        font-size: 1.1em;
+    }
+}
+
+
+/* Animation pour le texte overlay-text */
+@keyframes growAndShrink {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+.overlay-text.scroll-animation {
+    animation: growAndShrink 1s ease-in-out;
+}
 
 
 
@@ -619,7 +732,10 @@ body {
 
 
 
-.Actu {
+
+
+
+/* .Actu {
     display: flex;
     align-items: center;
     position: relative;
@@ -662,13 +778,13 @@ body {
 }
 
 .left-arrow {
-    left: 10px; /* Ajuste la position selon le besoin */
+    left: 10px;
 }
 
 .right-arrow {
     z-index: 1006;
-    right: 10px; /* Ajuste la position selon le besoin */
-}
+    right: 10px;
+} */
 
 
 
@@ -683,7 +799,7 @@ body {
 .Partenaire {
     display: block;
     color: rgb(255, 217, 0);
-    font-size: 6em;
+    font-size: 6vw;
     font-family: 'Poppins';
     margin-bottom: 20px;
 }
@@ -709,65 +825,66 @@ body {
 
 
 
-.Contact{
+
+
+
+
+/* PARTIE CONTACT */
+
+.Contact {
     background-color: rgb(18, 18, 18);
     color: rgb(207, 207, 207);
     height: auto;
+    padding: 20px; /* Ajout d'un padding pour l'espacement */
 }
 
-.ContactTitre{
-    position: relative;
-    top: -6%;
-    left: 1%;   
+.ContactTitre {
     color: white;
     font-size: 3.5em;
     font-family: 'Poppins';
     font-weight: bold;
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: left;
 }
 
-
-.contenerContact{
+.contenerContact {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Pour permettre l'ajustement des éléments lorsque la taille de la fenêtre change */
 }
 
-.LogoEmail{
+.LogoEmail {
     height: 100px;
-    position: relative;
-    left: 5%;
-    top: 470%;
+    flex-shrink: 0; /* Pour empêcher le rétrécissement de l'image */
 }
 
-.adressemail{
-    margin-top: 18px;
-    position: relative;
-    top: -2%;
-    left: 9%;
+.adressemail {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 20px;
-    width: 55%;
+    flex-grow: 1;
+    margin-left: 15px; /* Espacement entre l'image et les adresses email */
 }
 
-.adressemail span{
-    font-size: 1.5em;
+.adressemail span {
+    font-size: 1.5rem;
     font-family: 'Poppins';
     font-weight: bold;
-    width: 70%;
+    text-align: left; /* Aligner les adresses email à gauche */
 }
 
-.adressemail span:nth-child(1){
-    margin-top: 8px;
-    font-family: 'Poppins';
-    font-weight: bold;
-    width: 70%;
+.ReseauLien {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Pousse la section des réseaux sociaux à l'extrémité droite */
+    gap: 15px;
 }
 
-.ReseauLien{
-    margin-left: 15%;
-}
-
-.ReseauLien a{
+.ReseauLien a {
     text-decoration: none;
     font-size: 1em;
     font-family: 'Poppins';
@@ -775,48 +892,66 @@ body {
     color: white;
     align-items: center;
     display: flex;
-}
-
-.ReseauLien a img{
-    width: 75px;
-    height: 75px;
-    margin-bottom: 15px;
-}
-
-.ReseauLien a span{ 
-    font-size: 1.1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    width: 70%;
-    position: relative;
-    left: 3%;
-}
-
-/* .ReseauLien a {
-    text-decoration: none;
-    font-size: 1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
 }
 
 .ReseauLien a img {
     width: 75px;
     height: 75px;
+    margin-right: 10px; /* Espacement entre l'image et le texte */
 }
 
-.ReseauLien a span { 
+.ReseauLien a span {
     font-size: 1.1em;
     font-family: 'Poppins';
     font-weight: bold;
-    position: relative;
-    transform: translateY(-3%);
-    margin-left: 10px;
-} */
+}
 
 
+
+@media (max-width: 600px) {
+    .contenerContact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ContactTitre {
+        font-size: 2rem; 
+    }
+
+    .adressemail span {
+        font-size: 1rem;
+    }
+
+    .LogoEmail {
+        margin-bottom: 5px;
+    }
+
+    .adressemail {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .ReseauLien {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .ReseauLien a span {
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .ReseauLien a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+
+
+/* COPYRIGHT */
 
 .Copyright{
     background-color: rgb(18, 18, 18);
@@ -856,3 +991,229 @@ body {
     animation: rainbow 5s infinite;
 }
 
+@media (max-width: 600px){
+    .Copyright{
+        padding-top: 10px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.team-container {
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.team-container h2 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.team-container h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.team-container h4 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.team-container img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Section Présidente */
+.president-section {
+    margin-bottom: 50px;
+}
+
+/* Section Bureau */
+.bureau-section {
+    margin-bottom: 50px;
+}
+
+.bureau-images {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.bureau-member {
+    margin: 20px;
+}
+
+/* Autres membres */
+.other-members {
+    margin-bottom: 50px;
+}
+
+.member-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.member {
+    margin: 20px;
+}
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* UNISTRA */
+
+
+/* Styles généraux */
+.unistra {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.unistra h1, h2, h3 {
+    text-align: center;
+}
+
+.unistra a{
+    color: white;
+}
+
+.main-title {
+    font-size: 3vw;
+    margin-top: 5vh;
+}
+
+.sub-title{
+    font-size: 3em;
+}
+
+.response {
+    display: block;
+    width: 80%;
+    height: 150px;
+    margin: 20px auto;
+    font-size: 1.5vw;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Styles pour la section des sports */
+.sports-section {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10%;
+}
+
+.sports-list {
+    margin: 20px 0;
+    text-align: center;
+    margin-bottom: 15%;
+}
+
+.sports-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sports-list ul li {
+    font-size: 2vw;
+    margin: 15px 0;
+}
+
+.sport-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.sport-details img {
+    width: 40%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.sport-text {
+    width: 55%;
+    padding: 20px;
+    font-size: 1.5vw;
+}
+
+/* Styles pour la section Google Maps */
+.maps-section {
+    width: 80%;
+    margin: 50px auto;
+    margin-bottom: 10%;
+}
+
+.map-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.map-item img {
+    width: 40%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.map-text {
+    width: 55%;
+    padding: 20px;
+    font-size: 1.5vw;
+}
+
+
+
+
+
+
+
+
+
+.construction{
+    margin-top: 5%;
+    width: 100%;
+}
+
+.construction span{
+    width: 100%;
+    font-size: 3em;
+    color: white;
+    margin-left: 25%;
+}
+
+
+.construction img{
+    margin-left: 30%;
+    width: 40%;
+    height: auto;
+}
