@@ -1104,26 +1104,44 @@ a{
     color: white;
 }
 
+.section-intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 8%;
+}
+
 .main-title {
     font-size: 3vw;
-    margin-top: 5vh;
+    margin-top: 10vh;
 }
 
 .sub-title{
     font-size: 3em;
+    margin-bottom: 5%;
 }
 
 .response {
-    display: block;
-    width: 80%;
-    height: 150px;
-    margin: 20px auto;
-    font-size: 1.5vw;
-    border-radius: 10px;
-    padding: 10px;
+    display: inline-block; 
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: white;
+}
+
+.dots-container{
+    text-align: center;
+    margin-bottom: 3%;
 }
 
 /* Styles pour la section des sports */
+.sports-section-liste {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: -5%;
+}
+
 .sports-section {
     width: 80%;
     margin: 0 auto;
@@ -1131,7 +1149,11 @@ a{
 }
 
 .sports-list {
-    margin: 20px 0;
+    line-height: 2.25rem;
+    color: rgb(207, 207, 207);
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    max-width: 150%;
     text-align: center;
     margin-bottom: 15%;
 }
@@ -1179,8 +1201,14 @@ a{
     margin: 30px 0;
 }
 
+.map-item a {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 45%;
+}
+
 .map-item img {
-    width: 40%;
+    max-width: 100%;
     height: auto;
     border-radius: 15px;
 }
@@ -1189,6 +1217,45 @@ a{
     width: 55%;
     padding: 20px;
     font-size: 1.5vw;
+}
+
+
+@media (max-width: 600px) {
+    .sport-details {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sport-details img {
+        width: 80%;
+        margin: 20px 0;
+    }
+
+    .sport-text {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .map-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .map-item a {
+        width: 100%;
+    }
+
+    .map-item img {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .map-text {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
 }
 
 
