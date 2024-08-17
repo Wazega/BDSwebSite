@@ -1220,41 +1220,70 @@ a{
 }
 
 
-@media (max-width: 600px) {
+/* Media Query pour les écrans de moins de 600px de largeur */
+@media screen and (max-width: 600px) {
+    /* Pour la section des sports */
     .sport-details {
         flex-direction: column;
         align-items: center;
-        text-align: center;
-    }
-
-    .sport-details img {
-        width: 80%;
-        margin: 20px 0;
     }
 
     .sport-text {
         width: 100%;
+        text-align: center;
         padding: 10px;
+        order: 1; /* Texte placé en 3ème position */
     }
 
+    .sport-text h3 {
+        margin-bottom: 10px;
+        font-size: 4em;
+        order: 1; /* Titre placé en 1ère position */
+    }
+
+    .sport-text p {
+        margin-bottom: 5px;
+        font-size: 2em;
+        order: 3; /* Titre placé en 1ère position */
+    }
+
+    .sport-details img {
+        width: 100%;
+        margin-bottom: 10px;
+        order: 2; /* Image placée en 2ème position */
+    }
+
+    /* Pour la section des cartes Google Maps */
     .map-item {
         flex-direction: column;
         align-items: center;
     }
 
     .map-item a {
-        width: 100%;
-    }
-
-    .map-item img {
-        width: 80%;
-        margin-bottom: 20px;
+        width: 75%;
     }
 
     .map-text {
         width: 100%;
-        padding: 10px;
         text-align: center;
+        padding: 10px;
+        order: 3; /* Texte placé en 3ème position */
+    }
+
+    .map-item h3 {
+        margin-bottom: 10px;
+        font-size: 3em;
+        order: 1; /* Titre placé en 1ère position */
+    }
+
+    .map-text p{
+        font-size: 1.5em;
+    }
+
+    .map-item img {
+        width: 100%;
+        margin-bottom: 10px;
+        order: 2; /* Image placée en 2ème position */
     }
 }
 
@@ -1262,6 +1291,11 @@ a{
 
 
 
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* CONSTRUCTION */
 
 
 
