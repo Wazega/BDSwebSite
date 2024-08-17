@@ -1223,6 +1223,25 @@ a{
 /* Media Query pour les écrans de moins de 600px de largeur */
 @media screen and (max-width: 600px) {
     /* Pour la section des sports */
+
+    .main-title {
+        font-size: 3em;
+        margin-top: 10vh;
+    }
+    
+    .sub-title{
+        font-size: 3em;
+        margin-bottom: 5%;
+    }
+    
+    .response {
+        width: 90%;
+        display: inline-block; 
+        margin-top: 1px;
+        font-size: 0.9em;
+        color: white;
+    }
+
     .sports-list ul li {
         font-size: 4vw;
         margin: 5px 0;
