@@ -440,20 +440,29 @@ a{
     background-repeat: no-repeat;
 }
 
-.plug-play {
-    background: url('Image/tmp.jpeg');
-    background-position: top;
-    background-position-y: 25%;
+.evenement {
+    background: url('Image/EVENEMENTS.JPG');
+    background-position-y: 80%;
+    zoom: 1.5;
     background-size: cover;
-
+    background-repeat: no-repeat;
 }
 
-.customizable-themes {
-    background: url('Image/tmp.jpeg');
+.clubs {
+    background: url('Image/CLUBS1.JPG');
+    background-position-y: 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    zoom: 1.5;
+    
 }
 
-.dark-mode {
-    background: url('Image/tmp.jpeg');
+.ultra {
+    background: url('Image/ULTRA.JPG');
+    background-position-y: 70%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    zoom: 1.5;
 }
 
 .feature h3 {
@@ -547,8 +556,8 @@ a{
 }
 
 .icon-circle {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: 5px solid #32E0C4;
     border-radius: 50%;
     display: flex;
@@ -558,8 +567,11 @@ a{
 }
 
 .icon-circle img {
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    zoom: 1.5;
+    overflow: hidden;
 }
 
 .infographie-description {

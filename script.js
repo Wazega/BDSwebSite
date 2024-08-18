@@ -61,7 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const skierElement = document.querySelector('.skier');
     const skierInitialPosition = skierElement.getBoundingClientRect().top + window.scrollY;
     const windowHeight = window.innerHeight;
-    const startScrollPosition = skierInitialPosition - windowHeight * 0.3; // 30% du haut de la fenêtre
+    var startScrollPosition;
+    if (window.innerWidth <= 768) {
+        startScrollPosition = skierInitialPosition - windowHeight * 0.5;
+    } else {
+        startScrollPosition = skierInitialPosition - windowHeight * 0.3;
+
+    }
+
     const endScrollPosition = startScrollPosition + windowHeight/1.5;
     
 
@@ -145,6 +152,49 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    // URL du site à scraper
+    const sourceUrl = "https://wo.unistra.fr/app/WebObjects/SUAPSWeb.woa/wa/activites";
+
+    // Fonction pour récupérer et afficher les activités
+    function fetchActivities() {
+        fetch(sourceUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Créer un DOMParser pour analyser le texte HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, "text/html");
+
+                // Sélectionner les éléments <li> avec la classe "libelleActivite"
+                const activities = doc.querySelectorAll(".libelleActivite");
+
+                // Cible où injecter les éléments <li> sur votre site
+                const sportsList = document.querySelector(".sports-list ul");
+
+                // Vider la liste existante
+                sportsList.innerHTML = "";
+
+                // Parcourir les activités et les ajouter à votre site
+                activities.forEach(activity => {
+                    const li = document.createElement("li");
+                    li.textContent = activity.textContent;
+                    sportsList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    // Appeler la fonction pour charger les activités
+    fetchActivities();
+});
 
 
 
