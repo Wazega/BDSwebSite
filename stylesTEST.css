@@ -1293,10 +1293,15 @@ a{
     align-items: center;
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
+    flex-direction: row;
 }
 
 .story:last-child {
     border-bottom: none;
+}
+
+.story-image {
+    flex-shrink: 0;
 }
 
 .story-image img {
@@ -1319,6 +1324,7 @@ a{
     color: white;
     text-decoration: none;
     font-size: 1.7em;
+    text-align: left;
 }
 
 .story-content a:hover {
@@ -1335,6 +1341,28 @@ a{
 }
 
 
+@media screen and (max-width: 600px) {
+    .story {
+        flex-direction: column; /* Les éléments sont empilés verticalement sur mobile */
+        align-items: center; /* Centre l'image et le lien */
+    }
+
+    .story-image img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px; /* Espace entre l'image et le texte sur mobile */
+    }
+
+    .story-content a {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .story-content span {
+        font-size: 0.9em;
+        text-align: left; /* Le texte reste aligné à gauche */
+    }
+}
 
 
 
