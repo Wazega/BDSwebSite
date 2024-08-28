@@ -15,6 +15,18 @@ a{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 .LogoContainer{
     z-index: 1005;
     position: fixed;
@@ -64,6 +76,22 @@ a{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .video-background {
     position: absolute;
     top: 0;
@@ -105,6 +133,11 @@ a{
     width: 75px;
     height: 75px;
 }
+
+
+
+
+
 
 
 
@@ -841,174 +874,6 @@ a{
 
 
 
-/* PARTIE CONTACT */
-
-.Contact {
-    background-color: rgb(18, 18, 18);
-    color: rgb(207, 207, 207);
-    height: auto;
-    padding: 20px; /* Ajout d'un padding pour l'espacement */
-}
-
-.ContactTitre {
-    color: white;
-    font-size: 3.5em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    margin-bottom: 20px; /* Espacement sous le titre */
-    text-align: left;
-}
-
-.contenerContact {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Pour permettre l'ajustement des éléments lorsque la taille de la fenêtre change */
-}
-
-.LogoEmail {
-    height: 100px;
-    flex-shrink: 0; /* Pour empêcher le rétrécissement de l'image */
-}
-
-.adressemail {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 20px;
-    flex-grow: 1;
-    margin-left: 15px; /* Espacement entre l'image et les adresses email */
-}
-
-.adressemail span {
-    font-size: 1.5rem;
-    font-family: 'Poppins';
-    font-weight: bold;
-    text-align: left; /* Aligner les adresses email à gauche */
-}
-
-.ReseauLien {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto; /* Pousse la section des réseaux sociaux à l'extrémité droite */
-    gap: 15px;
-}
-
-.ReseauLien a {
-    text-decoration: none;
-    font-size: 1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-    color: white;
-    align-items: center;
-    display: flex;
-}
-
-.ReseauLien a img {
-    width: 75px;
-    height: 75px;
-    margin-right: 10px; /* Espacement entre l'image et le texte */
-}
-
-.ReseauLien a span {
-    font-size: 1.1em;
-    font-family: 'Poppins';
-    font-weight: bold;
-}
-
-
-
-@media (max-width: 600px) {
-    .contenerContact {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .ContactTitre {
-        font-size: 2rem; 
-    }
-
-    .adressemail span {
-        font-size: 1rem;
-    }
-
-    .LogoEmail {
-        margin-bottom: 5px;
-    }
-
-    .adressemail {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .ReseauLien {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .ReseauLien a span {
-        text-align: left;
-        font-size: 1rem;
-    }
-    
-    .ReseauLien a img{
-        width: 50px;
-        height: 50px;
-    }
-}
-
-
-
-
-
-/* COPYRIGHT */
-
-.Copyright{
-    background-color: rgb(18, 18, 18);
-    color: rgb(207, 207, 207);
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 15px;
-    font-size: 1.1rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    position: relative;
-}
-
-.Copyright .text-container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    position: relative; /* Nécessaire pour positionner #discret */
-}
-
-@keyframes rainbow {
-    0% { color: red; }
-    14% { color: orange; }
-    28% { color: yellow; }
-    42% { color: green; }
-    57% { color: blue; }
-    71% { color: indigo; }
-    85% { color: violet; }
-    100% { color: red; }
-}
-
-.multicolor {
-    display: inline-block;
-    font-weight: bold;
-    animation: rainbow 5s infinite;
-}
-
-@media (max-width: 600px){
-    .Copyright{
-        padding-top: 10px;
-        font-size: 0.8rem;
-    }
-}
 
 
 
@@ -1017,6 +882,12 @@ a{
 
 
 
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* BDS*/
 
 
 
@@ -1092,11 +963,35 @@ a{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ##################################################################### */
 /* ##################################################################### */
 /* ##################################################################### */
 /* ##################################################################### */
                             /* UNISTRA */
+
+
+
 .page-unistra{
     background-color: white;
     color: #003cff;
@@ -1324,33 +1219,60 @@ a{
 
 
 
-.club-container {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-}
 
-.club-container h1, h2 {
-    text-align: center;
-    color: #444;
-}
 
-.club-container p {
-    text-align: center;
-    margin: 20px 0;
-    padding: 0 10px;
-}
 
-.club-container {
-    width: 100%;
-    margin: 0 auto;
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* club */
+
+
+.club-wrapper {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: auto;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #0B1124;;
+}
+
+.club-wrapper h1{
+    font-size: 7em;
+    letter-spacing: .15em;
+    font-weight: bold;
+}
+
+.club-wrapper p{
+    font-size: 2em;
+    line-height: 1.5em;
+    margin-bottom: 5%;
+}
+
+
+
+
+.club-container {
+    width: 80%; /* Limite la largeur pour ne pas déborder l'écran */
+    max-width: 1000px;
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
 }
 
 .top-stories {
@@ -1369,7 +1291,7 @@ a{
 .story {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #ddd;
 }
 
@@ -1378,16 +1300,25 @@ a{
 }
 
 .story-image img {
-    width: 50px;
-    height: 50px;
+    width: 200px; /* Taille de l'image */
+    height: 200px;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-right: 20px; /* Espace entre l'image et le texte */
 }
+
+
+.story-content{
+    flex: 1;
+    text-align: left;
+}
+
+
 
 .story-content a {
     font-weight: bold;
-    color: #333;
+    color: white;
     text-decoration: none;
+    font-size: 1.7em;
 }
 
 .story-content a:hover {
@@ -1395,10 +1326,229 @@ a{
 }
 
 .story-content span {
+    margin-top: 1%;
     display: block;
-    font-size: 0.9em;
-    color: #999;
+    font-size: 1.2em;
+    color: rgb(207, 207, 207);
+    text-align: left;
+    line-height: 1.5;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* CONTACT*/
+
+
+.Contact {
+    background-color: rgb(18, 18, 18);
+    color: rgb(207, 207, 207);
+    height: auto;
+    padding: 20px; /* Ajout d'un padding pour l'espacement */
+}
+
+.ContactTitre {
+    color: white;
+    font-size: 3.5em;
+    font-family: 'Poppins';
+    font-weight: bold;
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: left;
+}
+
+.contenerContact {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Pour permettre l'ajustement des éléments lorsque la taille de la fenêtre change */
+}
+
+.LogoEmail {
+    height: 100px;
+    flex-shrink: 0; /* Pour empêcher le rétrécissement de l'image */
+}
+
+.adressemail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-grow: 1;
+    margin-left: 15px; /* Espacement entre l'image et les adresses email */
+}
+
+.adressemail span {
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+    font-weight: bold;
+    text-align: left; /* Aligner les adresses email à gauche */
+}
+
+.ReseauLien {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Pousse la section des réseaux sociaux à l'extrémité droite */
+    gap: 15px;
+}
+
+.ReseauLien a {
+    text-decoration: none;
+    font-size: 1em;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: white;
+    align-items: center;
+    display: flex;
+}
+
+.ReseauLien a img {
+    width: 75px;
+    height: 75px;
+    margin-right: 10px; /* Espacement entre l'image et le texte */
+}
+
+.ReseauLien a span {
+    font-size: 1.1em;
+    font-family: 'Poppins';
+    font-weight: bold;
+}
+
+
+
+@media (max-width: 600px) {
+    .contenerContact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ContactTitre {
+        font-size: 2rem; 
+    }
+
+    .adressemail span {
+        font-size: 1rem;
+    }
+
+    .LogoEmail {
+        margin-bottom: 5px;
+    }
+
+    .adressemail {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .ReseauLien {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .ReseauLien a span {
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .ReseauLien a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* COPYRIGHT*/
+
+.Copyright{
+    background-color: rgb(18, 18, 18);
+    color: rgb(207, 207, 207);
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    position: relative;
+}
+
+.Copyright .text-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative; /* Nécessaire pour positionner #discret */
+}
+
+@keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
+}
+
+.multicolor {
+    display: inline-block;
+    font-weight: bold;
+    animation: rainbow 5s infinite;
+}
+
+@media (max-width: 600px){
+    .Copyright{
+        padding-top: 10px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
 
 
 
