@@ -1097,23 +1097,27 @@ a{
 /* ##################################################################### */
 /* ##################################################################### */
                             /* UNISTRA */
-
+.page-unistra{
+    background-color: white;
+    color: #003cff;
+}
 
 /* Styles généraux */
 .unistra {
     font-family: 'Poppins', sans-serif;
-    color: white;
+    /* color: white; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 .unistra h1, h2, h3 {
     text-align: center;
 }
 
 .unistra a{
-    color: white;
+    /* color: white; */
 }
 
 .section-intro{
@@ -1123,6 +1127,7 @@ a{
     align-items: center;
     text-align: center;
     margin-bottom: 8%;
+    margin-top: 7%;
 }
 
 .main-title {
@@ -1135,41 +1140,91 @@ a{
     margin-bottom: 5%;
 }
 
-.response {
-    width: 90%;
+.def_unistra {
+    width: 60%;
     display: inline-block; 
     margin-top: 20px;
     font-size: 1.5em;
-    color: white;
+    margin-bottom: 10vh;
+    /* color: white; */
 }
+
+
+.info_unistra{
+    width: 25%; 
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    gap: 15%;
+}
+
+.info_unistra a{
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    text-align: center;
+    color: purple;
+    display: flex;
+    align-items: center; 
+    gap: 2px;
+}
+
+.info_unistra img{
+    width: 50px;
+    height: 50px;
+}
+
+.info_supp{
+    margin-top: 2%;
+    width: 50%;
+    display: inline-block; 
+    font-size: 1.3em;
+}
+
+/* .info_supp_a{
+    color:#ff0303;
+} */
 
 .dots-container{
     text-align: center;
     margin-bottom: 3%;
 }
 
+
+.tournoissport{
+    width: 60%;
+    margin-left: 20%;
+    font-size: 1.2em;
+}
+
+
+
+
 /* Styles pour la section des sports */
 .sports-section-liste {
     width: 100%;
     margin: 0 auto;
     margin-bottom: -5%;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .sports-section {
     width: 80%;
     margin: 0 auto;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
+}
+
+.sports-section h1{
+    margin-bottom: 7%;
 }
 
 .sports-list {
     line-height: 2.25rem;
-    color: rgb(207, 207, 207);
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    /* color: rgb(207, 207, 207); */
+    /* border-top: 1px solid gray; */
+    /* border-bottom: 1px solid gray; */
     max-width: 150%;
     text-align: center;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
 }
 
 .sports-list ul {
@@ -1185,8 +1240,10 @@ a{
 .sport-details {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5%;
     margin: 30px 0;
+    margin-bottom: 5%;
 }
 
 .sport-details img {
@@ -1196,40 +1253,7 @@ a{
 }
 
 .sport-text {
-    width: 55%;
-    padding: 20px;
-    font-size: 1.5vw;
-}
-
-/* Styles pour la section Google Maps */
-.maps-section {
-    width: 80%;
-    margin: 50px auto;
-    margin-bottom: 10%;
-}
-
-.map-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 30px 0;
-}
-
-.map-item a {
-    display: inline-block;
-    flex-shrink: 0;
-    width: 45%;
-}
-
-.map-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 15px;
-}
-
-.map-text {
-    width: 55%;
-    padding: 20px;
+    width: auto;
     font-size: 1.5vw;
 }
 
@@ -1288,38 +1312,6 @@ a{
         width: 100%;
         margin-bottom: 10px;
         order: 2; /* Image placée en 2ème position */
-    }
-
-    /* Pour la section des cartes Google Maps */
-    .map-item {
-        flex-direction: column;
-        align-items: center;
-        margin: 1px 0;
-    }
-
-    .map-item a {
-        width: 75%;
-    }
-
-    .map-text {
-        width: 100%;
-        text-align: center;
-        order: 1; /* Texte placé en 3ème position */
-    }
-
-    .map-item h3 {
-        margin-bottom: 10px;
-        font-size: 3em;
-    }
-
-    .map-text p{
-        font-size: 1.5em;
-    }
-
-    .map-item a{
-        width: 100%;
-        margin-bottom: 10px;
-        order: 5; /* Image placée en 2ème position */
     }
 }
 
