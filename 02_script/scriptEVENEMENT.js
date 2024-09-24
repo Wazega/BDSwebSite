@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sportItems.forEach((item, index) => {
                         if (sports[index]) {
                             const sportName = sports[index];
+                            console.log(sportName);
                             const sportImage = `04_Image/icone_${sportName}.png`; // Chemin de l'image
 
                             // Met à jour le texte et l'image
