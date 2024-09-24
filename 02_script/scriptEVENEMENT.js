@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sportItems.forEach((item, index) => {
                         if (sports[index]) {
                             const sportName = sports[index];
-                            const sportImage = `Image/icone_${sportName}.png`; // Chemin de l'image
+                            const sportImage = `04_Image/icone_${sportName}.png`; // Chemin de l'image
 
                             // Met à jour le texte et l'image
                             item.querySelector('span').textContent = sportName.charAt(0).toUpperCase() + sportName.slice(1); // Met en majuscule la première lettre
