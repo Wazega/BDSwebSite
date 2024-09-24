@@ -99,15 +99,16 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
             if (data.selections) {
-                const selections = document.querySelectorAll("select");
-                selections.forEach((select, index) => {
-                    if (data.selections[index]) {
-                        select.value = data.selections[index];
-                    }
-                });
+                // Assurez-vous que les clés correspondent aux IDs des sélecteurs
+                document.getElementById("sport1").value = data.selections.sport1 || "foot"; // valeur par défaut
+                document.getElementById("sport2").value = data.selections.sport2 || "basket"; // valeur par défaut
+                document.getElementById("sport3").value = data.selections.sport3 || "tennis"; // valeur par défaut
+                document.getElementById("sport4").value = data.selections.sport4 || "natation"; // valeur par défaut
+                document.getElementById("sport5").value = data.selections.sport5 || "rugby"; // valeur par défaut
             }
         })
         .catch(error => {
             console.error("Erreur lors du chargement des sélections : ", error);
         });
 };
+
