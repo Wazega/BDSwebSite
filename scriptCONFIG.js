@@ -52,19 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Sauvegarde les données
 function saveEvent() {
-    // Récupérer les valeurs des listes déroulantes
-    const sport1 = document.getElementById("sport1").value;
-    const sport2 = document.getElementById("sport2").value;
-    const sport3 = document.getElementById("sport3").value;
-    const sport4 = document.getElementById("sport4").value;
-    const sport5 = document.getElementById("sport5").value;
+    const sportItems = document.querySelectorAll('.sport-item'); // Récupère tous les éléments sport-item
+    const selections = {}; // Un objet pour stocker les sélections
 
-    // Afficher les valeurs dans la console pour vérifier
-    console.log("Sport sélectionné pour sport1: ", sport1);
-    console.log("Sport sélectionné pour sport2: ", sport2);
-    console.log("Sport sélectionné pour sport3: ", sport3);
-    console.log("Sport sélectionné pour sport4: ", sport4);
-    console.log("Sport sélectionné pour sport5: ", sport5);
+    // Itère sur chaque sport-item pour récupérer les valeurs
+    sportItems.forEach((item, index) => {
+        const sportName = item.querySelector('span').textContent.toLowerCase(); // Récupère le nom du sport en minuscule
+        selections[`sport${index + 1}`] = sportName; // Ajoute le sport à l'objet avec la clé sport1, sport2, etc.
+    });
+
+    // Affiche les valeurs dans la console pour vérifier
+    console.log("Sélections sauvegardées : ", selections);
 
     // Envoyer les données au serveur
     fetch("/saveSelection.php", {
@@ -72,13 +70,7 @@ function saveEvent() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            sport1: sport1,
-            sport2: sport2,
-            sport3: sport3,
-            sport4: sport4,
-            sport5: sport5
-        }),
+        body: JSON.stringify(selections), // Envoie l'objet des sélections
     })
     .then(response => response.json())
     .then(data => {
@@ -92,6 +84,7 @@ function saveEvent() {
         console.error("Erreur lors de la requête : ", error);
     });
 }
+
 
 
 window.onload = function() {
