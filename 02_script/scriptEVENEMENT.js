@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sports = data.sports; // Récupère la liste des sports
                 const sportItems = document.querySelectorAll('.sport-item'); // Récupère tous les éléments sport-item
 
-                // Assurez-vous que le nombre de sports correspond à celui des éléments sport-item
+                // Vérifiez que le nombre de sports ne dépasse pas le nombre d'éléments sport-item
                 if (sports.length <= sportItems.length) {
                     sportItems.forEach((item, index) => {
                         if (sports[index]) {
@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             item.querySelector('img').alt = sportName; // Met à jour l'attribut alt
                         }
                     });
+                } else {
+                    console.warn("Le nombre de sports dans le JSON dépasse le nombre d'éléments sport-item.");
                 }
             })
             .catch(error => {
@@ -31,3 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Appelle la fonction pour charger les sélections
     loadSelections();
 });
+
