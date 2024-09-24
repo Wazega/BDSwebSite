@@ -1,0 +1,619 @@
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* CORPS DE BASE */
+
+
+/* Styles pour le corps de la page */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #0B1124;
+    /* background-color: rgba(15,23,42,255); */
+    /* background-color: rgb(5, 20, 221); */
+    /* background-color: rgb(4, 11, 122); */
+}
+
+a{
+    color:#0B1124;
+    text-decoration-color: none;
+    text-decoration: none;
+}
+
+
+.LogoContainer{
+    z-index: 1005;
+    position: fixed;
+    top: -1%;
+    right: -1vw;
+    width: 15vw;
+    height: 15vw;
+    overflow: hidden;
+}
+
+/* Styles pour le logo */
+.logo {
+    width: 15vw;
+    height: 15vw;
+    object-fit: cover;
+}
+
+
+
+.BDSTitre{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(224, 78, 10);
+    font-size: 8em;
+    text-align: center;
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+
+@media (max-width: 800px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 500px){
+    .BDSTitre{
+        padding-top: 15px;
+        font-size: 4.5em;
+    }
+}
+
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.video-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+}
+
+.Reseau {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligne les éléments à droite */
+    bottom: 3%;
+    right: 3%;
+    z-index: 1;
+    gap: 2%; /* Espace entre les éléments */
+}
+
+.Facebook, .Insta {
+    width: 75px;
+    height: 75px;
+}
+
+
+/* Styles pour la barre de navigation */
+.navbar {
+    position: fixed;
+    background: none;
+    top: 0;
+    left: 0; /* Ajouté pour s'assurer que la navbar commence à gauche */
+    width: 100%;
+    height: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1vh 2vw; /* Padding relatif à la taille de la fenêtre */
+    -webkit-text-stroke: 1px black; /* Contour noir de 1px */
+    z-index: 1000;
+    box-sizing: border-box; /* Ajouté pour inclure padding et bordures dans la largeur */
+}
+
+.navbar.scrolled {
+    background: black; /* Fond noir quand la page est défilée */
+    transition: 0.7s ease-in-out;
+}
+
+/* Styles pour le conteneur de la navigation */
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Styles pour les éléments de navigation */
+.nav-items {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    margin: -1% 0;
+    gap: 3vw; /* Espace entre les éléments relatif à la largeur de la fenêtre */
+    font-size: 2em;
+}
+
+.nav-items a {  
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.nav-items a:nth-child(1) {  
+    margin-right: 10%;
+    margin-left: -20%;
+}
+
+.nav-items a.active {
+    text-decoration: underline;
+    -webkit-text-stroke: 1px black;
+}
+
+.nav-items a:hover {
+    color: rgb(54, 124, 188);
+    transition: 0.2s ease-in-out;
+}
+
+/* Styles pour le bouton de menu */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 1600px){
+    .nav-items{
+        font-size: 1.9em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -16%;
+    }
+}
+
+@media (max-width: 1300px){
+    .nav-items{
+        font-size: 1.5em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 1060px){
+    .nav-items{
+        font-size: 1.2em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 7%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 900px){
+    .nav-items{
+        font-size: 1em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 4%;
+        margin-left: -14%;
+    }
+}
+
+@media (max-width: 700px){
+    .nav-items{
+        font-size: 0.9em;
+    }
+    .nav-items a:nth-child(1) {  
+        margin-right: 5%;
+        margin-left: -17%;
+    }
+}
+
+/* Styles pour les écrans de moins de 600px */
+@media (max-width: 600px) {
+    .nav-items {
+        display: none; /* Cacher les éléments de navigation par défaut */
+        flex-direction: column;
+        gap: 10px;
+        background-color: black;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 25%;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-items a:nth-child(1) {  
+        margin-left: 0%;
+
+    }
+
+}
+
+/* Styles pour le conteneur du logo */
+.LogoContainer {
+    z-index: 1005;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    width: 12vw;
+    height: auto;
+    overflow: hidden;
+}
+
+/* Styles pour le logo */
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* CONTACT*/
+
+
+.Contact {
+    background-color: rgb(18, 18, 18);
+    color: rgb(207, 207, 207);
+    height: auto;
+    padding: 20px; /* Ajout d'un padding pour l'espacement */
+}
+
+.ContactTitre {
+    color: white;
+    font-size: 3.5em;
+    font-family: 'Poppins';
+    font-weight: bold;
+    margin-bottom: 20px; /* Espacement sous le titre */
+    text-align: left;
+}
+
+.contenerContact {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Pour permettre l'ajustement des éléments lorsque la taille de la fenêtre change */
+}
+
+.LogoEmail {
+    height: 100px;
+    flex-shrink: 0; /* Pour empêcher le rétrécissement de l'image */
+}
+
+.adressemail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+    flex-grow: 1;
+    margin-left: 15px; /* Espacement entre l'image et les adresses email */
+}
+
+.adressemail span {
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+    font-weight: bold;
+    text-align: left; /* Aligner les adresses email à gauche */
+}
+
+.ReseauLien {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto; /* Pousse la section des réseaux sociaux à l'extrémité droite */
+    gap: 15px;
+}
+
+.ReseauLien a {
+    text-decoration: none;
+    font-size: 1em;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: white;
+    align-items: center;
+    display: flex;
+}
+
+.ReseauLien a img {
+    width: 75px;
+    height: 75px;
+    margin-right: 10px; /* Espacement entre l'image et le texte */
+}
+
+.ReseauLien a span {
+    font-size: 1.1em;
+    font-family: 'Poppins';
+    font-weight: bold;
+}
+
+
+
+@media (max-width: 600px) {
+    .contenerContact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ContactTitre {
+        font-size: 2rem; 
+    }
+
+    .adressemail span {
+        font-size: 1rem;
+    }
+
+    .LogoEmail {
+        margin-bottom: 5px;
+    }
+
+    .adressemail {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .ReseauLien {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .ReseauLien a span {
+        text-align: left;
+        font-size: 1rem;
+    }
+    
+    .ReseauLien a img{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* COPYRIGHT*/
+
+.Copyright{
+    background-color: rgb(18, 18, 18);
+    color: rgb(207, 207, 207);
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    font-size: 1.1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    position: relative;
+}
+
+.Copyright .text-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative; /* Nécessaire pour positionner #discret */
+}
+
+@keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
+}
+
+.multicolor {
+    display: inline-block;
+    font-weight: bold;
+    animation: rainbow 5s infinite;
+}
+
+@media (max-width: 600px){
+    .Copyright{
+        padding-top: 10px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* EVENEMENT */
+
+
+
+
+.activity-page-wrapper {
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Activités Section */
+.activity-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.activity-slider {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    color: black;
+}
+
+.activity-item {
+    flex: 0 0 300px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.activity-info h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.activity-info span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* COUFF Section */
+.couff-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.couff-section h2 {
+    margin: 20px 0;
+    font-size: 1.8em;
+}
+
+.time-slot {
+    margin: 20px 0;
+}
+
+.sport_couff {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sport-item {
+    text-align: center;
+}
+
+.sport-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* TOSS Section */
+.toss-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.toss-section img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* WES Section */
+.wes-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.wes-section img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Media Query pour Mobile */
+@media (max-width: 600px) {
+    .activity-slider {
+        flex-direction: column;
+    }
+
+    .sport_couff {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sport-item img {
+        width: 100px;
+        height: 100px;
+    }
+}

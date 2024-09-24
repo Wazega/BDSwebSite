@@ -134,69 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const links = document.querySelectorAll('.sports-list ul li a');
-
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-
-            window.scrollTo({
-                top: targetElement.offsetTop,
-                behavior: 'smooth'
-            });
-        });
-    });
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    // URL du site à scraper
-    const sourceUrl = "https://wo.unistra.fr/app/WebObjects/SUAPSWeb.woa/wa/activites";
-
-    // Fonction pour récupérer et afficher les activités
-    function fetchActivities() {
-        fetch(sourceUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                // Créer un DOMParser pour analyser le texte HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, "text/html");
-
-                // Sélectionner les éléments <li> avec la classe "libelleActivite"
-                const activities = doc.querySelectorAll(".libelleActivite");
-
-                // Cible où injecter les éléments <li> sur votre site
-                const sportsList = document.querySelector(".sports-list ul");
-
-                // Vider la liste existante
-                sportsList.innerHTML = "";
-
-                // Parcourir les activités et les ajouter à votre site
-                activities.forEach(activity => {
-                    const li = document.createElement("li");
-                    li.textContent = activity.textContent;
-                    sportsList.appendChild(li);
-                });
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    }
-
-    // Appeler la fonction pour charger les activités
-    fetchActivities();
-});
-
-
 
 
 function getNextFriday() {
