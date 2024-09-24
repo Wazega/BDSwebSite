@@ -68,7 +68,11 @@ function saveEvent() {
 
     // Préparez les données pour correspondre à la structure souhaitée
     const dataToSave = {
-        sports: [sport1, sport2, sport3, sport4, sport5]
+        sport1: sport1,
+        sport2: sport2,
+        sport3: sport3,
+        sport4: sport4,
+        sport5: sport5
     };
 
     // Envoyer les données au serveur
@@ -94,6 +98,7 @@ function saveEvent() {
 
 
 
+
 window.onload = function() {
     fetch("/getSelection.php")
         .then(response => response.json())
@@ -101,7 +106,7 @@ window.onload = function() {
             if (data.selections) {
                 // Assurez-vous que les clés correspondent aux IDs des sélecteurs
                 document.getElementById("sport1").value = data.selections.sport1 || "foot"; // valeur par défaut
-                document.getElementById("sport2").value = data.selections.sport2 || "basket"; // valeur par défaut
+                document.getElementById("sport2").value = data.selections.sport2 || "tenis"; // valeur par défaut
                 document.getElementById("sport3").value = data.selections.sport3 || "tennis"; // valeur par défaut
                 document.getElementById("sport4").value = data.selections.sport4 || "natation"; // valeur par défaut
                 document.getElementById("sport5").value = data.selections.sport5 || "rugby"; // valeur par défaut
