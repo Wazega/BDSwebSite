@@ -199,3 +199,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+function getNextFriday() {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const daysUntilFriday = (5 - dayOfWeek + 7) % 7 || 7;
+    const nextFriday = new Date(today.setDate(today.getDate() + daysUntilFriday));
+    return nextFriday.toLocaleDateString();
+}
+
+document.getElementById('next-friday-date').innerText += getNextFriday();
+
+
+
+
+
+
+
+
+

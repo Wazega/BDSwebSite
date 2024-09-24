@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration BDS</title>
+    <link rel="stylesheet" href="stylesTEST.css">
+    <link rel="icon" href="Image/LogoBDS.png" type="image/x-icon">
+
+</head>
+<body class="config_page">
+    <h1 id="titre_config">Page configuration site BDS</h1>
+    <div id="login-container">
+        <form id="login-form">
+            <h2>Connexion</h2>
+            <div id="error-message" class="hidden"></div>
+            <label for="username">Identifiant:</label>
+            <input type="text" id="username" required>
+            <label for="password">Mot de passe:</label>
+            <div class="password-container">
+                <input type="password" id="password" required>
+                <span class="password-toggle" id="toggle-password">👁️</span>
+            </div>
+            <button type="button" id="login-button">Se connecter</button>
+        </form>
+    </div>
+
+    <div id="content" class="hidden">
+        <h1>Configuration</h1>
+
+        <!-- Section Activité -->
+        <section id="activite-section">
+            <h2>Activité</h2>
+            <form id="activite-form">
+                <label for="titre">Titre:</label>
+                <input type="text" id="titre" required>
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+                <label for="description">Description:</label>
+                <textarea id="description" required></textarea>
+                <label for="image-upload">Télécharger une image:</label>
+                <input type="file" id="image-upload" accept="image/*">
+                <button type="submit">Ajouter l'activité</button>
+            </form>
+            <div id="activite-list"></div>
+        </section>
+
+        <!-- Section Couff -->
+        <section id="couff-section">
+            <h2>Couff</h2>
+            <div class="time-slot">
+                <h3>18h30 à 20h</h3>
+                <select>
+                    <option value="foot">Football</option>
+                    <option value="basket">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                    <option value="natation">Natation</option>
+                    <option value="rugby">Rugby</option>
+                </select>
+                <select>
+                    <option value="foot">Football</option>
+                    <option value="basket">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                    <option value="natation">Natation</option>
+                    <option value="rugby">Rugby</option>
+                </select>
+                <select>
+                    <option value="foot">Football</option>
+                    <option value="basket">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                    <option value="natation">Natation</option>
+                    <option value="rugby">Rugby</option>
+                </select>
+            </div>
+            <div class="time-slot">
+                <h3>20h à 21h30</h3>
+                <select>
+                    <option value="foot">Football</option>
+                    <option value="basket">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                    <option value="natation">Natation</option>
+                    <option value="rugby">Rugby</option>
+                </select>
+                <select>
+                    <option value="foot">Football</option>
+                    <option value="basket">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                    <option value="natation">Natation</option>
+                    <option value="rugby">Rugby</option>
+                </select>
+            </div>
+        </section>
+        <button onclick="saveEvent()">Enregistrer</button>
+    </div>
+
+
+
+    <div id="sport_icone" class="hidden">
+        <img id="basket" src="Image/icone_basketball.png"/>
+        <img src="Image/icone_badminton.png"/>
+        <img src="Image/icone_boxe.png"/>
+        <img src="Image/icone_football.png"/>
+        <img src="Image/icone_frisbee.png"/>
+        <img src="Image/icone_handball.png"/>
+        <img src="Image/icone_hockey.png"/>
+        <img src="Image/icone_lutte.png"/>
+        <img src="Image/icone_volleyball.png"/>
+        <img src="Image/icone_yoga.png"/>
+    </div>
+    <div id="wrapper_link">
+        <a id="lien_icone" href="https://www.freepik.com/author/freepik/icons/detailed-flat-circular-flat_44">Lien des icones pour en ajouter</a>
+    </div>
+    <script src="scriptCONFIG.js"></script>
+</body>
+</html>

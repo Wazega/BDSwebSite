@@ -152,6 +152,7 @@ a{
     top: 0;
     left: 0; /* Ajouté pour s'assurer que la navbar commence à gauche */
     width: 100%;
+    height: 3vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -181,7 +182,7 @@ a{
     justify-content: center;
     margin: -1% 0;
     gap: 3vw; /* Espace entre les éléments relatif à la largeur de la fenêtre */
-    font-size: 2em; /* Taille de la police relative à la largeur de la fenêtre */
+    font-size: 2em;
 }
 
 .nav-items a {  
@@ -221,7 +222,7 @@ a{
 
 @media (max-width: 1600px){
     .nav-items{
-        font-size: 1.7em;
+        font-size: 1.9em;
     }
     .nav-items a:nth-child(1) {  
         margin-right: 7%;
@@ -342,7 +343,7 @@ a{
 
 .container {
     margin-top: 15%;
-    text-align: center;
+    text-align: justify;
     max-width: 100%;
     background-color: #0B1124;
     padding: 10px;
@@ -1334,7 +1335,7 @@ a{
 .story-content span {
     margin-top: 1%;
     display: block;
-    font-size: 1.2em;
+    font-size: 1em;
     color: rgb(207, 207, 207);
     text-align: left;
     line-height: 1.5;
@@ -1363,6 +1364,168 @@ a{
         text-align: left; /* Le texte reste aligné à gauche */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* EVENEMENT */
+
+
+
+
+.activity-page-wrapper {
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Activités Section */
+.activity-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.activity-slider {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    color: black;
+}
+
+.activity-item {
+    flex: 0 0 300px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.activity-info h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.activity-info span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* COUFF Section */
+.couff-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.couff-section h2 {
+    margin: 20px 0;
+    font-size: 1.8em;
+}
+
+.time-slot {
+    margin: 20px 0;
+}
+
+.sport_couff {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sport-item {
+    text-align: center;
+}
+
+.sport-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* TOSS Section */
+.toss-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.toss-section img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* WES Section */
+.wes-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.wes-section img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Media Query pour Mobile */
+@media (max-width: 600px) {
+    .activity-slider {
+        flex-direction: column;
+    }
+
+    .sport_couff {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sport-item img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1616,4 +1779,140 @@ a{
     margin-left: 30%;
     width: 40%;
     height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+/* ##################################################################### */
+                            /* CONFIG */
+
+
+.config_page{
+    background-color: white;
+}
+
+.config_page h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 5%;
+}
+
+/* Centrage du conteneur de connexion */
+#login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Champs de saisie */
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    width: 100%; /* Ajusté pour le bouton d'affichage du mot de passe */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#login-form input[type="password"] {
+    width: calc(100% - 40px);
+}
+
+/* Conteneur pour le champ de mot de passe avec bouton d'affichage */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+}
+
+/* Bouton de soumission */
+#login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Message d'erreur */
+#error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Cacher le contenu jusqu'à la connexion */
+.hidden {
+    display: none;
+}
+
+/* Style pour le contenu après la connexion */
+#content {
+    padding: 20px;
+    background-color: white;
+}
+
+#sport_icone{
+    background-color: white;
+    display: hidden;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+
+#sport_icone img{
+    width: 150px;
+    height: 150px;
+}
+
+#wrapper_link {
+    display: none;
+    text-align: center;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+
+#lien_icone{
+    color: red;
+    font-size: 1.4em;
 }
