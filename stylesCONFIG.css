@@ -1,0 +1,159 @@
+.config_page{
+    background-color: white;
+}
+
+.config_page h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 5%;
+}
+
+
+#LoginMiseEnPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30%;
+    margin-top: 20px;
+}
+
+.LogoBackground{
+    margin-top: 10px;
+    width: 500px;
+    height: 500px;
+}
+
+
+/* Centrage du conteneur de connexion */
+#login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    width: 300px;
+}
+
+/* Champs de saisie */
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    width: 100%; /* Ajusté pour le bouton d'affichage du mot de passe */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#login-form input[type="password"] {
+    width: calc(100% - 40px);
+}
+
+/* Conteneur pour le champ de mot de passe avec bouton d'affichage */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+}
+
+/* Bouton de soumission */
+#login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Message d'erreur */
+#error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Cacher le contenu jusqu'à la connexion */
+.hidden {
+    display: none;
+}
+
+/* Style pour le contenu après la connexion */
+#content {
+    padding: 20px;
+    background-color: white;
+}
+
+.SaveButton{
+    background-color: #3498db; /* Couleur de fond bleu */
+    color: white; /* Couleur du texte en blanc */
+    border: none; /* Pas de bordure */
+    border-radius: 25px; /* Bordures arrondies */
+    padding: 10px 20px; /* Espace interne pour agrandir le bouton */
+    font-size: 16px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    cursor: pointer; /* Curseur en forme de main */
+    transition: background-color 0.3s, transform 0.3s; /* Transition douce pour l'effet hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre sous le bouton */
+}
+
+/* Effet au survol (hover) */
+SaveButton:hover {
+    background-color: #2980b9; /* Couleur plus foncée au survol */
+    transform: translateY(-3px); /* Léger décalage vers le haut */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Accentuation de l'ombre */
+}
+
+/* Effet au clic */
+SaveButton:active {
+    background-color: #1d6fa5; /* Couleur encore plus foncée au clic */
+    transform: translateY(1px); /* Légère descente au clic */
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2); /* Ombre réduite */
+}
+
+
+/* Désactiver le bouton (état disabled) */
+SaveButton:disabled {
+    background-color: #bdc3c7; /* Couleur grise pour indiquer un bouton désactivé */
+    cursor: not-allowed; /* Icône indiquant que le bouton est non-cliquable */
+}
+
+
+
+
+#sport_icone{
+    background-color: white;
+    display: hidden;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+
+#sport_icone img{
+    width: 150px;
+    height: 150px;
+}
+
+#wrapper_link {
+    display: none;
+    text-align: center;
+    justify-content: center;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+
+#lien_icone{
+    color: red;
+    font-size: 1.4em;
+}

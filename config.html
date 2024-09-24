@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuration BDS</title>
-    <link rel="stylesheet" href="stylesTEST.css">
+    <link rel="stylesheet" href="stylesCONFIG.css">
     <link rel="icon" href="Image/LogoBDS.png" type="image/x-icon">
 
 </head>
 <body class="config_page">
     <h1 id="titre_config">Page configuration site BDS</h1>
-    <div id="login-container">
-        <form id="login-form">
-            <h2>Connexion</h2>
-            <div id="error-message" class="hidden"></div>
-            <label for="username">Identifiant:</label>
-            <input type="text" id="username" required>
-            <label for="password">Mot de passe:</label>
-            <div class="password-container">
-                <input type="password" id="password" required>
-                <span class="password-toggle" id="toggle-password">👁️</span>
-            </div>
-            <button type="button" id="login-button">Se connecter</button>
-        </form>
+    <div id="LoginMiseEnPage">
+        <img class="LogoBackground" src="Image/LogoBDS.png"/>
+        <div id="login-container">
+            <form id="login-form">
+                <h2>Connexion</h2>
+                <div id="error-message" class="hidden"></div>
+                <label for="username">Identifiant:</label>
+                <input type="text" id="username" required>
+                <label for="password">Mot de passe:</label>
+                <div class="password-container">
+                    <input type="password" id="password" required>
+                    <span class="password-toggle" id="toggle-password">👁️</span>
+                </div>
+                <button type="button" id="login-button">Se connecter</button>
+            </form>
+        </div>
+        <img class="LogoBackground" src="Image/LogoBDS.png"/>
     </div>
 
     <div id="content" class="hidden">
@@ -41,7 +45,7 @@
                 <label for="image-upload">Télécharger une image:</label>
                 <input type="file" id="image-upload" accept="image/*">
                 <button type="submit">Ajouter l'activité</button>
-            </form>
+            </form> 
             <div id="activite-list"></div>
         </section>
 
@@ -50,21 +54,21 @@
             <h2>Couff</h2>
             <div class="time-slot">
                 <h3>18h30 à 20h</h3>
-                <select>
+                <select id="sport1">
                     <option value="foot">Football</option>
                     <option value="basket">Basketball</option>
                     <option value="tennis">Tennis</option>
                     <option value="natation">Natation</option>
                     <option value="rugby">Rugby</option>
                 </select>
-                <select>
+                <select id="sport2">
                     <option value="foot">Football</option>
                     <option value="basket">Basketball</option>
                     <option value="tennis">Tennis</option>
                     <option value="natation">Natation</option>
                     <option value="rugby">Rugby</option>
                 </select>
-                <select>
+                <select id="sport3">
                     <option value="foot">Football</option>
                     <option value="basket">Basketball</option>
                     <option value="tennis">Tennis</option>
@@ -74,14 +78,14 @@
             </div>
             <div class="time-slot">
                 <h3>20h à 21h30</h3>
-                <select>
+                <select id="sport4">
                     <option value="foot">Football</option>
                     <option value="basket">Basketball</option>
                     <option value="tennis">Tennis</option>
                     <option value="natation">Natation</option>
                     <option value="rugby">Rugby</option>
                 </select>
-                <select>
+                <select id="sport5">
                     <option value="foot">Football</option>
                     <option value="basket">Basketball</option>
                     <option value="tennis">Tennis</option>
@@ -90,7 +94,7 @@
                 </select>
             </div>
         </section>
-        <button onclick="saveEvent()">Enregistrer</button>
+        <button type="button" class="SaveButton" onclick="saveEvent()">Validation</button>
     </div>
 
 
