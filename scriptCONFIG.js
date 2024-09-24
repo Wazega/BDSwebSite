@@ -94,7 +94,6 @@ function saveEvent() {
 }
 
 
-// Fonction pour charger les sélections au chargement de la page
 window.onload = function() {
     fetch("/getSelection.php")
         .then(response => response.json())
@@ -102,8 +101,13 @@ window.onload = function() {
             if (data.selections) {
                 const selections = document.querySelectorAll("select");
                 selections.forEach((select, index) => {
-                    select.value = data.selections[index];
+                    if (data.selections[index]) {
+                        select.value = data.selections[index];
+                    }
                 });
             }
+        })
+        .catch(error => {
+            console.error("Erreur lors du chargement des sélections : ", error);
         });
 };
