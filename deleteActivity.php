@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     // Récupérer l'ID de l'activité à partir de la requête
-    parse_str(file_get_contents("php://input"), $data);
+    $input = file_get_contents("php://input");
+    parse_str($input, $data);
     $activityId = $data['id'] ?? null;
 
     if (!$activityId) {
@@ -51,3 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée.']);
 }
+?>

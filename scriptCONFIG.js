@@ -114,8 +114,12 @@ function chargerActivites() {
 // Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
-        fetch(`deleteActivity.php?id=${activityId}`, {
+        fetch(`deleteActivity.php`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `id=${activityId}` // On passe l'ID ici
         })
         .then(response => response.json())
         .then(data => {
@@ -131,6 +135,7 @@ function supprimerActivite(activityId) {
         });
     }
 }
+
 
 
 // Appel de la fonction pour charger les activités au démarrage
