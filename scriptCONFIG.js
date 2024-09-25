@@ -78,7 +78,7 @@ function ajouterActivite(titre, date, description, imagePath) {
     infoDiv.appendChild(descriptionElement);
     
     activiteDiv.appendChild(img);
-    activiteDiv.appendChild(infoDiv);
+    activiteDiv.appendChild(infoDiv); // Ajouter le div des informations
 
     activityItem.appendChild(activiteDiv);
 }
