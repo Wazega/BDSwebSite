@@ -1,10 +1,10 @@
 document.getElementById('activite-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche la soumission par défaut pour le débogage
 
     const form = document.getElementById('activite-form');
-    const formData = new FormData(form); // Créer un FormData à partir du formulaire
+    const formData = new FormData(form);
 
-    // Afficher les données pour débogage
+    // Afficher le contenu du FormData pour débogage
     for (const [key, value] of formData.entries()) {
         console.log(key, value);
     }
@@ -23,6 +23,10 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
         alert('Erreur lors de l\'ajout de l\'activité.');
     });
 });
+
+file_put_contents('debug.log', "Requête reçue\n", FILE_APPEND);
+file_put_contents('debug.log', print_r($_POST, true), FILE_APPEND);
+file_put_contents('debug.log', print_r($_FILES, true), FILE_APPEND);
 
 
 function ajouterActivite(titre, date, description, imagePath) {
