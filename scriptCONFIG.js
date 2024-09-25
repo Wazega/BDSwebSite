@@ -1,82 +1,70 @@
-// Traitement des activités
 document.getElementById('activite-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Empêcher le rechargement de la page
+    event.preventDefault();
 
-    const formData = new FormData();
-    formData.append('titre', document.getElementById('titre').value);
-    formData.append('date', document.getElementById('date').value);
-    formData.append('description', document.getElementById('description').value);
-    formData.append('image', document.getElementById('image-upload').files[0]);
+    const form = document.getElementById('activite-form');
+    const formData = new FormData(form);
 
-    fetch('/saveActivity.php', {
+    fetch('saveActivity.php', {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert('Activité ajoutée avec succès !');
-            displayActivity(data.activity);  // Affiche l'activité sur la page
-        } else {
-            alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
+    .then(response => response.text()) // On récupère la réponse brute du serveur
+    .then(text => {
+        console.log("Réponse brute du serveur : ", text);
+
+        // Essayer de parser le JSON
+        try {
+            const data = JSON.parse(text);
+            console.log("Réponse JSON : ", data);
+
+            if (data.success) {
+                alert('Activité ajoutée avec succès !');
+                ajouterActivite(data.titre, data.date, data.description, data.imagePath);
+            } else {
+                alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
+            }
+        } catch (error) {
+            console.error("Erreur lors du parsing JSON : ", error);
+            alert('La réponse du serveur n\'est pas au format JSON.');
         }
     })
     .catch(error => {
-        console.error('Erreur lors de la requête : ', error);
+        console.error('Erreur lors de la requête :', error);
+        alert('Erreur lors de l\'ajout de l\'activité.');
     });
 });
 
-// Fonction pour afficher une nouvelle activité sur la page
-function displayActivity(activity) {
-    const activityList = document.getElementById('activite-list');
+function ajouterActivite(titre, date, description, imagePath) {
+    const activiteList = document.getElementById('activite-list');
 
-    const activityItem = `
-    <div class="activity-item">
-        <img src="${activity.imagePath}" alt="${activity.titre}">
-        <div class="activity-info">
-            <h2>${activity.titre}</h2>
-            <span>Date: ${activity.date}</span>
-            <p>${activity.description}</p>
-        </div>
-        <button onclick="deleteActivity(${activity.id})">Supprimer</button>
-    </div>
-    `;
+    const activiteItem = document.createElement('div');
+    activiteItem.classList.add('activity-item');
+    
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = titre;
 
-    activityList.innerHTML += activityItem; // Ajoute l'activité au DOM
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('activity-info');
+    
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = titre;
+
+    const dateElement = document.createElement('span');
+    dateElement.textContent = 'Date: ' + date;
+
+    const descriptionElement = document.createElement('p');
+    descriptionElement.textContent = description;
+
+    infoDiv.appendChild(titleElement);
+    infoDiv.appendChild(dateElement);
+    infoDiv.appendChild(descriptionElement);
+    
+    activiteItem.appendChild(img);
+    activiteItem.appendChild(infoDiv);
+
+    activiteList.appendChild(activiteItem);
 }
-
-// Fonction pour supprimer une activité
-function deleteActivity(activityId) {
-    fetch(`/deleteActivity.php?id=${activityId}`, {
-        method: 'DELETE',
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            alert('Activité supprimée avec succès !');
-            location.reload();  // Recharge la page pour actualiser la liste
-        } else {
-            alert('Erreur lors de la suppression : ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Erreur lors de la suppression : ', error);
-    });
-}
-
-
-window.onload = function() {
-    fetch('/getActivities.php')
-    .then(response => response.json())
-    .then(activities => {
-        activities.forEach(activity => {
-            displayActivity(activity);  // Affiche chaque activité
-        });
-    })
-    .catch(error => {
-        console.error('Erreur lors du chargement des activités : ', error);
-    });
-};
 
 
 
