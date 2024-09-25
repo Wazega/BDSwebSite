@@ -8,6 +8,11 @@ error_reporting(E_ALL);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification de l'upload de l'image
     if (isset($_FILES['image'])) {
+        // Debug: afficher le tableau $_FILES pour voir son contenu
+        echo "Tableau des fichiers : ";
+        print_r($_FILES['image']); // Affichage des détails de l'upload
+        echo "<br>"; // Saut de ligne pour une meilleure lisibilité
+
         if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             switch ($_FILES['image']['error']) {
                 case UPLOAD_ERR_INI_SIZE:
@@ -17,18 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 case UPLOAD_ERR_NO_FILE:
                     $message = "Aucun fichier téléchargé.";
                     break;
-                // Ajoutez d'autres cas si nécessaire
                 default:
                     $message = "Erreur inconnue lors de l'upload.";
                     break;
             }
-            header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => $message]);
             exit;
         }
     } else {
         // Erreur : aucune image ou problème lors de l'upload
-        header('Content-Type: application/json');
         echo json_encode([
             'success' => false,
             'message' => 'Aucune image téléchargée ou erreur lors de l\'upload.'
@@ -53,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagePath = $uploadFilePath;
 
             // Réponse JSON
-            header('Content-Type: application/json');
             echo json_encode([
                 'success' => true,
                 'message' => 'Activité ajoutée avec succès !',
@@ -64,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         } else {
             // Erreur lors de l'upload de l'image
-            header('Content-Type: application/json');
             echo json_encode([
                 'success' => false,
                 'message' => 'Erreur lors de l\'upload de l\'image.'
@@ -73,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // Requête non valide
-    header('Content-Type: application/json');
     echo json_encode([
         'success' => false,
         'message' => 'Méthode non autorisée.'
