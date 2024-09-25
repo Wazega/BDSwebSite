@@ -38,8 +38,8 @@ function chargerActivites() {
     fetch('getActivities.php')
         .then(response => response.json())
         .then(activites => {
-            const activityItem = document.getElementById('activity-item');
-            activityItem.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
+            const activitySlider = document.getElementById('activity-item');
+            activitySlider.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
 
             activites.forEach(activity => {
                 ajouterActivite(activity.titre, activity.date, activity.description, activity.imagePath);
@@ -52,7 +52,10 @@ function chargerActivites() {
 
 // Fonction pour ajouter une activité à la liste
 function ajouterActivite(titre, date, description, imagePath) {
-    const activityItem = document.getElementById('activity-item');
+    const activitySlider = document.getElementById('activity-item');
+
+    const sliderDiv = document.createElement('div');
+    sliderDiv.classList.add('activity-slider');
 
     const activiteDiv = document.createElement('div');
     activiteDiv.classList.add('activity-item');
@@ -80,13 +83,15 @@ function ajouterActivite(titre, date, description, imagePath) {
     activiteDiv.appendChild(img);
     activiteDiv.appendChild(infoDiv); // Ajouter le div des informations
 
-    activityItem.appendChild(activiteDiv);
+    sliderDiv.appendChild(activiteDiv);
+    activitySlider.appendChild(sliderDiv); // Ajouter le div slider à la liste d'activités
 }
 
 // Charger les activités lorsque la page est prête
 document.addEventListener('DOMContentLoaded', function() {
     chargerActivites(); // Charger les activités à l'initialisation
 });
+
 
 
 
