@@ -7,8 +7,38 @@ error_reporting(E_ALL);
 // Vérification des données POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification de l'upload de l'image
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = '04_Image/';
+    if (isset($_FILES['image'])) {
+        if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            switch ($_FILES['image']['error']) {
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    $message = "Le fichier est trop grand.";
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    $message = "Aucun fichier téléchargé.";
+                    break;
+                // Ajoutez d'autres cas si nécessaire
+                default:
+                    $message = "Erreur inconnue lors de l'upload.";
+                    break;
+            }
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => $message]);
+            exit;
+        }
+    } else {
+        // Erreur : aucune image ou problème lors de l'upload
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Aucune image téléchargée ou erreur lors de l\'upload.'
+        ]);
+        exit;
+    }
+
+    // Si l'image a été uploadée sans erreur
+    if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = './uploads/'; // Changer le dossier de destination
         $imageName = basename($_FILES['image']['name']);
         $uploadFilePath = $uploadDir . $imageName;
 
@@ -40,13 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'message' => 'Erreur lors de l\'upload de l\'image.'
             ]);
         }
-    } else {
-        // Erreur : aucune image ou problème lors de l'upload
-        header('Content-Type: application/json');
-        echo json_encode([
-            'success' => false,
-            'message' => 'Aucune image téléchargée ou erreur lors de l\'upload.'
-        ]);
     }
 } else {
     // Requête non valide
