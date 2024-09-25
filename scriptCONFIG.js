@@ -34,15 +34,51 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
 });
 
 // Fonction pour charger et afficher les activités
+// Fonction pour charger et afficher les activités depuis activities.json
 function chargerActivites() {
-    fetch('getActivities.php')
+    fetch('getActivities.php') // Assurez-vous que ce fichier renvoie les données JSON correctement
         .then(response => response.json())
         .then(activites => {
-            const activitySlider = document.getElementById('activity-item');
-            activitySlider.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
+            const activitySlider = document.getElementById('activity-slider');
+            activitySlider.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles activités
 
             activites.forEach(activity => {
-                ajouterActivite(activity.titre, activity.date, activity.description, activity.imagePath);
+                // Créer un élément div pour chaque activité
+                const activiteDiv = document.createElement('div');
+                activiteDiv.classList.add('activity-item');
+
+                // Créer et ajouter l'image
+                const img = document.createElement('img');
+                img.src = activity.imagePath; // Chemin de l'image
+                img.alt = activity.titre; // Texte alternatif
+
+                // Créer un div pour les informations de l'activité
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('activity-info');
+
+                // Créer et ajouter le titre
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = activity.titre; // Titre de l'activité
+
+                // Créer et ajouter la date
+                const dateElement = document.createElement('span');
+                dateElement.textContent = 'Date: ' + activity.date; // Date de l'activité
+
+                // Créer et ajouter la description
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = activity.description; // Description de l'activité
+
+                // Ajouter les informations à infoDiv
+                infoDiv.appendChild(titleElement);
+                infoDiv.appendChild(dateElement);
+                infoDiv.appendChild(descriptionElement);
+
+                // Ajouter l'image et infoDiv à activiteDiv
+                activiteDiv.appendChild(img);
+                activiteDiv.appendChild(infoDiv);
+
+                // Ajouter l'élément d'activité à activitySlider
+                activitySlider.appendChild(activiteDiv);
             });
         })
         .catch(error => {
@@ -50,9 +86,12 @@ function chargerActivites() {
         });
 }
 
-// Fonction pour ajouter une activité à la liste
+// Appel de la fonction pour charger les activités au démarrage
+document.addEventListener('DOMContentLoaded', chargerActivites);
+
+
 function ajouterActivite(titre, date, description, imagePath) {
-    const activitySlider = document.getElementById('activity-item');
+    const activitySlider = document.getElementById('activity-slider');
 
     const sliderDiv = document.createElement('div');
     sliderDiv.classList.add('activity-slider');
@@ -61,20 +100,20 @@ function ajouterActivite(titre, date, description, imagePath) {
     activiteDiv.classList.add('activity-item');
     
     const img = document.createElement('img');
-    img.src = imagePath;
-    img.alt = titre;
+    img.src = imagePath; // [imagePath]
+    img.alt = titre; // [titre]
 
     const infoDiv = document.createElement('div');
     infoDiv.classList.add('activity-info');
     
     const titleElement = document.createElement('h2');
-    titleElement.textContent = titre;
+    titleElement.textContent = titre; // [titre]
 
     const dateElement = document.createElement('span');
-    dateElement.textContent = 'Date: ' + date;
+    dateElement.textContent = 'Date: ' + date; // [date]
 
     const descriptionElement = document.createElement('p');
-    descriptionElement.textContent = description;
+    descriptionElement.textContent = description; // [description]
 
     infoDiv.appendChild(titleElement);
     infoDiv.appendChild(dateElement);
@@ -86,6 +125,7 @@ function ajouterActivite(titre, date, description, imagePath) {
     sliderDiv.appendChild(activiteDiv);
     activitySlider.appendChild(sliderDiv); // Ajouter le div slider à la liste d'activités
 }
+
 
 // Charger les activités lorsque la page est prête
 document.addEventListener('DOMContentLoaded', function() {
