@@ -1,3 +1,74 @@
+// Traitement des activités
+document.getElementById('activite-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêcher le rechargement de la page
+
+    const formData = new FormData();
+    formData.append('titre', document.getElementById('titre').value);
+    formData.append('date', document.getElementById('date').value);
+    formData.append('description', document.getElementById('description').value);
+    formData.append('image', document.getElementById('image-upload').files[0]);
+
+    fetch('/saveActivity.php', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Activité ajoutée avec succès !');
+            displayActivity(data.activity);  // Affiche l'activité sur la page
+        } else {
+            alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de la requête : ', error);
+    });
+});
+
+// Fonction pour afficher une nouvelle activité sur la page
+function displayActivity(activity) {
+    const activityList = document.getElementById('activite-list');
+
+    const activityItem = `
+    <div class="activity-item">
+        <img src="${activity.imagePath}" alt="${activity.titre}">
+        <div class="activity-info">
+            <h2>${activity.titre}</h2>
+            <span>Date: ${activity.date}</span>
+            <p>${activity.description}</p>
+        </div>
+        <button onclick="deleteActivity(${activity.id})">Supprimer</button>
+    </div>
+    `;
+
+    activityList.innerHTML += activityItem; // Ajoute l'activité au DOM
+}
+
+// Fonction pour supprimer une activité
+function deleteActivity(activityId) {
+    fetch(`/deleteActivity.php?id=${activityId}`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Activité supprimée avec succès !');
+            location.reload();  // Recharge la page pour actualiser la liste
+        } else {
+            alert('Erreur lors de la suppression : ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de la suppression : ', error);
+    });
+}
+
+
+
+
+
+// Ajouter des sports de couff
 document.addEventListener('DOMContentLoaded', () => {
     const validCredentials = [
         { username: 'admin', password: 'config' },

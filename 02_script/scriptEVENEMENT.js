@@ -1,3 +1,9 @@
+
+
+
+
+
+// Pour afficher les sports de couff
 document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour charger les sélections
     function loadSelections() {
@@ -31,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSelections();
 });
 
-
+// Pour afficher la date
 function getNextFriday() {
     const today = new Date();
     const dayOfWeek = today.getDay();
