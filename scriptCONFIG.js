@@ -39,7 +39,7 @@ function chargerActivites() {
     fetch('getActivities.php') // Assurez-vous que ce fichier renvoie les données JSON correctement
         .then(response => response.json())
         .then(activites => {
-            const activitySlider = document.getElementById('activity-slider');
+            const activitySlider = document.querySelector('.activity-slider');
             activitySlider.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles activités
 
             activites.forEach((activity, index) => {
@@ -73,19 +73,20 @@ function chargerActivites() {
                 infoDiv.appendChild(dateElement);
                 infoDiv.appendChild(descriptionElement);
 
-                // Ajouter l'image et infoDiv à activiteDiv
-                activiteDiv.appendChild(img);
-                activiteDiv.appendChild(infoDiv);
-
                 // Créer et ajouter le bouton de suppression
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Supprimer';
                 deleteButton.classList.add('delete-btn');
+                deleteButton.style.marginTop = "10px"; // Ajout d'un espace pour mieux voir le bouton
                 deleteButton.addEventListener('click', function() {
                     supprimerActivite(activity.id);
                 });
 
-                // Ajouter le bouton de suppression sous l'image
+                // Ajouter l'image et infoDiv à activiteDiv
+                activiteDiv.appendChild(img);
+                activiteDiv.appendChild(infoDiv);
+                
+                // Ajouter le bouton de suppression sous les informations de l'activité
                 activiteDiv.appendChild(deleteButton);
 
                 // Ajouter l'élément d'activité à activitySlider
@@ -117,11 +118,6 @@ function supprimerActivite(activityId) {
         });
     }
 }
-
-// Appel de la fonction pour charger les activités au démarrage
-document.addEventListener('DOMContentLoaded', chargerActivites);
-
-
 
 // Appel de la fonction pour charger les activités au démarrage
 document.addEventListener('DOMContentLoaded', chargerActivites);
