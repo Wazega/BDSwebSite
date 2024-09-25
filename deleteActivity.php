@@ -1,37 +1,53 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    // Récupérer l'ID de l'activité à supprimer
-    $activityId = $_GET['id'];
+    // Récupérer l'ID de l'activité à partir de la requête
+    parse_str(file_get_contents("php://input"), $data);
+    $activityId = $data['id'] ?? null;
 
-    // Charger les activités existantes depuis le fichier JSON
-    $activities = json_decode(file_get_contents('activities.json'), true);
+    if (!$activityId) {
+        echo json_encode(['status' => 'error', 'message' => 'ID d\'activité non fourni.']);
+        exit;
+    }
 
-    // Trouver et supprimer l'activité correspondante
-    $activityFound = false;
+    // Chemin du fichier JSON
+    $filePath = 'activities.json';
+
+    // Lire le fichier JSON
+    if (!file_exists($filePath)) {
+        echo json_encode(['status' => 'error', 'message' => 'Fichier JSON non trouvé.']);
+        exit;
+    }
+
+    $activities = json_decode(file_get_contents($filePath), true);
+
+    if ($activities === null) {
+        echo json_encode(['status' => 'error', 'message' => 'Erreur lors de la lecture du fichier JSON.']);
+        exit;
+    }
+
+    // Rechercher l'activité par ID
+    $found = false;
     foreach ($activities as $index => $activity) {
         if ($activity['id'] == $activityId) {
-            // Supprimer le fichier image associé
-            if (file_exists($activity['imagePath'])) {
-                unlink($activity['imagePath']);
-            }
-
-            // Supprimer l'activité du tableau
+            // Supprimer l'activité
             unset($activities[$index]);
-            $activityFound = true;
+            $found = true;
             break;
         }
     }
 
-    if ($activityFound) {
-        // Réindexer le tableau après suppression
-        $activities = array_values($activities);
-
-        // Sauvegarder les nouvelles données dans le fichier JSON
-        file_put_contents('activities.json', json_encode($activities));
-
-        echo json_encode(['status' => 'success']);
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Activité non trouvée']);
+    if (!$found) {
+        echo json_encode(['status' => 'error', 'message' => 'Activité non trouvée.']);
+        exit;
     }
+
+    // Réindexer le tableau pour enlever les trous après la suppression
+    $activities = array_values($activities);
+
+    // Enregistrer les modifications dans le fichier JSON
+    file_put_contents($filePath, json_encode($activities, JSON_PRETTY_PRINT));
+
+    echo json_encode(['status' => 'success', 'message' => 'Activité supprimée avec succès.']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée.']);
 }
-?>

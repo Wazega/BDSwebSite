@@ -132,6 +132,7 @@ function supprimerActivite(activityId) {
     }
 }
 
+
 // Appel de la fonction pour charger les activités au démarrage
 document.addEventListener('DOMContentLoaded', chargerActivites);
 
