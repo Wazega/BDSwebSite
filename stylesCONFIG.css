@@ -94,6 +94,43 @@
     background-color: white;
 }
 
+
+.activity-page-wrapper {
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* Activités Section */
+
+#activity-item {
+    flex: 0 0 300px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#activity-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+#activity-info h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.activity-info span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+
+
+
 #couff-section{
     display: flex;
     flex-direction: column;

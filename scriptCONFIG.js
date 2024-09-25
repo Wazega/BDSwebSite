@@ -18,7 +18,6 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
 
             if (data.success) {
                 alert('Activité ajoutée avec succès !');
-                ajouterActivite(data.titre, data.date, data.description, data.imagePath);
                 chargerActivites(); // Charger les activités après l'ajout
             } else {
                 alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
@@ -34,12 +33,29 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     });
 });
 
+// Fonction pour charger et afficher les activités
+function chargerActivites() {
+    fetch('getActivities.php')
+        .then(response => response.json())
+        .then(activites => {
+            const activityItem = document.getElementById('activity-item');
+            activityItem.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
+
+            activites.forEach(activity => {
+                ajouterActivite(activity.titre, activity.date, activity.description, activity.imagePath);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des activités :', error);
+        });
+}
+
 // Fonction pour ajouter une activité à la liste
 function ajouterActivite(titre, date, description, imagePath) {
-    const activiteList = document.getElementById('activite-list');
+    const activityItem = document.getElementById('activity-item');
 
-    const activiteItem = document.createElement('div');
-    activiteItem.classList.add('activity-item');
+    const activiteDiv = document.createElement('div');
+    activiteDiv.classList.add('activity-item');
     
     const img = document.createElement('img');
     img.src = imagePath;
@@ -61,33 +77,17 @@ function ajouterActivite(titre, date, description, imagePath) {
     infoDiv.appendChild(dateElement);
     infoDiv.appendChild(descriptionElement);
     
-    activiteItem.appendChild(img);
-    activiteItem.appendChild(infoDiv);
+    activiteDiv.appendChild(img);
+    activiteDiv.appendChild(infoDiv);
 
-    activiteList.appendChild(activiteItem);
-}
-
-// Fonction pour charger et afficher les activités
-function chargerActivites() {
-    fetch('getActivities.php')
-        .then(response => response.json())
-        .then(activites => {
-            const activiteList = document.getElementById('activite-list');
-            activiteList.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
-
-            activites.forEach(activity => {
-                ajouterActivite(activity.titre, activity.date, activity.description, activity.imagePath);
-            });
-        })
-        .catch(error => {
-            console.error('Erreur lors du chargement des activités :', error);
-        });
+    activityItem.appendChild(activiteDiv);
 }
 
 // Charger les activités lorsque la page est prête
 document.addEventListener('DOMContentLoaded', function() {
     chargerActivites(); // Charger les activités à l'initialisation
 });
+
 
 
 
