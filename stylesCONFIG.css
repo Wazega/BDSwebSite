@@ -126,8 +126,7 @@
 
 .activity-item img {
     width: auto;
-    height: 100px;
-    height: auto;
+    height: 50px;
     border-radius: 10px;
 }
 
