@@ -65,6 +65,21 @@ function deleteActivity(activityId) {
 }
 
 
+window.onload = function() {
+    fetch('/getActivities.php')
+    .then(response => response.json())
+    .then(activities => {
+        activities.forEach(activity => {
+            displayActivity(activity);  // Affiche chaque activité
+        });
+    })
+    .catch(error => {
+        console.error('Erreur lors du chargement des activités : ', error);
+    });
+};
+
+
+
 
 
 
