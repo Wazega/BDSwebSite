@@ -211,7 +211,7 @@
 
 #sport_icone{
     background-color: white;
-    display: hidden;
+    /* display: hidden; */
     justify-content: center;
     flex-wrap: wrap;
     gap: 2%;

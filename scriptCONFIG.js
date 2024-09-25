@@ -83,10 +83,11 @@ function chargerActivites() {
                 deleteButton.textContent = 'Supprimer';
                 deleteButton.classList.add('delete-btn');
                 deleteButton.style.marginTop = "10px"; // Ajout d'un espace pour mieux voir le bouton
-                
-                // Ajout d'une trace de débogage pour voir si le bouton est créé
-                console.log('Bouton supprimé créé pour:', activity.titre);
 
+                // Ajouter une trace de débogage pour voir si le bouton est ajouté
+                console.log('Création du bouton supprimer pour l\'activité:', activity.titre);
+
+                // Écouteur d'événement pour la suppression
                 deleteButton.addEventListener('click', function() {
                     supprimerActivite(activity.id);
                 });
@@ -98,6 +99,9 @@ function chargerActivites() {
                 // Ajouter le bouton de suppression sous les informations de l'activité
                 activiteDiv.appendChild(deleteButton);
 
+                // Vérification avant d'ajouter à la page
+                console.log('Ajout du bouton supprimer à l\'activité:', activity.titre);
+                
                 // Ajouter l'élément d'activité à activitySlider
                 activitySlider.appendChild(activiteDiv);
             });
