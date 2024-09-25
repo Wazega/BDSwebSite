@@ -2,37 +2,28 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     event.preventDefault();
 
     const form = document.getElementById('activite-form');
-    const formData = new FormData(form);
+    const formData = new FormData(form); // Créer un FormData à partir du formulaire
+
+    // Afficher les données pour débogage
+    for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
 
     fetch('saveActivity.php', {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.text()) // On récupère la réponse brute du serveur
+    .then(response => response.text())
     .then(text => {
         console.log("Réponse brute du serveur : ", text);
-
-        // Essayer de parser le JSON
-        try {
-            const data = JSON.parse(text);
-            console.log("Réponse JSON : ", data);
-
-            if (data.success) {
-                alert('Activité ajoutée avec succès !');
-                ajouterActivite(data.titre, data.date, data.description, data.imagePath);
-            } else {
-                alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
-            }
-        } catch (error) {
-            console.error("Erreur lors du parsing JSON : ", error);
-            alert('La réponse du serveur n\'est pas au format JSON.');
-        }
+        // Votre code de traitement de la réponse...
     })
     .catch(error => {
         console.error('Erreur lors de la requête :', error);
         alert('Erreur lors de l\'ajout de l\'activité.');
     });
 });
+
 
 function ajouterActivite(titre, date, description, imagePath) {
     const activiteList = document.getElementById('activite-list');
