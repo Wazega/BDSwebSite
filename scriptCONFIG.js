@@ -42,7 +42,12 @@ function chargerActivites() {
             const activitySlider = document.querySelector('.activity-slider');
             activitySlider.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles activités
 
+            // Vérification de la réception des activités
+            console.log('Activités reçues :', activites);
+
             activites.forEach((activity, index) => {
+                console.log('Ajout de l\'activité :', activity);
+
                 // Créer un élément div pour chaque activité
                 const activiteDiv = document.createElement('div');
                 activiteDiv.classList.add('activity-item');
@@ -78,6 +83,10 @@ function chargerActivites() {
                 deleteButton.textContent = 'Supprimer';
                 deleteButton.classList.add('delete-btn');
                 deleteButton.style.marginTop = "10px"; // Ajout d'un espace pour mieux voir le bouton
+                
+                // Ajout d'une trace de débogage pour voir si le bouton est créé
+                console.log('Bouton supprimé créé pour:', activity.titre);
+
                 deleteButton.addEventListener('click', function() {
                     supprimerActivite(activity.id);
                 });
