@@ -1,13 +1,8 @@
 document.getElementById('activite-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Empêche la soumission par défaut pour le débogage
+    event.preventDefault();
 
     const form = document.getElementById('activite-form');
     const formData = new FormData(form);
-
-    // Afficher le contenu du FormData pour débogage
-    for (const [key, value] of formData.entries()) {
-        console.log(key, value);
-    }
 
     fetch('saveActivity.php', {
         method: 'POST',
@@ -16,7 +11,22 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     .then(response => response.text())
     .then(text => {
         console.log("Réponse brute du serveur : ", text);
-        // Votre code de traitement de la réponse...
+
+        try {
+            const data = JSON.parse(text);
+            console.log("Réponse JSON : ", data);
+
+            if (data.success) {
+                alert('Activité ajoutée avec succès !');
+                ajouterActivite(data.titre, data.date, data.description, data.imagePath);
+                chargerActivites(); // Charger les activités après l'ajout
+            } else {
+                alert('Erreur lors de l\'ajout de l\'activité : ' + data.message);
+            }
+        } catch (error) {
+            console.error("Erreur lors du parsing JSON : ", error);
+            alert('La réponse du serveur n\'est pas au format JSON.');
+        }
     })
     .catch(error => {
         console.error('Erreur lors de la requête :', error);
@@ -24,8 +34,7 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     });
 });
 
-
-
+// Fonction pour ajouter une activité à la liste
 function ajouterActivite(titre, date, description, imagePath) {
     const activiteList = document.getElementById('activite-list');
 
@@ -58,6 +67,27 @@ function ajouterActivite(titre, date, description, imagePath) {
     activiteList.appendChild(activiteItem);
 }
 
+// Fonction pour charger et afficher les activités
+function chargerActivites() {
+    fetch('getActivities.php')
+        .then(response => response.json())
+        .then(activites => {
+            const activiteList = document.getElementById('activite-list');
+            activiteList.innerHTML = ''; // Réinitialiser le contenu avant d'afficher les activités
+
+            activites.forEach(activity => {
+                ajouterActivite(activity.titre, activity.date, activity.description, activity.imagePath);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des activités :', error);
+        });
+}
+
+// Charger les activités lorsque la page est prête
+document.addEventListener('DOMContentLoaded', function() {
+    chargerActivites(); // Charger les activités à l'initialisation
+});
 
 
 
