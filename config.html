@@ -35,17 +35,17 @@
         <!-- Section Activité -->
         <section id="activite-section">
             <h2>Activité</h2>
-            <form id="activite-form">
+            <form id="activite-form" method="post" action="saveActivity.php" enctype="multipart/form-data">
                 <label for="titre">Titre:</label>
-                <input type="text" id="titre" required>
+                <input type="text" id="titre" name="titre" required>
                 <label for="date">Date:</label>
-                <input type="date" id="date" required>
+                <input type="date" id="date" name="date" required>
                 <label for="description">Description:</label>
-                <textarea id="description" required></textarea>
+                <textarea id="description" name="description" required></textarea>
                 <label for="image-upload">Télécharger une image:</label>
-                <input type="file" id="image-upload" accept="image/*">
+                <input type="file" id="image-upload" name="image" accept="image/*" required>
                 <button type="submit">Ajouter l'activité</button>
-            </form> 
+            </form>
             <div id="activite-list"></div>
         </section>
 

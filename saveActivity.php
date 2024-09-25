@@ -1,37 +1,50 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérifier si tous les champs sont envoyés
-    if (!empty($_POST['titre']) && !empty($_POST['date']) && !empty($_POST['description']) && !empty($_FILES['image'])) {
-        $titre = $_POST['titre'];
-        $date = $_POST['date'];
-        $description = $_POST['description'];
-        $image = $_FILES['image'];
+if (isset($_FILES['image'])) {
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Sauvegarder l'image sur le serveur
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($image["name"]);
-        if (move_uploaded_file($image["tmp_name"], $target_file)) {
-            // Sauvegarder les informations dans un fichier JSON ou une base de données
-            $activity = [
-                'id' => uniqid(),  // ID unique pour chaque activité
-                'titre' => $titre,
-                'date' => $date,
-                'description' => $description,
-                'imagePath' => $target_file,
-            ];
-
-            // Sauvegarder dans un fichier JSON
-            $activities = json_decode(file_get_contents('activities.json'), true);
-            $activities[] = $activity;
-            file_put_contents('activities.json', json_encode($activities));
-
-            // Retourner une réponse JSON au client
-            echo json_encode(['status' => 'success', 'activity' => $activity]);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Erreur lors de l\'upload de l\'image']);
-        }
-    } else {
-        echo json_encode(['status' => 'error', 'message' => 'Tous les champs sont obligatoires']);
+    // Vérifier si le fichier est une image réelle
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check === false) {
+        die("Erreur : Le fichier n'est pas une image.");
     }
+
+    // Vérifier si le fichier existe déjà
+    if (file_exists($target_file)) {
+        die("Erreur : L'image existe déjà.");
+    }
+
+    // Vérifier la taille du fichier
+    if ($_FILES["image"]["size"] > 5000000) {
+        die("Erreur : La taille de l'image est trop grande.");
+    }
+
+    // Autoriser certains formats de fichier
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        die("Erreur : Seuls les fichiers JPG, JPEG, PNG & GIF sont autorisés.");
+    }
+
+    // Tentative de déplacement du fichier uploadé
+    if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        die("Erreur lors de l'upload de l'image : " . $_FILES['image']['error']);
+    }
+} else {
+    die("Erreur : Aucune image envoyée.");
 }
+
+// Ajouter les détails de l'activité à activities.json
+$activity = [
+    "titre" => $_POST['titre'],
+    "date" => $_POST['date'],
+    "description" => $_POST['description'],
+    "image" => $target_file
+];
+
+$activities_file = 'data/activities.json';
+$activities = json_decode(file_get_contents($activities_file), true);
+$activities[] = $activity;
+file_put_contents($activities_file, json_encode($activities));
+
+echo "Activité ajoutée avec succès !";
 ?>
