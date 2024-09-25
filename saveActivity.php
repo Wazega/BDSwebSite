@@ -6,6 +6,11 @@ error_reporting(E_ALL);
 
 // Vérification des données POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";
+
     // Vérification de l'upload de l'image
     if (isset($_FILES['image'])) {
         // Debug: afficher le tableau $_FILES pour voir son contenu
