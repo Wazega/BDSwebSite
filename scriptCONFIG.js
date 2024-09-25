@@ -35,8 +35,9 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
 
 // Fonction pour charger et afficher les activités
 // Fonction pour charger et afficher les activités depuis activities.json
+// Fonction pour charger et afficher les activités depuis activities.json
 function chargerActivites() {
-    fetch('getActivities.php') // Assurez-vous que ce fichier renvoie les données JSON correctement
+    fetch('getActivities.php')
         .then(response => response.json())
         .then(activites => {
             const activitySlider = document.getElementById('activity-slider');
@@ -77,6 +78,22 @@ function chargerActivites() {
                 activiteDiv.appendChild(img);
                 activiteDiv.appendChild(infoDiv);
 
+                // Ajouter le bouton de suppression
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.classList.add('delete-button');
+
+                // Ajout de l'ID de l'activité comme attribut de données (data-attribute)
+                deleteButton.setAttribute('data-id', activity.id);
+
+                // Ajouter un événement de suppression sur le bouton
+                deleteButton.addEventListener('click', function() {
+                    supprimerActivite(activity.id);
+                });
+
+                // Ajouter le bouton à l'élément activiteDiv
+                activiteDiv.appendChild(deleteButton);
+
                 // Ajouter l'élément d'activité à activitySlider
                 activitySlider.appendChild(activiteDiv);
             });
@@ -85,6 +102,30 @@ function chargerActivites() {
             console.error('Erreur lors du chargement des activités :', error);
         });
 }
+
+// Fonction pour supprimer une activité
+function supprimerActivite(activityId) {
+    // Envoi d'une requête DELETE à deleteActivity.php avec l'ID de l'activité
+    fetch('deleteActivity.php?id=' + activityId, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Activité supprimée avec succès !');
+            chargerActivites(); // Recharger les activités après la suppression
+        } else {
+            alert('Erreur lors de la suppression de l\'activité : ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors de la suppression de l\'activité :', error);
+    });
+}
+
+// Appel de la fonction pour charger les activités au démarrage
+document.addEventListener('DOMContentLoaded', chargerActivites);
+
 
 // Appel de la fonction pour charger les activités au démarrage
 document.addEventListener('DOMContentLoaded', chargerActivites);
