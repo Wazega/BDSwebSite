@@ -101,6 +101,20 @@
 }
 
 /* Activités Section */
+.activity-section {
+    margin-bottom: 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.activity-slider {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    color: black;
+}
 
 #activity-item {
     flex: 0 0 300px;
