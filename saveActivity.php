@@ -1,7 +1,8 @@
 <?php
 // Activation des erreurs pour le débogage
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', 'path/to/your/custom_error.log'); // Remplacez par le chemin valide
 error_reporting(E_ALL);
 
 // Vérification des données POST
@@ -12,33 +13,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imageName = basename($_FILES['image']['name']); // Nom du fichier
         $uploadFilePath = $uploadDir . $imageName;
 
-        // Si l'image existe déjà dans uploads, vous pouvez simplement utiliser son chemin
-        if (file_exists($uploadFilePath)) {
+        // Debug - Vérifier si le fichier temporaire existe
+        if (!file_exists($_FILES['image']['tmp_name'])) {
+            error_log('Le fichier temporaire n\'existe pas.');
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Le fichier temporaire n\'existe pas.']);
+            exit;
+        }
+
+        // Déplacement du fichier téléchargé
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)) {
             // Récupération des autres données du formulaire
             $titre = htmlspecialchars($_POST['titre']);
             $date = htmlspecialchars($_POST['date']);
             $description = htmlspecialchars($_POST['description']);
 
-            // Ajouter l'activité au fichier JSON
-            $activities = [];
-
-            // Lire les activités existantes
-            if (file_exists('activities.json')) {
-                $activities = json_decode(file_get_contents('activities.json'), true);
-            }
-
-            // Créer une nouvelle activité
-            $newActivity = [
+            // Enregistrement dans activities.json
+            $activityData = [
                 'titre' => $titre,
                 'date' => $date,
                 'description' => $description,
                 'imagePath' => $uploadFilePath
             ];
 
-            // Ajouter la nouvelle activité au tableau
-            $activities[] = $newActivity;
+            // Lire les activités existantes
+            $activities = [];
+            if (file_exists('activities.json')) {
+                $activities = json_decode(file_get_contents('activities.json'), true);
+            }
 
-            // Écrire les nouvelles activités dans le fichier
+            // Ajouter la nouvelle activité
+            $activities[] = $activityData;
+
+            // Écrire les données dans activities.json
             file_put_contents('activities.json', json_encode($activities, JSON_PRETTY_PRINT));
 
             // Réponse JSON
@@ -52,12 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'imagePath' => $uploadFilePath
             ]);
         } else {
-            // Erreur lors de l'upload de l'image
+            // Log de l'erreur
+            error_log('Échec du déplacement du fichier téléchargé.');
             header('Content-Type: application/json');
-            echo json_encode([
-                'success' => false,
-                'message' => 'Erreur lors de l\'upload de l\'image.'
-            ]);
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image.']);
         }
     } else {
         // Erreur : aucune image ou problème lors de l'upload
