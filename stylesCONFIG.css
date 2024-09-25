@@ -150,6 +150,7 @@
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
+    display: block;
 }
 
 .delete-btn:hover {
@@ -185,14 +186,14 @@
 }
 
 /* Effet au survol (hover) */
-SaveButton:hover {
+.SaveButton:hover {
     background-color: #2980b9; /* Couleur plus foncée au survol */
     transform: translateY(-3px); /* Léger décalage vers le haut */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Accentuation de l'ombre */
 }
 
 /* Effet au clic */
-SaveButton:active {
+.SaveButton:active {
     background-color: #1d6fa5; /* Couleur encore plus foncée au clic */
     transform: translateY(1px); /* Légère descente au clic */
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2); /* Ombre réduite */
@@ -200,7 +201,7 @@ SaveButton:active {
 
 
 /* Désactiver le bouton (état disabled) */
-SaveButton:disabled {
+.SaveButton:disabled {
     background-color: #bdc3c7; /* Couleur grise pour indiquer un bouton désactivé */
     cursor: not-allowed; /* Icône indiquant que le bouton est non-cliquable */
 }
