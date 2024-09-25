@@ -30,3 +30,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Appelle la fonction pour charger les sélections
     loadSelections();
 });
+
+
+function getNextFriday() {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const daysUntilFriday = (5 - dayOfWeek + 7) % 7 || 7;
+    const nextFriday = new Date(today.setDate(today.getDate() + daysUntilFriday));
+
+    // Formater la date en jour et mois uniquement
+    const options = { day: 'numeric', month: 'long' };
+    const formattedDate = new Intl.DateTimeFormat('fr-FR', options).format(nextFriday);
+
+    // Ajouter un espace avant la date
+    const result = ` ${formattedDate}`;
+
+    console.log(result);
+    return result;
+}
+
+document.getElementById('next-friday-date').innerText += getNextFriday();
+
