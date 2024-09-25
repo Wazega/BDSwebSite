@@ -24,9 +24,6 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     });
 });
 
-file_put_contents('debug.log', "Requête reçue\n", FILE_APPEND);
-file_put_contents('debug.log', print_r($_POST, true), FILE_APPEND);
-file_put_contents('debug.log', print_r($_FILES, true), FILE_APPEND);
 
 
 function ajouterActivite(titre, date, description, imagePath) {
