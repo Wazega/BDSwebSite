@@ -266,6 +266,7 @@ function saveEvent() {
     console.log("Sport sélectionné pour sport3: ", sport3);
     console.log("Sport sélectionné pour sport4: ", sport4);
     console.log("Sport sélectionné pour sport5: ", sport5);
+    console.log("Sport sélectionné pour sport6: ", sport6);
 
     // Préparez les données pour correspondre à la structure souhaitée
     const dataToSave = {
