@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
+        header('Content-Type: application/json')
+
         // Déplacement du fichier téléchargé
         if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)) {
             // Récupération des autres données du formulaire
