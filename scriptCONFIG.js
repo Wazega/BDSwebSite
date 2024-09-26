@@ -258,7 +258,7 @@ function saveEvent() {
     const sport4 = document.getElementById("sport4").value;
     const sport5 = document.getElementById("sport5").value;
     const sport6 = document.getElementById("sport6").value;
-
+    console.log("LE sport6:", sport6);
 
     if (!sport6) {
         console.error("L'élément sport6 est introuvable.");
