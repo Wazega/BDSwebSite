@@ -257,6 +257,8 @@ function saveEvent() {
     const sport3 = document.getElementById("sport3").value;
     const sport4 = document.getElementById("sport4").value;
     const sport5 = document.getElementById("sport5").value;
+    const sport6 = document.getElementById("sport6").value;
+
 
     // Afficher les valeurs dans la console pour vérifier
     console.log("Sport sélectionné pour sport1: ", sport1);
@@ -271,7 +273,8 @@ function saveEvent() {
         sport2: sport2,
         sport3: sport3,
         sport4: sport4,
-        sport5: sport5
+        sport5: sport5,
+        sport6: sport6
     };
 
     // Envoyer les données au serveur
@@ -304,11 +307,12 @@ window.onload = function() {
         .then(data => {
             if (data.selections) {
                 // Assurez-vous que les clés correspondent aux IDs des sélecteurs
-                document.getElementById("sport1").value = data.selections.sport1 || "foot"; // valeur par défaut
-                document.getElementById("sport2").value = data.selections.sport2 || "tenis"; // valeur par défaut
-                document.getElementById("sport3").value = data.selections.sport3 || "tennis"; // valeur par défaut
-                document.getElementById("sport4").value = data.selections.sport4 || "natation"; // valeur par défaut
-                document.getElementById("sport5").value = data.selections.sport5 || "rugby"; // valeur par défaut
+                document.getElementById("sport1").value = data.selections.sport1 || "handball"; // valeur par défaut
+                document.getElementById("sport2").value = data.selections.sport2 || "handball"; // valeur par défaut
+                document.getElementById("sport3").value = data.selections.sport3 || "handball"; // valeur par défaut
+                document.getElementById("sport4").value = data.selections.sport4 || "handball"; // valeur par défaut
+                document.getElementById("sport5").value = data.selections.sport5 || "handball"; // valeur par défaut
+                document.getElementById("sport6").value = data.selections.sport6 || "handball"; // valeur par défaut
             }
         })
         .catch(error => {
