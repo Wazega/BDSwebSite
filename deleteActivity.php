@@ -1,55 +1,62 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    // Récupérer l'ID de l'activité à partir de la requête
-    $input = file_get_contents("php://input");
-    parse_str($input, $data);
-    $activityId = $data['id'] ?? null;
+// Activation des erreurs pour le débogage
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', 'path/to/your/custom_error.log');
+error_reporting(E_ALL);
 
-    if (!$activityId) {
-        echo json_encode(['status' => 'error', 'message' => 'ID d\'activité non fourni.']);
-        exit;
+// Vérification de la méthode POST et de l'ID de l'activité
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $id = intval($_POST['id']); // Assurez-vous que l'ID est un entier
+
+    // Lire les activités existantes
+    $activities = [];
+    if (file_exists('activities.json')) {
+        $activities = json_decode(file_get_contents('activities.json'), true);
     }
 
-    // Chemin du fichier JSON
-    $filePath = 'activities.json';
-
-    // Lire le fichier JSON
-    if (!file_exists($filePath)) {
-        echo json_encode(['status' => 'error', 'message' => 'Fichier JSON non trouvé.']);
-        exit;
-    }
-
-    $activities = json_decode(file_get_contents($filePath), true);
-
-    if ($activities === null) {
-        echo json_encode(['status' => 'error', 'message' => 'Erreur lors de la lecture du fichier JSON.']);
-        exit;
-    }
-
-    // Rechercher l'activité par ID
-    $found = false;
+    // Trouver l'activité à supprimer
+    $activityIndex = -1;
+    $imagePath = '';
     foreach ($activities as $index => $activity) {
-        if ($activity['id'] == $activityId) {
-            // Supprimer l'activité
-            unset($activities[$index]);
-            $found = true;
+        if ($activity['id'] === $id) {
+            $activityIndex = $index;
+            $imagePath = $activity['imagePath']; // Récupérer le chemin de l'image associée
             break;
         }
     }
 
-    if (!$found) {
-        echo json_encode(['status' => 'error', 'message' => 'Activité non trouvée.']);
-        exit;
+    if ($activityIndex !== -1) {
+        // Supprimer l'activité du tableau
+        array_splice($activities, $activityIndex, 1);
+
+        // Réécrire le fichier activities.json sans l'activité supprimée
+        file_put_contents('activities.json', json_encode($activities, JSON_PRETTY_PRINT));
+
+        // Supprimer l'image associée
+        if (file_exists($imagePath)) {
+            unlink($imagePath); // Supprimer le fichier image
+        }
+
+        // Réponse JSON
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'message' => 'Activité supprimée avec succès.'
+        ]);
+    } else {
+        // Activité non trouvée
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => false,
+            'message' => 'Activité non trouvée.'
+        ]);
     }
-
-    // Réindexer le tableau pour enlever les trous après la suppression
-    $activities = array_values($activities);
-
-    // Enregistrer les modifications dans le fichier JSON
-    file_put_contents($filePath, json_encode($activities, JSON_PRETTY_PRINT));
-
-    echo json_encode(['status' => 'success', 'message' => 'Activité supprimée avec succès.']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Méthode non autorisée.']);
+    // ID non fourni ou mauvaise méthode
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => false,
+        'message' => 'ID d\'activité non fourni ou méthode non autorisée.'
+    ]);
 }
-?>
