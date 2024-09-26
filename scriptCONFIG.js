@@ -260,6 +260,12 @@ function saveEvent() {
     const sport6 = document.getElementById("sport6").value;
 
 
+    if (!sport6) {
+        console.error("L'élément sport6 est introuvable.");
+    } else {
+        console.log("Sport sélectionné pour sport6: ", sport6); // Vérifiez la récupération de sport6
+    }
+
     // Afficher les valeurs dans la console pour vérifier
     console.log("Sport sélectionné pour sport1: ", sport1);
     console.log("Sport sélectionné pour sport2: ", sport2);
