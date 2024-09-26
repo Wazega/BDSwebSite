@@ -2,7 +2,7 @@
 // Activation des erreurs pour le débogage
 ini_set('display_errors', 1);
 ini_set('log_errors', 1);
-ini_set('error_log', 'path/to/your/custom_error.log'); // Remplacez par le chemin valide
+ini_set('error_log', '/path/to/your/custom_error.log'); // Remplacez par le chemin valide
 error_reporting(E_ALL);
 
 // Vérification des données POST
@@ -12,16 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadDir = './uploads/'; // Dossier de destination
         $imageName = basename($_FILES['image']['name']); // Nom du fichier
         $uploadFilePath = $uploadDir . $imageName;
-
-        // Debug - Vérifier si le fichier temporaire existe
-        if (!file_exists($_FILES['image']['tmp_name'])) {
-            error_log('Le fichier temporaire n\'existe pas.');
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'message' => 'Le fichier temporaire n\'existe pas.']);
-            exit;
-        }
-
-        header('Content-Type: application/json')
 
         // Déplacement du fichier téléchargé
         if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFilePath)) {
@@ -45,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'titre' => $titre,
                 'date' => $date,
                 'description' => $description,
-                'imagePath' => $uploadFilePath
+                'uploadFilePath' => $uploadFilePath // Note : le champ doit correspondre à ta structure
             ];
 
             // Ajouter la nouvelle activité
@@ -54,17 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Écrire les données dans activities.json
             file_put_contents('activities.json', json_encode($activities, JSON_PRETTY_PRINT));
 
-            // Réponse JSON
+            // Réponse JSON avec la structure demandée
             header('Content-Type: application/json');
-            echo json_encode([
-                'success' => true,
-                'message' => 'Activité ajoutée avec succès !',
-                'id' => $newId,
-                'titre' => $titre,
-                'date' => $date,
-                'description' => $description,
-                'imagePath' => $uploadFilePath
-            ]);
+            echo json_encode($activityData);
         } else {
             // Log de l'erreur
             error_log('Échec du déplacement du fichier téléchargé.');
@@ -87,4 +69,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'message' => 'Méthode non autorisée.'
     ]);
 }
-?>
