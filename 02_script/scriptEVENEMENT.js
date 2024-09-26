@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sportItems.forEach((item, index) => {
                     const sportKey = `sport${index + 1}`; // sport1, sport2, etc.
                     const sportName = data[sportKey]; // Récupère le nom du sport
-
+                    console.log(sportName);
                     if (sportName) {
                         console.log(sportName);
                         const sportImage = `04_Image/icone_${sportName}.png`; // Chemin de l'image
