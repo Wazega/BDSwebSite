@@ -138,11 +138,7 @@ function supprimerActivite(activityId) {
 
 
 
-// Appel de la fonction pour charger les activités au démarrage
-document.addEventListener('DOMContentLoaded', chargerActivites);
-
-
-function ajouterActivite(titre, date, description, imagePath) {
+function ajouterActivite(titre, date, description, imagePath, id) {
     const activitySlider = document.getElementById('activity-slider');
 
     const sliderDiv = document.createElement('div');
@@ -150,14 +146,15 @@ function ajouterActivite(titre, date, description, imagePath) {
 
     const activiteDiv = document.createElement('div');
     activiteDiv.classList.add('activity-item');
-    
+    activiteDiv.dataset.id = id; // Stocker l'ID dans un attribut data
+
     const img = document.createElement('img');
     img.src = imagePath; // [imagePath]
     img.alt = titre; // [titre]
 
     const infoDiv = document.createElement('div');
     infoDiv.classList.add('activity-info');
-    
+
     const titleElement = document.createElement('h2');
     titleElement.textContent = titre; // [titre]
 
@@ -167,16 +164,25 @@ function ajouterActivite(titre, date, description, imagePath) {
     const descriptionElement = document.createElement('p');
     descriptionElement.textContent = description; // [description]
 
+    // Ajout du bouton de suppression
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Supprimer';
+    deleteButton.onclick = function() {
+        supprimerActivite(id); // Appel à la fonction de suppression avec l'ID
+    };
+
     infoDiv.appendChild(titleElement);
     infoDiv.appendChild(dateElement);
     infoDiv.appendChild(descriptionElement);
-    
+
     activiteDiv.appendChild(img);
     activiteDiv.appendChild(infoDiv); // Ajouter le div des informations
+    activiteDiv.appendChild(deleteButton); // Ajouter le bouton supprimer
 
     sliderDiv.appendChild(activiteDiv);
     activitySlider.appendChild(sliderDiv); // Ajouter le div slider à la liste d'activités
 }
+
 
 
 // Charger les activités lorsque la page est prête

@@ -28,19 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date = htmlspecialchars($_POST['date']);
             $description = htmlspecialchars($_POST['description']);
 
-            // Enregistrement dans activities.json
-            $activityData = [
-                'titre' => $titre,
-                'date' => $date,
-                'description' => $description,
-                'imagePath' => $uploadFilePath
-            ];
-
             // Lire les activités existantes
             $activities = [];
             if (file_exists('activities.json')) {
                 $activities = json_decode(file_get_contents('activities.json'), true);
             }
+
+            // Générer un nouvel ID unique
+            $newId = count($activities) > 0 ? max(array_column($activities, 'id')) + 1 : 1;
+
+            // Ajouter la nouvelle activité avec un ID unique
+            $activityData = [
+                'id' => $newId, // Ajout de l'ID
+                'titre' => $titre,
+                'date' => $date,
+                'description' => $description,
+                'imagePath' => $uploadFilePath
+            ];
 
             // Ajouter la nouvelle activité
             $activities[] = $activityData;
@@ -53,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode([
                 'success' => true,
                 'message' => 'Activité ajoutée avec succès !',
+                'id' => $newId,
                 'titre' => $titre,
                 'date' => $date,
                 'description' => $description,
