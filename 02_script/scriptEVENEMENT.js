@@ -1,3 +1,52 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const activitySlider = document.getElementById('activity-slider');
+
+    // Charger les activités à partir du fichier JSON
+    fetch('activities.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement du fichier JSON.');
+            }
+            return response.json();
+        })
+        .then(activities => {
+            // Parcourir chaque activité et l'ajouter à la page
+            activities.forEach(activity => {
+                const activityDiv = document.createElement('div');
+                activityDiv.classList.add('activity-item');
+
+                const img = document.createElement('img');
+                img.src = activity.imagePath;
+                img.alt = activity.titre;
+
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('activity-info');
+
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = activity.titre;
+
+                const dateElement = document.createElement('span');
+                dateElement.textContent = 'Date: ' + activity.date;
+
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = activity.description;
+
+                // Append info to activity div
+                infoDiv.appendChild(titleElement);
+                infoDiv.appendChild(dateElement);
+                infoDiv.appendChild(descriptionElement);
+
+                activityDiv.appendChild(img);
+                activityDiv.appendChild(infoDiv);
+
+                // Ajouter le div d'activité au slider
+                activitySlider.appendChild(activityDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+});
 
 
 
