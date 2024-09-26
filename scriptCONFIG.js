@@ -260,15 +260,7 @@ function saveEvent() {
     const sport6 = document.getElementById("sport6").value;
 
 
-    const sport6Element = document.getElementById("sport6"); // Récupérer l'élément, pas sa valeur
-
-    if (!sport6Element) {
-        console.error("L'élément sport6 est introuvable.");
-    } else {
-        const sport6 = sport6Element.value; // Récupérer la valeur ici
-        console.log("Sport sélectionné pour sport6: ", sport6); // Vérifiez la récupération de sport6
-    }
-
+    
 
     // Afficher les valeurs dans la console pour vérifier
     console.log("Sport sélectionné pour sport1: ", sport1);
