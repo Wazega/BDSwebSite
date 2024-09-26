@@ -10,7 +10,7 @@ if ($data) {
         'sport3' => $data['sport3'],
         'sport4' => $data['sport4'],
         'sport5' => $data['sport5'],
-        'sport6' => $data['sport6'],
+        'sport6' => $data['sport6']
     ];
 
     // Sauvegarder ces informations dans un fichier JSON
