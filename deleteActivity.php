@@ -1,54 +1,64 @@
 <?php
-// Activer le rapport d'erreurs pour déboguer
+// Activer l'affichage des erreurs pour faciliter le débogage
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Vérification que la méthode est bien POST et que l'ID est fourni
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = intval($_POST['id']); // Récupérer l'ID de l'activité
+// Vérifier que la requête est POST et que l'ID est fourni
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Vérifier si l'ID est envoyé via POST
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id = intval($_POST['id']); // Convertir l'ID en entier
 
-    // Lire les activités existantes
-    $activities = [];
-    if (file_exists('activities.json')) {
-        $activities = json_decode(file_get_contents('activities.json'), true);
-    }
+        // Charger les activités à partir du fichier JSON
+        $file = 'activities.json';
+        if (file_exists($file)) {
+            $activities = json_decode(file_get_contents($file), true);
 
-    // Rechercher l'activité avec l'ID correspondant
-    $activityIndex = -1;
-    foreach ($activities as $index => $activity) {
-        if ($activity['id'] == $id) {
-            $activityIndex = $index;
-            break;
+            // Vérifier si l'activité existe
+            $activityFound = false;
+            foreach ($activities as $index => $activity) {
+                if ($activity['id'] == $id) {
+                    // Supprimer l'activité
+                    unset($activities[$index]);
+                    $activityFound = true;
+                    break;
+                }
+            }
+
+            if ($activityFound) {
+                // Sauvegarder les activités mises à jour dans le fichier JSON
+                file_put_contents($file, json_encode(array_values($activities), JSON_PRETTY_PRINT));
+
+                // Envoyer une réponse JSON de succès
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Activité supprimée avec succès.'
+                ]);
+            } else {
+                // Si l'activité avec cet ID n'existe pas
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Activité non trouvée.'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Fichier des activités non trouvé.'
+            ]);
         }
-    }
-
-    if ($activityIndex !== -1) {
-        // Supprimer l'activité
-        array_splice($activities, $activityIndex, 1);
-
-        // Sauvegarder les modifications dans le fichier JSON
-        file_put_contents('activities.json', json_encode($activities, JSON_PRETTY_PRINT));
-
-        // Réponse en cas de succès
-        header('Content-Type: application/json');
-        echo json_encode([
-            'success' => true,
-            'message' => 'Activité supprimée avec succès.'
-        ]);
     } else {
-        // Si l'activité n'a pas été trouvée
-        header('Content-Type: application/json');
+        // ID non fourni
         echo json_encode([
             'success' => false,
-            'message' => 'Activité non trouvée.'
+            'message' => 'ID d\'activité non fourni.'
         ]);
     }
 } else {
-    // Si la méthode est incorrecte ou que l'ID n'est pas fourni
-    header('Content-Type: application/json');
+    // Méthode non autorisée
     echo json_encode([
         'success' => false,
-        'message' => 'ID d\'activité non fourni ou méthode non autorisée.'
+        'message' => 'Méthode non autorisée. Utilisez POST.'
     ]);
 }
 ?>

@@ -39,17 +39,17 @@ function supprimerActivite(activityId) {
         fetch('deleteActivity.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded', // Type de contenu
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: `id=${encodeURIComponent(activityId)}` // Envoi de l'ID de l'activité
         })
-        .then(response => response.json()) // Parse la réponse JSON
+        .then(response => response.json()) // Parse la réponse en JSON
         .then(data => {
             if (data.success) {
                 alert(data.message); // Message de succès
-                chargerActivites(); // Recharger les activités
+                chargerActivites(); // Recharger les activités après suppression
             } else {
-                alert('Erreur lors de la suppression : ' + data.message); // Message d'erreur
+                alert('Erreur lors de la suppression : ' + data.message); // Afficher le message d'erreur
             }
         })
         .catch(error => {
@@ -65,7 +65,7 @@ function chargerActivites() {
         .then(response => response.json())
         .then(data => {
             const activityContainer = document.getElementById('activity-item');
-            activityContainer.innerHTML = ''; // Vider le conteneur
+            activityContainer.innerHTML = ''; // Vider le conteneur avant de le remplir
 
             data.forEach(activity => {
                 const activityDiv = document.createElement('div');
