@@ -111,6 +111,7 @@ function chargerActivites() {
         });
 }
 
+
 // Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
@@ -136,6 +137,7 @@ function supprimerActivite(activityId) {
         });
     }
 }
+
 
 
 
