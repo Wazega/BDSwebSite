@@ -5,9 +5,9 @@ ini_set('log_errors', 1);
 ini_set('error_log', 'path/to/your/custom_error.log');
 error_reporting(E_ALL);
 
-// Vérification de la méthode DELETE et de l'ID de l'activité dans l'URL
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && isset($_GET['id'])) {
-    $id = intval($_GET['id']); // Récupérer l'ID depuis l'URL
+// Vérification de la méthode POST, de l'ID de l'activité et de l'action de suppression
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    $id = intval($_POST['id']); // Récupérer l'ID depuis les données POST
 
     // Lire les activités existantes
     $activities = [];

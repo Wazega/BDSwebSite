@@ -112,11 +112,14 @@ function chargerActivites() {
 }
 
 // Fonction pour supprimer une activité
-// Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
-        fetch(`deleteActivity.php?id=${activityId}`, { // Passer l'ID dans l'URL
-            method: 'DELETE',
+        fetch('deleteActivity.php', { // Utilisation de la méthode POST
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `id=${activityId}&action=delete` // Passer l'ID et indiquer l'action de suppression
         })
         .then(response => response.json())
         .then(data => {
@@ -133,6 +136,7 @@ function supprimerActivite(activityId) {
         });
     }
 }
+
 
 
 
