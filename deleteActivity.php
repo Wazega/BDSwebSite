@@ -1,12 +1,11 @@
 <?php
-// Activation des erreurs pour le débogage
+// Activer le rapport d'erreurs pour déboguer
 ini_set('display_errors', 1);
-ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
-// Vérification de la méthode POST et de l'ID de l'activité
+// Vérification que la méthode est bien POST et que l'ID est fourni
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-    $id = intval($_POST['id']); // Récupérer l'ID de l'activité à partir du POST
+    $id = intval($_POST['id']); // Récupérer l'ID de l'activité
 
     // Lire les activités existantes
     $activities = [];
@@ -14,37 +13,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         $activities = json_decode(file_get_contents('activities.json'), true);
     }
 
-    // Rechercher l'activité par son ID
+    // Rechercher l'activité avec l'ID correspondant
     $activityIndex = -1;
-    $imagePath = '';
     foreach ($activities as $index => $activity) {
-        if ($activity['id'] === $id) {
+        if ($activity['id'] == $id) {
             $activityIndex = $index;
-            $imagePath = $activity['imagePath']; // Récupérer le chemin de l'image associée
             break;
         }
     }
 
     if ($activityIndex !== -1) {
-        // Supprimer l'activité du tableau
+        // Supprimer l'activité
         array_splice($activities, $activityIndex, 1);
 
-        // Réécrire le fichier JSON après suppression
+        // Sauvegarder les modifications dans le fichier JSON
         file_put_contents('activities.json', json_encode($activities, JSON_PRETTY_PRINT));
 
-        // Supprimer l'image associée si elle existe
-        if (file_exists($imagePath)) {
-            unlink($imagePath); // Supprimer l'image
-        }
-
-        // Réponse JSON de succès
+        // Réponse en cas de succès
         header('Content-Type: application/json');
         echo json_encode([
             'success' => true,
             'message' => 'Activité supprimée avec succès.'
         ]);
     } else {
-        // Si l'activité n'est pas trouvée
+        // Si l'activité n'a pas été trouvée
         header('Content-Type: application/json');
         echo json_encode([
             'success' => false,
@@ -52,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         ]);
     }
 } else {
-    // Si l'ID n'est pas fourni ou si la méthode est incorrecte
+    // Si la méthode est incorrecte ou que l'ID n'est pas fourni
     header('Content-Type: application/json');
     echo json_encode([
         'success' => false,

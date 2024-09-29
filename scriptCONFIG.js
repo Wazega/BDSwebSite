@@ -33,58 +33,58 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     });
 });
 
-
-// Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
+        // Créer une requête POST avec l'ID de l'activité
         fetch('deleteActivity.php', {
-            method: 'POST', // Utilisation de la méthode POST
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded', // Type de contenu
             },
-            body: `id=${activityId}` // Envoi de l'ID de l'activité à supprimer
+            body: `id=${encodeURIComponent(activityId)}` // Envoi de l'ID de l'activité
         })
-        .then(response => response.json())
+        .then(response => response.json()) // Parse la réponse JSON
         .then(data => {
             if (data.success) {
-                alert('Activité supprimée avec succès !');
-                chargerActivites(); // Recharger les activités après suppression
+                alert(data.message); // Message de succès
+                chargerActivites(); // Recharger les activités
             } else {
-                alert('Erreur lors de la suppression : ' + data.message);
+                alert('Erreur lors de la suppression : ' + data.message); // Message d'erreur
             }
         })
         .catch(error => {
-            console.error('Erreur lors de la suppression de l\'activité :', error);
+            console.error('Erreur lors de la requête de suppression :', error);
             alert('Erreur lors de la suppression de l\'activité.');
         });
     }
 }
 
-// Fonction pour recharger les activités
+// Fonction pour recharger les activités après suppression
 function chargerActivites() {
-    fetch('getActivities.php') // Remplacer par le chemin de votre fichier qui liste les activités
-    .then(response => response.json())
-    .then(data => {
-        const activityContainer = document.getElementById('activity-item'); // Le conteneur des activités
-        activityContainer.innerHTML = ''; // Vider le conteneur avant de le remplir
+    fetch('getActivities.php')
+        .then(response => response.json())
+        .then(data => {
+            const activityContainer = document.getElementById('activity-item');
+            activityContainer.innerHTML = ''; // Vider le conteneur
 
-        data.forEach(activity => {
-            const activityDiv = document.createElement('div');
-            activityDiv.className = 'activity-slider';
-            activityDiv.innerHTML = `
-                <div class="activity-info">
-                    <h3>${activity.title}</h3>
-                    <p>${activity.description}</p>
-                    <button onclick="supprimerActivite(${activity.id})">Supprimer</button>
-                </div>
-            `;
-            activityContainer.appendChild(activityDiv);
+            data.forEach(activity => {
+                const activityDiv = document.createElement('div');
+                activityDiv.className = 'activity-slider';
+                activityDiv.innerHTML = `
+                    <div class="activity-info">
+                        <h3>${activity.title}</h3>
+                        <p>${activity.description}</p>
+                        <button onclick="supprimerActivite(${activity.id})">Supprimer</button>
+                    </div>
+                `;
+                activityContainer.appendChild(activityDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des activités :', error);
         });
-    })
-    .catch(error => {
-        console.error('Erreur lors du chargement des activités :', error);
-    });
 }
+
 
 
 
