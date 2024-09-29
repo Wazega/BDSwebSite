@@ -112,6 +112,7 @@ function chargerActivites() {
 }
 
 // Fonction pour supprimer une activité
+// Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
         fetch(`deleteActivity.php`, {
@@ -123,7 +124,7 @@ function supprimerActivite(activityId) {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.status === 'success') {
+            if (data.success) {
                 alert('Activité supprimée avec succès !');
                 chargerActivites(); // Recharger les activités après suppression
             } else {
@@ -132,9 +133,11 @@ function supprimerActivite(activityId) {
         })
         .catch(error => {
             console.error('Erreur lors de la suppression de l\'activité :', error);
+            alert('Erreur lors de la suppression de l\'activité.');
         });
     }
 }
+
 
 
 
