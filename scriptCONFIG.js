@@ -34,26 +34,65 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
 });
 
 
-// Fonction pour charger et afficher les activités
-function chargerActivites() {
-    fetch('getActivities.php') // Requête pour obtenir les activités
-        .then(response => response.json())
-        .then(data => {
-            const activityContainer = document.getElementById('activity-item');
-            activityContainer.innerHTML = ''; // Vider le conteneur
+// Charger les activités lorsque la page est prête
+document.addEventListener('DOMContentLoaded', function() {
+    chargerActivites(); // Charger les activités à l'initialisation
+});
 
-            // Parcourir et afficher chaque activité
-            data.forEach(activity => {
-                const activityDiv = document.createElement('div');
-                activityDiv.className = 'activity-slider';
-                activityDiv.innerHTML = `
-                    <div class="activity-info">
-                        <h3>${activity.title}</h3>
-                        <p>${activity.description}</p>
-                        <button onclick="supprimerActivite(${activity.id})">Supprimer</button>
-                    </div>
-                `;
-                activityContainer.appendChild(activityDiv);
+// Fonction pour charger et afficher les activités depuis activities.json
+function chargerActivites() {
+    fetch('getActivities.php')
+        .then(response => response.json())
+        .then(activites => {
+            const activitySlider = document.getElementById('activity-slider');
+            activitySlider.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles activités
+
+            activites.forEach((activity) => {
+                // Créer un élément div pour chaque activité
+                const activiteDiv = document.createElement('div');
+                activiteDiv.classList.add('activity-item');
+
+                // Créer et ajouter l'image
+                const img = document.createElement('img');
+                img.src = activity.imagePath;
+                img.alt = activity.titre;
+
+                // Créer un div pour les informations de l'activité
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('activity-info');
+
+                // Créer et ajouter le titre
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = activity.titre;
+
+                // Créer et ajouter la date
+                const dateElement = document.createElement('span');
+                dateElement.textContent = 'Date: ' + activity.date;
+
+                // Créer et ajouter la description
+                const descriptionElement = document.createElement('p');
+                descriptionElement.textContent = activity.description;
+
+                // Ajouter les informations à infoDiv
+                infoDiv.appendChild(titleElement);
+                infoDiv.appendChild(dateElement);
+                infoDiv.appendChild(descriptionElement);
+
+                // Créer et ajouter le bouton de suppression
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.classList.add('delete-btn');
+                deleteButton.addEventListener('click', function() {
+                    supprimerActivite(activity.id);
+                });
+
+                // Ajouter les éléments à l'élément activité
+                activiteDiv.appendChild(img);
+                activiteDiv.appendChild(infoDiv);
+                activiteDiv.appendChild(deleteButton);
+
+                // Ajouter l'élément d'activité à activitySlider
+                activitySlider.appendChild(activiteDiv);
             });
         })
         .catch(error => {
@@ -64,32 +103,27 @@ function chargerActivites() {
 // Fonction pour supprimer une activité
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
-        // Requête POST pour supprimer l'activité
         fetch('deleteActivity.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `id=${encodeURIComponent(activityId)}` // Envoyer l'ID de l'activité à supprimer
+            body: `id=${activityId}` // Envoi de l'ID dans le corps de la requête
         })
-        .then(response => response.json()) // Traiter la réponse JSON
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert(data.message); // Afficher un message de succès
-                chargerActivites(); // Recharger la liste des activités
+                alert('Activité supprimée avec succès.');
+                chargerActivites(); // Recharger les activités après suppression
             } else {
-                alert('Erreur lors de la suppression : ' + data.message); // Afficher un message d'erreur
+                alert('Erreur lors de la suppression : ' + data.message);
             }
         })
         .catch(error => {
-            console.error('Erreur lors de la requête de suppression :', error);
-            alert('Erreur lors de la suppression de l\'activité.');
+            console.error('Erreur lors de la suppression de l\'activité :', error);
         });
     }
 }
-
-// Charger les activités au démarrage
-document.addEventListener('DOMContentLoaded', chargerActivites);
 
 
 
