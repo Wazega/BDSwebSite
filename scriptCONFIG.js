@@ -85,9 +85,6 @@ function chargerActivites() {
         });
 }
 
-// Appeler cette fonction lors du chargement de la page pour afficher les activités
-document.addEventListener('DOMContentLoaded', chargerActivites);
-
 
 
 
