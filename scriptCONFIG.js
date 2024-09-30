@@ -35,21 +35,21 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
 
 function supprimerActivite(activityId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
-        // Créer une requête POST avec l'ID de l'activité
+        // Requête POST avec l'ID de l'activité
         fetch('deleteActivity.php', {
-            method: 'POST',
+            method: 'POST', // On précise bien la méthode POST ici
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `id=${encodeURIComponent(activityId)}` // Envoi de l'ID de l'activité
+            body: `id=${encodeURIComponent(activityId)}` // Passer l'ID dans le corps de la requête
         })
-        .then(response => response.json()) // Parse la réponse en JSON
+        .then(response => response.json()) // Traiter la réponse JSON
         .then(data => {
             if (data.success) {
                 alert(data.message); // Message de succès
                 chargerActivites(); // Recharger les activités après suppression
             } else {
-                alert('Erreur lors de la suppression : ' + data.message); // Afficher le message d'erreur
+                alert('Erreur lors de la suppression : ' + data.message); // Message d'erreur
             }
         })
         .catch(error => {
@@ -59,13 +59,13 @@ function supprimerActivite(activityId) {
     }
 }
 
-// Fonction pour recharger les activités après suppression
+// Fonction pour recharger les activités
 function chargerActivites() {
     fetch('getActivities.php')
         .then(response => response.json())
         .then(data => {
             const activityContainer = document.getElementById('activity-item');
-            activityContainer.innerHTML = ''; // Vider le conteneur avant de le remplir
+            activityContainer.innerHTML = ''; // Vider le conteneur
 
             data.forEach(activity => {
                 const activityDiv = document.createElement('div');
@@ -85,8 +85,8 @@ function chargerActivites() {
         });
 }
 
-
-
+// Appeler cette fonction lors du chargement de la page pour afficher les activités
+document.addEventListener('DOMContentLoaded', chargerActivites);
 
 
 
