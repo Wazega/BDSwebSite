@@ -33,40 +33,16 @@ document.getElementById('activite-form').addEventListener('submit', function(eve
     });
 });
 
-function supprimerActivite(activityId) {
-    if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
-        // Requête POST avec l'ID de l'activité
-        fetch('deleteActivity.php', {
-            method: 'POST', // On précise bien la méthode POST ici
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `id=${encodeURIComponent(activityId)}` // Passer l'ID dans le corps de la requête
-        })
-        .then(response => response.json()) // Traiter la réponse JSON
-        .then(data => {
-            if (data.success) {
-                alert(data.message); // Message de succès
-                chargerActivites(); // Recharger les activités après suppression
-            } else {
-                alert('Erreur lors de la suppression : ' + data.message); // Message d'erreur
-            }
-        })
-        .catch(error => {
-            console.error('Erreur lors de la requête de suppression :', error);
-            alert('Erreur lors de la suppression de l\'activité.');
-        });
-    }
-}
 
-// Fonction pour recharger les activités
+// Fonction pour charger et afficher les activités
 function chargerActivites() {
-    fetch('getActivities.php')
+    fetch('getActivities.php') // Requête pour obtenir les activités
         .then(response => response.json())
         .then(data => {
             const activityContainer = document.getElementById('activity-item');
             activityContainer.innerHTML = ''; // Vider le conteneur
 
+            // Parcourir et afficher chaque activité
             data.forEach(activity => {
                 const activityDiv = document.createElement('div');
                 activityDiv.className = 'activity-slider';
@@ -84,6 +60,36 @@ function chargerActivites() {
             console.error('Erreur lors du chargement des activités :', error);
         });
 }
+
+// Fonction pour supprimer une activité
+function supprimerActivite(activityId) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette activité ?")) {
+        // Requête POST pour supprimer l'activité
+        fetch('deleteActivity.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `id=${encodeURIComponent(activityId)}` // Envoyer l'ID de l'activité à supprimer
+        })
+        .then(response => response.json()) // Traiter la réponse JSON
+        .then(data => {
+            if (data.success) {
+                alert(data.message); // Afficher un message de succès
+                chargerActivites(); // Recharger la liste des activités
+            } else {
+                alert('Erreur lors de la suppression : ' + data.message); // Afficher un message d'erreur
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête de suppression :', error);
+            alert('Erreur lors de la suppression de l\'activité.');
+        });
+    }
+}
+
+// Charger les activités au démarrage
+document.addEventListener('DOMContentLoaded', chargerActivites);
 
 
 
