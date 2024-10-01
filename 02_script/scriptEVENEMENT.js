@@ -12,6 +12,7 @@ function chargerActivites() {
             
             if (activites.length === 0) {
                 const message = document.createElement('p');
+                message.classList.add('msg-no-activity');
                 message.textContent = "Désolé, il n'y a pas d'activités de prévu pour le moment.";
                 activitySlider.appendChild(message);
             } else {

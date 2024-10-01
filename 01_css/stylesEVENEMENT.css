@@ -28,6 +28,10 @@ h1 {
     text-align: center;
 }
 
+.msg-no-activity{
+    color: white;
+    font-size: 1.2em;
+}
 
 
 .activity-slider {
