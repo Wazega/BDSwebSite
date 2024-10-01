@@ -1,24 +1,18 @@
 <?php
-    $filename = '../05_json/planning.json';
+$data = json_decode(file_get_contents('php://input'), true);
 
-    // Récupérer le contenu existant
-    $events = [];
-    if (file_exists($filename)) {
-        $events = json_decode(file_get_contents($filename), true);
+if ($data) {
+    $file = '../05_json/planning.json';
+    if (!file_exists($file)) {
+        file_put_contents($file, json_encode([]));
     }
-
-    // Récupérer les nouvelles données
-    $input = json_decode(file_get_contents('php://input'), true);
-
-    if ($input) {
-        // Ajouter l'événement
-        $events[] = $input;
-
-        // Sauvegarder les événements
-        file_put_contents($filename, json_encode($events));
-
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false]);
-    }
+    
+    $currentData = json_decode(file_get_contents($file), true);
+    $currentData[] = $data;
+    file_put_contents($file, json_encode($currentData));
+    
+    echo json_encode(['status' => 'success', 'message' => 'Activité sauvegardée.']);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Erreur lors de la sauvegarde.']);
+}
 ?>

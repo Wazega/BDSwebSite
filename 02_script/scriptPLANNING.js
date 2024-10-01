@@ -1,89 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Récupérer les événements depuis le serveur
-    chargerPlanning();
+document.getElementById('addActivityButton').addEventListener('click', function() {
+    addActivityToCalendar();
+});
 
-    const daysContainer = document.getElementById('days');
-    const currentDate = new Date();
-    let currentMonday = getMonday(currentDate);
+function addActivityToCalendar() {
+    const sport = document.getElementById('sportSelect').value;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+    const location = document.getElementById('locationSelect').value;
 
-    function getMonday(date) {
-        let day = date.getDay() || 7;
-        if (day !== 1) {
-            date.setHours(-24 * (day - 1));
-        }
-        return date;
-    }
+    if (sport && startTime && endTime && location) {
+        // Création de l'élément activité
+        const eventElement = document.createElement('div');
+        eventElement.classList.add('event');
+        eventElement.innerHTML = `<p class="title">${sport}</p><p class="time">${startTime} - ${endTime}</p><p class="location">${location}</p>`;
 
-    // Générer deux semaines du lundi au vendredi
-    for (let week = 0; week < 2; week++) {
-        for (let i = 0; i < 5; i++) {  // Seulement lundi à vendredi
-            const day = document.createElement('div');
-            day.classList.add('day');
-            day.dataset.date = currentMonday.toISOString().split('T')[0];
-            day.innerHTML = `
-                <div class="date">
-                    <p class="date-day">${currentMonday.toLocaleDateString('fr-FR', { weekday: 'long' })}</p>
-                    <p class="date-num">${currentMonday.getDate()}</p>
-                </div>
-                <div class="events"></div>
-            `;
-            daysContainer.appendChild(day);
-            currentMonday.setDate(currentMonday.getDate() + 1);
-        }
-        currentMonday.setDate(currentMonday.getDate() + 2); // Passer au lundi suivant (ignorer samedi et dimanche)
-    }
+        // Ajout de l'activité à la première journée du calendrier
+        document.querySelector('.days').appendChild(eventElement);
 
-    // Ajouter un événement
-    document.getElementById('add-event').addEventListener('click', function() {
-        const date = document.getElementById('date').value;
-        const sport = document.getElementById('sport').value;
-        const start = document.getElementById('start').value;
-        const end = document.getElementById('end').value;
-        const location = document.getElementById('location').value;
-
-        const event = {
-            date: date,
+        // Sauvegarder dans le fichier JSON
+        const activityData = {
             sport: sport,
-            start: start,
-            end: end,
+            startTime: startTime,
+            endTime: endTime,
             location: location
         };
+        saveActivityToServer(activityData);
 
-        // Envoyer les données au serveur pour les enregistrer
-        fetch('03_php/savePlanning.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(event)
-        }).then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  ajouterEvenement(event);
-              } else {
-                  alert('Erreur lors de l\'ajout de l\'événement');
-              }
-          });
+        // Afficher un message de succès
+        console.log('Activité ajoutée au calendrier.');
+    } else {
+        console.log('Veuillez remplir tous les champs.');
+    }
+}
+
+function saveActivityToServer(activityData) {
+    fetch('03_php/savePlanning.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(activityData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Données sauvegardées:', data);
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
     });
-
-    function ajouterEvenement(event) {
-        const day = document.querySelector(`[data-date="${event.date}"] .events`);
-        if (day) {
-            const eventDiv = document.createElement('div');
-            eventDiv.classList.add('event');
-            eventDiv.innerHTML = `
-                <p class="title">${event.sport}</p>
-                <p class="time">${event.start} - ${event.end} (${event.location})</p>
-            `;
-            day.appendChild(eventDiv);
-        }
-    }
-
-    function chargerPlanning() {
-        fetch('03_php/loadPlanning.php')
-            .then(response => response.json())
-            .then(events => {
-                events.forEach(ajouterEvenement);
-            });
-    }
-});
+}
