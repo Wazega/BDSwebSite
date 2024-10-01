@@ -126,7 +126,51 @@
             </div>
             <button type="button" class="SaveButton" onclick="saveEvent()">Validation</button>
         </section>
+
+        <div class="schedule-container">
+            <h1>Emploi du Temps</h1>
+            <div class="form-section">
+                <label for="date">Choix de la date :</label>
+                <input type="date" id="date">
+    
+                <label for="sport">Sport :</label>
+                <select id="sport">
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Tennis">Tennis</option>
+                </select>
+    
+                <label for="start">Début :</label>
+                <input type="time" id="start" min="17:00" max="23:00">
+    
+                <label for="end">Fin :</label>
+                <input type="time" id="end" min="17:00" max="23:00">
+    
+                <label for="location">Lieu :</label>
+                <select id="location">
+                    <option value="Gymnase">Gymnase</option>
+                    <option value="Stade">Stade</option>
+                    <option value="Salle">Salle</option>
+                </select>
+    
+                <button id="add-event">Ajouter un créneau</button>
+            </div>
+    
+            <div class="calendar">
+                <div class="timeline">
+                    <div class="spacer"></div>    
+                    <div class="time-marker">17h</div>
+                    <div class="time-marker">18h</div>
+                    <div class="time-marker">19h</div>
+                    <div class="time-marker">20h</div>
+                    <div class="time-marker">21h</div>
+                    <div class="time-marker">22h</div>
+                </div>
+                <div id="days" class="days"></div>
+            </div>
+        </div>
         
+      
     </div>
 
 
@@ -147,5 +191,7 @@
         <a id="lien_icone" href="https://www.freepik.com/author/freepik/icons/detailed-flat-circular-flat_44">Lien des icones pour en ajouter</a>
     </div>
     <script src="scriptCONFIG.js"></script>
+    <script src="02_script/scriptPLANNING.js"></script>
+
 </body>
 </html>
