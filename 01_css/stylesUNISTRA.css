@@ -1,0 +1,243 @@
+/* Styles généraux */
+.unistra {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+a {
+    color: #C81313;
+}
+
+.unistra h1, h2, h3 {
+    text-align: center;
+}
+
+.ask_maxime{
+    max-width: 80%;
+}
+
+.section-intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 8%;
+    margin-top: 7%;
+}
+
+.main-title {
+    font-size: 3em;
+    margin-top: 10vh;
+}
+
+.sub-title{
+    font-size: 3em;
+    margin-bottom: 5%;
+}
+
+.def_unistra {
+    width: 60%;
+    display: inline-block; 
+    font-size: 1.5em;
+    margin-bottom: 2vh;
+}
+
+.def_unistra:nth-child(2) {
+    margin-top: 20px;
+    margin-bottom: 10vh;
+}
+
+.def_unistra:nth-child(3) {
+    margin-bottom: 6vh;
+}
+
+.def_unistra:nth-child(4) {
+    margin-bottom: 3vh;
+    font-size: 2em;
+}
+
+
+.info_unistra{
+    width: 25%; 
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; 
+    gap: 15%;
+}
+
+.info_unistra a{
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    text-align: center;
+    display: flex;
+    align-items: center; 
+    gap: 2px;
+}
+
+.info_unistra img{
+    width: 50px;
+    height: 50px;
+}
+
+.info_supp{
+    margin-top: 0.5%;
+    width: 50%;
+    display: inline-block; 
+    font-size: 1.3em;
+}
+
+/* .info_supp_a{
+    color:#ff0303;
+} */
+
+.dots-container{
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+
+.tournoissport{
+    width: 60%;
+    margin-left: 20%;
+    font-size: 1.2em;
+}
+
+
+.text-tmp{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+
+/* Styles pour la section des sports */
+.sports-section-liste {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: -5%;
+    margin-top: 3%;
+}
+
+.sports-section {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 3%;
+}
+
+.sports-section h1{
+    margin-bottom: 7%;
+}
+
+.sports-list {
+    line-height: 2.25rem;
+    /* color: rgb(207, 207, 207); */
+    /* border-top: 1px solid gray; */
+    /* border-bottom: 1px solid gray; */
+    max-width: 150%;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.sports-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sports-list ul li {
+    font-size: 2vw;
+    margin: 15px 0;
+}
+
+.sport-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin: 30px 0;
+    margin-bottom: 5%;
+}
+
+.sport-details img {
+    width: 40%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.sport-text {
+    width: auto;
+    font-size: 1.5vw;
+}
+
+
+/* Media Query pour les écrans de moins de 600px de largeur */
+@media screen and (max-width: 600px) {
+    /* Pour la section des sports */
+
+    .main-title {
+        font-size: 3em;
+        margin-top: 10vh;
+    }
+    
+    .sub-title{
+        font-size: 3em;
+        margin-bottom: 5%;
+    }
+    
+    .response {
+        display: inline-block; 
+        margin-top: 1px;
+        font-size: 0.9em;
+        color: white;
+    }
+
+    .sports-list ul li {
+        font-size: 4vw;
+        margin: 5px 0;
+    }
+
+    .sport-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sport-text {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        order: 1; /* Texte placé en 3ème position */
+    }
+
+    .sport-text h3 {
+        margin-bottom: 10px;
+        font-size: 4em;
+        order: 1; /* Titre placé en 1ère position */
+    }
+
+    .sport-text p {
+        margin-bottom: 5px;
+        font-size: 2em;
+        order: 3; /* Titre placé en 1ère position */
+    }
+
+    .sport-details img {
+        width: 100%;
+        margin-bottom: 10px;
+        order: 2; /* Image placée en 2ème position */
+    }
+}
+
+
+
+
+
+
+
+
+

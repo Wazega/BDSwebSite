@@ -9,36 +9,43 @@ function chargerActivites() {
         .then(activites => {
             const activitySlider = document.getElementById('activity-slider');
             activitySlider.innerHTML = ''; // Vider le conteneur avant d'ajouter les nouvelles activités
+            
+            if (activites.length === 0) {
+                const message = document.createElement('p');
+                message.textContent = "Désolé, il n'y a pas d'activités de prévu pour le moment.";
+                activitySlider.appendChild(message);
+            } else {
 
-            activites.forEach(activity => {
-                const activiteDiv = document.createElement('div');
-                activiteDiv.classList.add('activity-item');
+                activites.forEach(activity => {
+                    const activiteDiv = document.createElement('div');
+                    activiteDiv.classList.add('activity-item');
 
-                const img = document.createElement('img');
-                img.src = activity.imagePath;
-                img.alt = activity.titre;
+                    const img = document.createElement('img');
+                    img.src = activity.imagePath;
+                    img.alt = activity.titre;
 
-                const infoDiv = document.createElement('div');
-                infoDiv.classList.add('activity-info');
+                    const infoDiv = document.createElement('div');
+                    infoDiv.classList.add('activity-info');
 
-                const titleElement = document.createElement('h2');
-                titleElement.textContent = activity.titre;
+                    const titleElement = document.createElement('h2');
+                    titleElement.textContent = activity.titre;
 
-                const dateElement = document.createElement('span');
-                dateElement.textContent = 'Date: ' + activity.date;
+                    const dateElement = document.createElement('span');
+                    dateElement.textContent = 'Date: ' + activity.date;
 
-                const descriptionElement = document.createElement('p');
-                descriptionElement.textContent = activity.description;
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.textContent = activity.description;
 
-                infoDiv.appendChild(titleElement);
-                infoDiv.appendChild(dateElement);
-                infoDiv.appendChild(descriptionElement);
+                    infoDiv.appendChild(titleElement);
+                    infoDiv.appendChild(dateElement);
+                    infoDiv.appendChild(descriptionElement);
 
-                activiteDiv.appendChild(img);
-                activiteDiv.appendChild(infoDiv);
+                    activiteDiv.appendChild(img);
+                    activiteDiv.appendChild(infoDiv);
 
-                activitySlider.appendChild(activiteDiv);
-            });
+                    activitySlider.appendChild(activiteDiv);
+                });
+            }
         })
         .catch(error => {
             console.error('Erreur lors du chargement des activités :', error);
