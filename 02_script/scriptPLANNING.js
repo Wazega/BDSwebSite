@@ -1,84 +1,105 @@
-document.addEventListener('DOMContentLoaded', function () {
-    loadSchedule();
-    const form = document.getElementById('addEventForm');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        addEventToSchedule();
-    });
-});
+const eventForm = document.getElementById("event-form");
+const messageElement = document.getElementById("message");
+const daysContainer = document.querySelector(".days");
 
-function loadSchedule() {
-    fetch('03_php/loadPlanning.php')
-        .then(response => response.json())
-        .then(data => {
-            const daysContainer = document.getElementById('days-container');
-            daysContainer.innerHTML = ''; // Clear previous content
-            data.forEach(day => {
-                const dayDiv = document.createElement('div');
-                dayDiv.classList.add('day');
+const loadPlanning = async () => {
+    const response = await fetch("../03_php/loadPlanning.php");
+    const events = await response.json();
+    displayCalendar(events);
+};
 
-                const dateDiv = document.createElement('div');
-                dateDiv.classList.add('date');
-                const dateNum = document.createElement('p');
-                dateNum.classList.add('date-num');
-                dateNum.textContent = day.dateNum;
+const displayCalendar = (events) => {
+    const now = new Date();
+    const startDate = new Date(now.setDate(now.getDate() - now.getDay() + 1)); // First Monday
+    const daysInWeek = 5; // Monday to Friday
+    daysContainer.innerHTML = ""; // Clear previous entries
 
-                const dateDay = document.createElement('p');
-                dateDay.classList.add('date-day');
-                dateDay.textContent = day.dateDay;
+    for (let week = 0; week < 2; week++) { // 2 weeks
+        for (let day = 0; day < daysInWeek; day++) {
+            const currentDay = new Date(startDate);
+            currentDay.setDate(currentDay.getDate() + week * 7 + day);
 
-                dateDiv.appendChild(dateNum);
-                dateDiv.appendChild(dateDay);
-                dayDiv.appendChild(dateDiv);
+            const dayDiv = document.createElement("div");
+            dayDiv.classList.add("day");
+            dayDiv.innerHTML = `
+                <div class="date">
+                    <p class="date-num">${currentDay.getDate()}</p>
+                    <p class="date-day">${currentDay.toLocaleString('en-US', { weekday: 'short' })}</p>
+                </div>
+                <div class="events"></div>
+            `;
 
-                const eventsDiv = document.createElement('div');
-                eventsDiv.classList.add('events');
-                day.events.forEach(event => {
-                    const eventDiv = document.createElement('div');
-                    eventDiv.classList.add('event', event.sport.toLowerCase());
+            const eventsDiv = dayDiv.querySelector(".events");
 
-                    const title = document.createElement('p');
-                    title.classList.add('title');
-                    title.textContent = event.sport;
+            const dayEvents = events.filter(event => new Date(event.date).toDateString() === currentDay.toDateString());
+            if (dayEvents.length === 0) {
+                eventsDiv.innerHTML = '<p class="no-event">Pas de match aujourd\'hui</p>';
+            } else {
+                dayEvents.forEach(event => {
+                    const eventDiv = document.createElement("div");
+                    eventDiv.classList.add("event");
+                    const startHour = new Date(event.date + ' ' + event.startTime);
+                    const endHour = new Date(event.date + ' ' + event.endTime);
 
-                    const time = document.createElement('p');
-                    time.textContent = `${event.startTime} - ${event.endTime}`;
+                    eventDiv.style.gridRowStart = Math.max(2, startHour.getHours() - 16); // 17h = row 2
+                    eventDiv.style.gridRowEnd = Math.min(8, endHour.getHours() - 16); // 23h = row 8
 
-                    eventDiv.appendChild(title);
-                    eventDiv.appendChild(time);
+                    eventDiv.innerHTML = `
+                        <p class="title">${event.sport} à ${event.location}</p>
+                        <p class="time">${event.startTime} - ${event.endTime}</p>
+                        <button class="delete-event" data-id="${event.id}">Supprimer</button>
+                    `;
+
                     eventsDiv.appendChild(eventDiv);
                 });
-
-                dayDiv.appendChild(eventsDiv);
-                daysContainer.appendChild(dayDiv);
-            });
-        })
-        .catch(error => console.error('Erreur de chargement du planning:', error));
-}
-
-function addEventToSchedule() {
-    const sport = document.getElementById('sport').value;
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
-    const location = document.getElementById('location').value;
-    const date = document.getElementById('date').value;
-
-    fetch('03_php/savePlanning.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sport, startTime, endTime, location, date })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('successMessage').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 2000);
-                loadSchedule(); // Refresh the schedule
-            } else {
-                console.error('Erreur lors de l\'ajout:', data.error);
             }
-        })
-        .catch(error => console.error('Erreur de sauvegarde du planning:', error));
-}
+            daysContainer.appendChild(dayDiv);
+        }
+    }
+
+    const deleteButtons = document.querySelectorAll(".delete-event");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", async (e) => {
+            const id = e.target.dataset.id;
+            await fetch(`../03_php/savePlanning.php?id=${id}`, { method: 'DELETE' });
+            loadPlanning();
+            showMessage("Événement supprimé");
+        });
+    });
+};
+
+const showMessage = (msg) => {
+    messageElement.innerText = msg;
+    setTimeout(() => {
+        messageElement.innerText = '';
+    }, 3000);
+};
+
+eventForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const sport = document.getElementById("sport").value;
+    const date = document.getElementById("date").value;
+    const location = document.getElementById("location").value;
+    const startTime = document.getElementById("start-time").value;
+    const endTime = document.getElementById("end-time").value;
+
+    const response = await fetch("../03_php/savePlanning.php", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ sport, date, location, startTime, endTime })
+    });
+
+    if (response.ok) {
+        showMessage("Événement ajouté avec succès !");
+        loadPlanning();
+        eventForm.reset();
+    } else {
+        showMessage("Erreur lors de l'ajout de l'événement.");
+    }
+});
+
+// Load initial events
+loadPlanning();

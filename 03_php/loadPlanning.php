@@ -1,9 +1,5 @@
 <?php
-$file = '../05_json/planning.json';
-if (file_exists($file)) {
-    $planning = json_decode(file_get_contents($file), true);
-    echo json_encode($planning);
-} else {
-    echo json_encode([]);
-}
+$filePath = '../05_json/planning.json';
+$data = json_decode(file_get_contents($filePath), true);
+echo json_encode($data);
 ?>

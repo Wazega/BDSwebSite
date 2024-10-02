@@ -250,34 +250,99 @@
 
 
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
-.schedule-container {
-    margin: 2rem;
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.form-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input, select, button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
 }
 
 .calendar {
     display: grid;
     gap: 10px;
     grid-template-columns: auto 1fr;
+    margin: 2rem;
 }
 
 .timeline {
     display: grid;
-    grid-template-rows: repeat(7, 60px); /* 17h to 23h */
+    grid-template-rows: repeat(7, 60px);
+    position: relative;
+}
+
+.time-marker {
+    position: absolute;
+    left: -50px;
+    width: 50px;
+    text-align: right;
+    font-size: 14px;
+    top: 10px;
 }
 
 .days {
     display: grid;
-    grid-column: 2;
     gap: 5px;
-    grid-template-columns: repeat(5, 1fr); /* 5 days per row */
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.day {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    position: relative;
 }
 
 .events {
     display: grid;
-    grid-template-rows: repeat(7, 60px); /* 7 hours per day */
+    grid-template-rows: repeat(7, 60px);
     border-radius: 5px;
-    background: #fff1f8;
+    overflow: hidden;
 }
 
 .event {
@@ -286,6 +351,7 @@
     padding: 0.5rem;
     margin: 0 0.5rem;
     background: white;
+    position: relative;
 }
 
 .title {
@@ -304,19 +370,26 @@
 }
 
 .date-day {
-    font-size: 2rem;
-    font-weight: 100;
+    font-size: 1.2rem;
 }
 
-.form-section {
-    margin-top: 20px;
+.no-event {
+    color: #888;
+    text-align: center;
+    font-style: italic;
+    grid-column: span 2; /* Span across columns for better visibility */
 }
 
-.corp-fi { background: #ffd6d1; }
-.ent-law { background: #fafaa3; }
-.writing { background: #e2f8ff; }
-.securities { background: #d1ffe6; }
+.delete-event {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
 
-body {
-    font-family: system-ui, sans-serif;
+.delete-event:hover {
+    background-color: #c82333;
 }

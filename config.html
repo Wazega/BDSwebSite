@@ -127,49 +127,49 @@
             <button type="button" class="SaveButton" onclick="saveEvent()">Validation</button>
         </section>
 
-        <div class="schedule-container">
-            <h1>Emploi du Temps</h1>
-            <div class="form-section">
-                <label for="date">Choix de la date :</label>
-                <input type="date" id="date">
-    
-                <label for="sport">Sport :</label>
-                <select id="sport">
+        <h1>Calendrier des Tournois Sportifs</h1>
+
+        <div class="form-section">
+            <form id="event-form">
+                <label for="sport">Sport:</label>
+                <select id="sport" required>
+                    <option value="">Sélectionnez un sport</option>
                     <option value="Football">Football</option>
                     <option value="Basketball">Basketball</option>
                     <option value="Tennis">Tennis</option>
+                    <option value="Rugby">Rugby</option>
                 </select>
     
-                <label for="start">Début :</label>
-                <input type="time" id="start" min="17:00" max="23:00">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
     
-                <label for="end">Fin :</label>
-                <input type="time" id="end" min="17:00" max="23:00">
+                <label for="location">Lieu:</label>
+                <input type="text" id="location" placeholder="Entrez le lieu" required>
     
-                <label for="location">Lieu :</label>
-                <select id="location">
-                    <option value="Gymnase">Gymnase</option>
-                    <option value="Stade">Stade</option>
-                    <option value="Salle">Salle</option>
-                </select>
+                <label for="start-time">Heure de début:</label>
+                <input type="time" id="start-time" min="17:00" max="23:00" required>
     
-                <button id="add-event">Ajouter un créneau</button>
-            </div>
+                <label for="end-time">Heure de fin:</label>
+                <input type="time" id="end-time" min="17:00" max="23:00" required>
     
-            <div class="calendar">
-                <div class="timeline">
-                    <div class="spacer"></div>    
-                    <div class="time-marker">17h</div>
-                    <div class="time-marker">18h</div>
-                    <div class="time-marker">19h</div>
-                    <div class="time-marker">20h</div>
-                    <div class="time-marker">21h</div>
-                    <div class="time-marker">22h</div>
-                </div>
-                <div id="days" class="days"></div>
-            </div>
+                <button type="submit">Enregistrer</button>
+            </form>
+            <p id="message"></p>
         </div>
-    </div>
+    
+        <div class="calendar">
+            <div class="timeline">
+                <div class="spacer"></div>
+                <div class="time-marker">17h</div>
+                <div class="time-marker">18h</div>
+                <div class="time-marker">19h</div>
+                <div class="time-marker">20h</div>
+                <div class="time-marker">21h</div>
+                <div class="time-marker">22h</div>
+                <div class="time-marker">23h</div>
+            </div>
+            <div class="days"></div>
+        </div>
 
 
 
