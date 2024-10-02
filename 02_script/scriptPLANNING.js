@@ -1,51 +1,84 @@
-document.getElementById('addActivityButton').addEventListener('click', function() {
-    addActivityToCalendar();
+document.addEventListener('DOMContentLoaded', function () {
+    loadSchedule();
+    const form = document.getElementById('addEventForm');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        addEventToSchedule();
+    });
 });
 
-function addActivityToCalendar() {
-    const sport = document.getElementById('sportSelect').value;
-    const startTime = document.getElementById('startTime').value;
-    const endTime = document.getElementById('endTime').value;
-    const location = document.getElementById('locationSelect').value;
+function loadSchedule() {
+    fetch('03_php/loadPlanning.php')
+        .then(response => response.json())
+        .then(data => {
+            const daysContainer = document.getElementById('days-container');
+            daysContainer.innerHTML = ''; // Clear previous content
+            data.forEach(day => {
+                const dayDiv = document.createElement('div');
+                dayDiv.classList.add('day');
 
-    if (sport && startTime && endTime && location) {
-        // Création de l'élément activité
-        const eventElement = document.createElement('div');
-        eventElement.classList.add('event');
-        eventElement.innerHTML = `<p class="title">${sport}</p><p class="time">${startTime} - ${endTime}</p><p class="location">${location}</p>`;
+                const dateDiv = document.createElement('div');
+                dateDiv.classList.add('date');
+                const dateNum = document.createElement('p');
+                dateNum.classList.add('date-num');
+                dateNum.textContent = day.dateNum;
 
-        // Ajout de l'activité à la première journée du calendrier
-        document.querySelector('.days').appendChild(eventElement);
+                const dateDay = document.createElement('p');
+                dateDay.classList.add('date-day');
+                dateDay.textContent = day.dateDay;
 
-        // Sauvegarder dans le fichier JSON
-        const activityData = {
-            sport: sport,
-            startTime: startTime,
-            endTime: endTime,
-            location: location
-        };
-        saveActivityToServer(activityData);
+                dateDiv.appendChild(dateNum);
+                dateDiv.appendChild(dateDay);
+                dayDiv.appendChild(dateDiv);
 
-        // Afficher un message de succès
-        console.log('Activité ajoutée au calendrier.');
-    } else {
-        console.log('Veuillez remplir tous les champs.');
-    }
+                const eventsDiv = document.createElement('div');
+                eventsDiv.classList.add('events');
+                day.events.forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.classList.add('event', event.sport.toLowerCase());
+
+                    const title = document.createElement('p');
+                    title.classList.add('title');
+                    title.textContent = event.sport;
+
+                    const time = document.createElement('p');
+                    time.textContent = `${event.startTime} - ${event.endTime}`;
+
+                    eventDiv.appendChild(title);
+                    eventDiv.appendChild(time);
+                    eventsDiv.appendChild(eventDiv);
+                });
+
+                dayDiv.appendChild(eventsDiv);
+                daysContainer.appendChild(dayDiv);
+            });
+        })
+        .catch(error => console.error('Erreur de chargement du planning:', error));
 }
 
-function saveActivityToServer(activityData) {
+function addEventToSchedule() {
+    const sport = document.getElementById('sport').value;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+    const location = document.getElementById('location').value;
+    const date = document.getElementById('date').value;
+
     fetch('03_php/savePlanning.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(activityData)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sport, startTime, endTime, location, date })
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Données sauvegardées:', data);
-    })
-    .catch(error => {
-        console.error('Erreur:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 2000);
+                loadSchedule(); // Refresh the schedule
+            } else {
+                console.error('Erreur lors de l\'ajout:', data.error);
+            }
+        })
+        .catch(error => console.error('Erreur de sauvegarde du planning:', error));
 }
