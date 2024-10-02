@@ -1,106 +1,107 @@
-const eventForm = document.getElementById("event-form");
-const messageElement = document.getElementById("message");
-const daysContainer = document.querySelector(".days");
+document.getElementById('activity-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-const loadPlanning = async () => {
-    const response = await fetch("../03_php/loadPlanning.php");
-    const events = await response.json();
-    displayCalendar(events);
-};
+    const sport = document.getElementById('sport').value;
+    const date = document.getElementById('date').value;
+    const location = document.getElementById('location').value;
+    const startTime = document.getElementById('start-time').value;
+    const endTime = document.getElementById('end-time').value;
 
-const displayCalendar = (events) => {
-    const now = new Date();
-    const startDate = new Date(now.setDate(now.getDate() - now.getDay() + 1)); // First Monday
-    const daysInWeek = 5; // Monday to Friday
-    daysContainer.innerHTML = ""; // Clear previous entries
-
-    for (let week = 0; week < 2; week++) { // 2 weeks
-        for (let day = 0; day < daysInWeek; day++) {
-            const currentDay = new Date(startDate);
-            currentDay.setDate(currentDay.getDate() + week * 7 + day);
-
-            const dayDiv = document.createElement("div");
-            dayDiv.classList.add("day");
-            dayDiv.innerHTML = `
-                <div class="date">
-                    <p class="date-num">${currentDay.getDate()}</p>
-                    <p class="date-day">${currentDay.toLocaleString('en-US', { weekday: 'short' })}</p>
-                </div>
-                <div class="events"></div>
-            `;
-
-            const eventsDiv = dayDiv.querySelector(".events");
-
-            const dayEvents = events.filter(event => new Date(event.date).toDateString() === currentDay.toDateString());
-            if (dayEvents.length === 0) {
-                eventsDiv.innerHTML = '<p class="no-event">Pas de match aujourd\'hui</p>';
-            } else {
-                dayEvents.forEach(event => {
-                    const eventDiv = document.createElement("div");
-                    eventDiv.classList.add("event");
-                    const startHour = new Date(event.date + ' ' + event.startTime);
-                    const endHour = new Date(event.date + ' ' + event.endTime);
-
-                    eventDiv.style.gridRowStart = Math.max(2, startHour.getHours() - 16); // 17h = row 2
-                    eventDiv.style.gridRowEnd = Math.min(8, endHour.getHours() - 16); // 23h = row 8
-
-                    eventDiv.innerHTML = `
-                        <p class="title">${event.sport} à ${event.location}</p>
-                        <p class="time">${event.startTime} - ${event.endTime}</p>
-                        <button class="delete-event" data-id="${event.id}">Supprimer</button>
-                    `;
-
-                    eventsDiv.appendChild(eventDiv);
-                });
-            }
-            daysContainer.appendChild(dayDiv);
-        }
+    if (!date) {
+        console.error('Date is required');
+        return;
     }
 
-    const deleteButtons = document.querySelectorAll(".delete-event");
-    deleteButtons.forEach(button => {
-        button.addEventListener("click", async (e) => {
-            const id = e.target.dataset.id;
-            await fetch(`../03_php/savePlanning.php?id=${id}`, { method: 'DELETE' });
-            loadPlanning();
-            showMessage("Événement supprimé");
-        });
-    });
-};
+    // Log data to check if it is correctly captured
+    console.log({ sport, date, location, startTime, endTime });
 
-const showMessage = (msg) => {
-    messageElement.innerText = msg;
-    setTimeout(() => {
-        messageElement.innerText = '';
-    }, 3000);
-};
+    // Prepare activity object
+    const activity = {
+        sport,
+        date,
+        location,
+        startTime,
+        endTime
+    };
 
-eventForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const sport = document.getElementById("sport").value;
-    const date = document.getElementById("date").value;
-    const location = document.getElementById("location").value;
-    const startTime = document.getElementById("start-time").value;
-    const endTime = document.getElementById("end-time").value;
-
-
-    const response = await fetch("../03_php/savePlanning.php", {
+    // Save to planning.json (using savePlanning.php)
+    fetch('../03_php/savePlanning.php', {
         method: 'POST',
+        body: JSON.stringify(activity),
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ sport, date, location, startTime, endTime })
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Activity added successfully');
+            // Reload the calendar to display the new activity
+            loadActivities();
+        } else {
+            alert('Failed to add activity');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
-
-    if (response.ok) {
-        showMessage("Événement ajouté avec succès !");
-        loadPlanning();
-        eventForm.reset();
-    } else {
-        showMessage("Erreur lors de l'ajout de l'événement.");
-    }
 });
 
-// Load initial events
-loadPlanning();
+// Function to load activities from planning.json
+function loadActivities() {
+    fetch('../03_php/loadPlanning.php')
+        .then(response => response.json())
+        .then(data => {
+            const calendar = document.querySelector('.calendar .days');
+            calendar.innerHTML = ''; // Clear the current calendar
+
+            data.forEach(activity => {
+                const dayElement = document.querySelector(`.day[data-date="${activity.date}"] .events`);
+                if (dayElement) {
+                    const eventElement = document.createElement('div');
+                    eventElement.classList.add('event');
+                    eventElement.innerHTML = `
+                        <p class="title">${activity.sport}</p>
+                        <p class="time">${activity.startTime} - ${activity.endTime}</p>
+                        <p class="location">${activity.location}</p>
+                        <button class="delete-btn" data-id="${activity.id}">Supprimer</button>
+                    `;
+                    dayElement.appendChild(eventElement);
+
+                    // Add delete functionality
+                    eventElement.querySelector('.delete-btn').addEventListener('click', function() {
+                        deleteActivity(activity.id);
+                    });
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error loading activities:', error);
+        });
+}
+
+// Function to delete an activity
+function deleteActivity(id) {
+    fetch('../03_php/deletePlanning.php', {
+        method: 'POST',
+        body: JSON.stringify({ id }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Activity deleted successfully');
+            loadActivities(); // Reload calendar after deletion
+        } else {
+            alert('Failed to delete activity');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Initial load of activities
+document.addEventListener('DOMContentLoaded', loadActivities);

@@ -1,20 +1,28 @@
 <?php
-$filePath = '../05_json/planning.json';
-$data = json_decode(file_get_contents($filePath), true);
+$filename = '../05_json/planning.json';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newEvent = json_decode(file_get_contents('php://input'), true);
-    $newEvent['id'] = uniqid(); // Assign a unique ID
-    $data[] = $newEvent;
-    file_put_contents($filePath, json_encode($data));
-    echo json_encode(['success' => true]);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    parse_str(file_get_contents("php://input"), $deleteVars);
-    $id = $deleteVars['id'];
-    $data = array_filter($data, function($event) use ($id) {
-        return $event['id'] !== $id;
-    });
-    file_put_contents($filePath, json_encode(array_values($data))); // Re-index the array
-    echo json_encode(['success' => true]);
+    $activity = json_decode(file_get_contents('php://input'), true);
+    
+    if (!isset($activity['sport'], $activity['date'], $activity['location'], $activity['startTime'], $activity['endTime'])) {
+        echo json_encode(['success' => false, 'message' => 'Invalid input']);
+        exit;
+    }
+
+    // Load existing data
+    $data = json_decode(file_get_contents($filename), true);
+
+    // Assign an ID to each activity
+    $activity['id'] = uniqid();
+
+    // Add new activity
+    $data[] = $activity;
+
+    // Save the updated data
+    if (file_put_contents($filename, json_encode($data))) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
 }
 ?>
