@@ -105,3 +105,8 @@ function deleteActivity(id) {
 
 // Initial load of activities
 document.addEventListener('DOMContentLoaded', loadActivities);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dateElement = document.getElementById('date');
+    console.log(dateElement); // Vérifiez ici s'il renvoie bien l'élément
+});
