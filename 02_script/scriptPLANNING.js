@@ -84,6 +84,7 @@ eventForm.addEventListener("submit", async (e) => {
     const startTime = document.getElementById("start-time").value;
     const endTime = document.getElementById("end-time").value;
 
+    console.log(date);
     const response = await fetch("../03_php/savePlanning.php", {
         method: 'POST',
         headers: {
