@@ -110,3 +110,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const dateElement = document.getElementById('date');
     console.log(dateElement); // Vérifiez ici s'il renvoie bien l'élément
 });
+
+window.onload = function() {
+    const dateInput = document.getElementById("date");
+    if (dateInput) {
+        console.log(dateInput.value);  // Pour vérifier si la date est bien récupérée
+    } else {
+        console.error("L'élément avec l'ID 'date' est introuvable.");
+    }
+}
+
+document.getElementById("submitBtn").addEventListener("click", function(event) {
+    event.preventDefault(); // Empêche la soumission du formulaire classique
+
+    // Récupérer les valeurs du formulaire
+    const sport = document.getElementById("sport").value;
+    const date = document.getElementById("date").value;
+    const location = document.getElementById("location").value;
+    const startTime = document.getElementById("start-time").value;
+    const endTime = document.getElementById("end-time").value;
+
+    // Valider et envoyer les données via AJAX (exemple)
+    if (sport && date && location && startTime && endTime) {
+        console.log("Données à envoyer :", { sport, date, location, startTime, endTime });
+        // Envoyer les données à votre fichier PHP (savePlanning.php)
+        // Vous pouvez utiliser fetch ou XMLHttpRequest pour cela
+    } else {
+        console.error("Tous les champs sont requis !");
+    }
+});
