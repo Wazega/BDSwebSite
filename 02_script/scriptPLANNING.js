@@ -1,141 +1,120 @@
-document.getElementById('activity-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+    // On récupère le bouton et l'élément de formulaire
+    const form = document.querySelector('form');
+    const planningContainer = document.querySelector('.days');
+    
+    // Charger les activités existantes depuis planning.json
+    loadPlanning();
 
-    const sport = document.getElementById('sport').value;
-    const date = document.getElementById('date').value;
-    const location = document.getElementById('location').value;
-    const startTime = document.getElementById('start-time').value;
-    const endTime = document.getElementById('end-time').value;
+    // Fonction pour ajouter une activité dans le fichier planning.json
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Empêche la page de se recharger
 
-    if (!date) {
-        console.error('Date is required');
-        return;
-    }
+        const sport = document.getElementById('sport').value;
+        const date = document.getElementById('date').value;
+        const lieu = document.getElementById('lieu').value;
+        const heureDebut = document.getElementById('heureDebut').value;
+        const heureFin = document.getElementById('heureFin').value;
 
-    // Log data to check if it is correctly captured
-    console.log({ sport, date, location, startTime, endTime });
-
-    // Prepare activity object
-    const activity = {
-        sport,
-        date,
-        location,
-        startTime,
-        endTime
-    };
-
-    // Save to planning.json (using savePlanning.php)
-    fetch('../03_php/savePlanning.php', {
-        method: 'POST',
-        body: JSON.stringify(activity),
-        headers: {
-            'Content-Type': 'application/json'
+        if (!sport || !date || !lieu || !heureDebut || !heureFin) {
+            alert('Tous les champs doivent être remplis.');
+            return;
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Activity added successfully');
-            // Reload the calendar to display the new activity
-            loadActivities();
-        } else {
-            alert('Failed to add activity');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
 
-// Function to load activities from planning.json
-function loadActivities() {
-    fetch('../03_php/loadPlanning.php')
+        // Ajouter l'activité à planning.json via PHP
+        const formData = new FormData();
+        formData.append('sport', sport);
+        formData.append('date', date);
+        formData.append('lieu', lieu);
+        formData.append('heureDebut', heureDebut);
+        formData.append('heureFin', heureFin);
+
+        fetch('../03_php/savePlanning.php', {
+            method: 'POST',
+            body: formData
+        })
         .then(response => response.json())
         .then(data => {
-            const calendar = document.querySelector('.calendar .days');
-            calendar.innerHTML = ''; // Clear the current calendar
-
-            data.forEach(activity => {
-                const dayElement = document.querySelector(`.day[data-date="${activity.date}"] .events`);
-                if (dayElement) {
-                    const eventElement = document.createElement('div');
-                    eventElement.classList.add('event');
-                    eventElement.innerHTML = `
-                        <p class="title">${activity.sport}</p>
-                        <p class="time">${activity.startTime} - ${activity.endTime}</p>
-                        <p class="location">${activity.location}</p>
-                        <button class="delete-btn" data-id="${activity.id}">Supprimer</button>
-                    `;
-                    dayElement.appendChild(eventElement);
-
-                    // Add delete functionality
-                    eventElement.querySelector('.delete-btn').addEventListener('click', function() {
-                        deleteActivity(activity.id);
-                    });
-                }
-            });
+            if (data.success) {
+                alert('Activité ajoutée avec succès !');
+                addActivityToCalendar(sport, date, lieu, heureDebut, heureFin); // Ajouter directement dans le planning sans recharger la page
+            } else {
+                alert('Erreur lors de l\'ajout de l\'activité.');
+            }
         })
         .catch(error => {
-            console.error('Error loading activities:', error);
+            console.error('Erreur:', error);
         });
-}
-
-// Function to delete an activity
-function deleteActivity(id) {
-    fetch('../03_php/deletePlanning.php', {
-        method: 'POST',
-        body: JSON.stringify({ id }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Activity deleted successfully');
-            loadActivities(); // Reload calendar after deletion
-        } else {
-            alert('Failed to delete activity');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
     });
-}
 
-// Initial load of activities
-document.addEventListener('DOMContentLoaded', loadActivities);
-
-document.addEventListener('DOMContentLoaded', function() {
-    const dateElement = document.getElementById('date');
-    console.log(dateElement); // Vérifiez ici s'il renvoie bien l'élément
-});
-
-window.onload = function() {
-    const dateInput = document.getElementById("date");
-    if (dateInput) {
-        console.log(dateInput.value);  // Pour vérifier si la date est bien récupérée
-    } else {
-        console.error("L'élément avec l'ID 'date' est introuvable.");
+    // Fonction pour charger le planning
+    function loadPlanning() {
+        fetch('../03_php/loadPlanning.php')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(activity => {
+                    addActivityToCalendar(
+                        activity.sport,
+                        activity.date,
+                        activity.lieu,
+                        activity.heureDebut,
+                        activity.heureFin
+                    );
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement du planning:', error);
+            });
     }
-}
 
-document.getElementById("submitBtn").addEventListener("click", function(event) {
-    event.preventDefault(); // Empêche la soumission du formulaire classique
+    // Fonction pour ajouter une activité visuellement dans le planning
+    function addActivityToCalendar(sport, date, lieu, heureDebut, heureFin) {
+        const dayElement = document.querySelector(`.day[data-date="${date}"]`);
+        if (dayElement) {
+            const eventsContainer = dayElement.querySelector('.events');
+            const eventElement = document.createElement('div');
+            eventElement.classList.add('event');
+            eventElement.innerHTML = `
+                <p class="title">${sport} - ${lieu}</p>
+                <p class="time">${heureDebut} - ${heureFin}</p>
+                <button class="delete-btn">Supprimer</button>
+            `;
 
-    // Récupérer les valeurs du formulaire
-    const sport = document.getElementById("sport").value;
-    const date = document.getElementById("date").value;
-    const location = document.getElementById("location").value;
-    const startTime = document.getElementById("start-time").value;
-    const endTime = document.getElementById("end-time").value;
+            eventsContainer.appendChild(eventElement);
 
-    // Valider et envoyer les données via AJAX (exemple)
-    if (sport && date && location && startTime && endTime) {
-        console.log("Données à envoyer :", { sport, date, location, startTime, endTime });
-        // Envoyer les données à votre fichier PHP (savePlanning.php)
-        // Vous pouvez utiliser fetch ou XMLHttpRequest pour cela
-    } else {
-        console.error("Tous les champs sont requis !");
+            // Ajouter la fonctionnalité de suppression
+            eventElement.querySelector('.delete-btn').addEventListener('click', function () {
+                deleteActivityFromCalendar(eventElement, date, heureDebut, heureFin);
+            });
+        } else {
+            console.warn(`Aucun élément trouvé pour la date : ${date}`);
+        }
+    }
+
+    // Fonction pour supprimer une activité
+    function deleteActivityFromCalendar(eventElement, date, heureDebut, heureFin) {
+        eventElement.remove(); // Supprimer visuellement l'élément
+
+        // Envoyer une requête pour supprimer l'activité du fichier planning.json
+        const formData = new FormData();
+        formData.append('date', date);
+        formData.append('heureDebut', heureDebut);
+        formData.append('heureFin', heureFin);
+
+        fetch('../03_php/deletePlanning.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Activité supprimée avec succès !');
+            } else {
+                alert('Erreur lors de la suppression de l\'activité.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
     }
 });
